@@ -171,12 +171,44 @@ but it is the way to specify the minimum requirements for the host that will exe
     label=lst:system-configuration,
 ]{listings/SystemConfig.kt}
 
+The second domain-specific language allows to define the concrete implementation of each component associating it to a specific start host;
+moreover, it allows to define the creteria on which the system should be reconfigured by specifying which events should trigger a reconfiguration.
+%
+This DSL binds the more abstrac definition specified in the previous DSL to the topology of the available infrastracture,
+defining the actual deployment of the system, and the reconfiguration policies.
+%
+The~\Cref{lst:runtime-configuration} provides an example of the usage of the domain-specific language where is defined the runtime configuration of the system.
+%
+The framework define the concept of \texttt{Host} that is the representation of an available physical host where the components can be deployed;
+for each host is possible to specify the capabilities that it implements.
+%
+In this way, the framework can check if a host can execute a component by verifying if the host implements the required capabilities.
+%
+The runtime is configured be specifying for each implementation of a \emph{component},
+its associated startup host enabling the definition of the initial deployment of the system.
+%
+The most relevant part of the domain-specific language, is the definition of the reconfiguration rules:
+the framework models the concept of \texttt{ReconfigurationEvent}
+that is the event that triggers the reconfiguration of the system.
+%
+The DSL allows the association of a \texttt{ReconfigurationEvent}
+to a new deployment of the system which is defined as the new association between component and host. 
+
+
+
 \lstinputlisting[
     float=ht,
     language=Kotlin,
     caption={TODO},
     label=lst:runtime-configuration,
 ]{listings/RuntimeConfig.kt}
+
+\lstinputlisting[
+    float=ht,
+    language=Kotlin,
+    caption={TODO},
+    label=lst:reconfiguration-events,
+]{listings/ReconfigurationEvents.kt}
 
 \subsection{Implementation details}
 
