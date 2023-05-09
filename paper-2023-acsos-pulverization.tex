@@ -76,7 +76,46 @@ is then evaluated in a small-scale real-world demo and in a city-scale simulated
 runtime reconfiguration, distributed systems, self-adaptation, self-organisation, pulverisation
 \end{IEEEkeywords}
 
+\newcommand{\ourframework}{Porbione}
+
 \section{Introduction}\label{sec:introduction}
+
+Recent research trends in topics related to the Internet of Things promote the idea of a cloud-edge continuum~\cite{DBLP:journals/iot/BittencourtISFM18},
+an infrastructure composed of heterogeneous devices ranging from large and powerful cloud servers to small connected things
+on which software computes in a distributed fashion,
+optimising for performance and resource utilisation.
+%
+Exploiting this intriguing infrastructure, however, poses new challenges to the application designer.
+%
+Commonly, in fact, applications are designed with a specific infrastructure in mind,
+whose assumptions leak into the application logic.
+
+Previous work suggests a technique for decoupling business logic and deployment concerns
+called \emph{pulverization}~\cite{FI2020-pulverization}.
+%
+In short, the core idea is to consider devices as \emph{logical} entities,
+whose software can be designed as (or broken down to, if already existing) an ensemble of five micro-components
+(behaviour, state, communication, sensors, and actuators)
+whose actual host can be decided at deployment time.
+%
+This way, the designer can focus on the business logic at hand,
+delaying an optimised deployment to later stages of the sofware design,
+thus gaining resilience to changing infrastructures or non-functional requirements.
+%
+One limitation of the current pulverisation approach regards dynamicity:
+although the application can be deployed on arbitrary systems,
+there is no support for the reconfiguration of components in face of changing conditions or requirements.
+
+In this work,
+we continue the research on pulverised systems by providing two key contributions:
+first, we extend the theoretical framework of pulverisation by adding support for
+\emph{runtime configuration rules}, allowing pulverised components to move at runtime across different hosts;
+the providing a practical implementation called \ourframework{} which,
+to the best of our knowledge,
+is the first \emph{practical framework supporting pulverisation} for a general-purpose language.
+%
+We exercise \ourframework{} with two case studies:
+a small-scale real-wold demonstration, and a city-scale simulated scenario.
 
 \begin{itemize}
     \item need for deployment-independent specs
