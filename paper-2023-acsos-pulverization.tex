@@ -9,6 +9,9 @@
 \usepackage{xcolor}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+    
+\newcommand{\meta}[1]{{\color{blue}#1}}    
+    
 \begin{document}
 
 \title{Declarative runtime reconfiguration of pulverised distributed systems
@@ -25,7 +28,7 @@ danilo.pianini@unibo.it}
 \IEEEauthorblockA{\textit{Department of Computer Science and Engineering} \\
 \textit{Alma Mater Studiorum---Università di Bologna}\\
 Cesena, Italy \\
-email address or ORCID}
+roby.casadei@unibo.it}
 \and
 \IEEEauthorblockN{3\textsuperscript{rd} Nicolas Farabegoli}
 \IEEEauthorblockA{\textit{Department of Computer Science and Engineering} \\
@@ -100,6 +103,49 @@ Also mention that is multiplatform
 \subsection{Large scale: smart city application}
 \cite{PianiniJOS2013}
 
+
+\section{Related Work}
+
+
+\meta{
+%
+%\subsection{Approaches to Deployment Independence}
+%\label{s:rw:deployment-independence}
+%
+%\meta{TODO: add works on deployment independence, e.g., osmotic~\citep{DBLP:journals/computer/VillariFDRJR19}, BIP~\citep{lekidis2015bip-wsn,bastarrica2001optimization-techniques-deployment-components-bip}}
+%
+We highlight a number of representatieve research efforts on deployment and automatic reconfiguration of systems.
+%
+%For instance, 
+\emph{Osmotic computing}~\cite{DBLP:journals/computer/VillariFDRJR19} is an approach to opportunistic deployment of microservices on the edge-fog-cloud platform.
+An osmotic platform aims to reach and maintain an ``osmotic equilibrium'' 
+between infrastructural and application requirements
+by automatically migrating microservices to deployment locations.
+%
+However, the approach mainly targets centrally orchestrated systems.
+%
+Other approaches leverage component-based, architectural descriptions to decouple application logic and deployment.
+%
+For instance, \emph{DR-BIP (Dynamically Reconfigurable - Behaviour Interaction Priority model)}~\cite{,Ballouli18dr-bip}
+and \emph{DReAM (Dynamically Reconfigurable Architectural Modelling)}~\cite{denicola2020dream-dynamic-reconfig-arch-modelling}
+use \emph{components} (capturing behaviour), \emph{connectors} (capturing interaction between components' \emph{ports}), 
+\emph{maps} (logical topologies),
+and \emph{deployments} (associating components to map locations),
+overall organised in \emph{motifs} (dynamic architectural configurations),
+to model and analyse dynamic architectures.
+%
+
+These approaches have some similarity with the approach presented in this paper, but they are arguably more complex and our  
+%than the one introduced in this paper,
+ %, though also fostering an exogenous, declarative (logics-based) modelling approach.
+approach explicitly addresses self-organising CPS.
+%
+%
+%By constrast, our approach explicitly addresses self-organising CPS.
+%
+%A more in-depth, formal comparison is left as future work.
+}
+
 \section{Conclusion and future work}\label{sec:conclusion}
 
 global policies
@@ -107,8 +153,8 @@ global policies
 \bibliographystyle{IEEEtran}
 \bibliography{bibliography}
 
-\vspace{12pt}
-\color{red}
-IEEE conference templates contain guidance text for composing and formatting conference papers. Please ensure that all template text is removed from your conference paper prior to submission to the conference. Failure to remove the template text from your paper may result in your paper not being published.
+%\vspace{12pt}
+%\color{red}
+%IEEE conference templates contain guidance text for composing and formatting conference papers. Please ensure that all template text is removed from your conference paper prior to submission to the conference. Failure to remove the template text from your paper may result in your paper not being published.
 
 \end{document}
