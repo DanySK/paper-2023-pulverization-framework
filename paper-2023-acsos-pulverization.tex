@@ -7,6 +7,11 @@
 \usepackage{graphicx}
 \usepackage{textcomp}
 \usepackage{xcolor}
+\usepackage{listings}
+\usepackage{listing-style}
+
+\usepackage{cleveref}
+
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
     
@@ -34,7 +39,7 @@ roby.casadei@unibo.it}
 \IEEEauthorblockA{\textit{Department of Computer Science and Engineering} \\
 \textit{Alma Mater Studiorum---Università di Bologna}\\
 Cesena, Italy \\
-email address or ORCID}
+nicolas.farabegoli@unibo.it}
 \and
 \IEEEauthorblockN{4\textsuperscript{th} Mirko Viroli}
 \IEEEauthorblockA{\textit{Department of Computer Science and Engineering} \\
@@ -130,6 +135,48 @@ a small-scale real-wold demonstration, and a city-scale simulated scenario.
 \subsection{Domain model}
 
 \subsection{Domain-specific language}
+
+The framework allows the system configuration via two distinct DSLs, one for defining the system's devices and their components,
+and one for defining the runtime configuration of the system.
+
+The first domain-specific language allows to define the system in terms of
+\emph{devices}, \emph{components} and which \emph{capabilities} requires to be executed.
+%
+In this way, infrastructural and deployment aspects are abstracted, allowing the focus to be on functional aspects of the system.
+%
+The DSL enables the definition of the type of devices that took part in the system,
+and for each device can be specified which components constitute it and where those component must run on (e.g. which host must execute the component).
+%
+The execution of a component is constrained to hosts with predetermined characteristics:
+the framework models the constraint with the \texttt{Capability} concept,
+namely the property that a host must to ``implement'' to run the component.
+%
+Different capabilities can be specified for each component to provide a more flexible and scalable deployment of the system.
+
+The~\Cref{lst:system-configuration} provides an example of the usage of the domain-specific language where is defined a system composed of two kind of devices.
+%
+The DSL returns the system's configuration that will be used by the runtime.
+
+One key-point of the domain-specific language can be observed in the definition of the \texttt{device-2} device:
+the \emph{Behaviour} component can be deployed on hosts that implement the \texttt{HighCPU} and \texttt{EmbeddedDevice} capabilities,
+in this way the behaviour can be moved (at runtime) from a host to another one that implements the same capabilities.
+%
+The association between a component and a single capability do not necessarily imply that the component can be executed only on a single host,
+but it is the way to specify the minimum requirements for the host that will execute the component.
+
+\lstinputlisting[
+    float=ht,
+    language=Kotlin,
+    caption={TODO},
+    label=lst:system-configuration,
+]{listings/SystemConfig.kt}
+
+\lstinputlisting[
+    float=ht,
+    language=Kotlin,
+    caption={TODO},
+    label=lst:runtime-configuration,
+]{listings/RuntimeConfig.kt}
 
 \subsection{Implementation details}
 
