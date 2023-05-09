@@ -43,16 +43,66 @@ email address or ORCID}
 \maketitle
 
 \begin{abstract}
-TBD
+In recent years, we witnessed a radical change in the deployed form of distributed systems.
+%
+Modern applications are designed to be executed on very diverse devices
+and to be deployed on heterogeneous infrastructures,
+ranging from cloud servers to mobile and IoT devices.
+%
+De facto, complex distributed computation is happening across a cloud-edge continuum composed of heterogeneous devices and infrastructures.
+%
+The availablity of such an infrastructure opens to new possibilities in terms of better resource utilisation and performance,
+but also poses new challenges to the application designer,
+as the application must be conceived to be able to adapt its deployment to changing conditions.
+%
+In this paper we present a framework for the development of distributed systems
+based on the concept of \emph{pulverisation},
+which is meant to neatly separate business logic and deployment concerns,
+allowing applications to be defined independent of the infrastructure they will execute upon.
+%
+The framework is based on a domain-specific language capturing,
+in a declarative fashion,
+the concepts composing a pulverised application and any potential target network,
+also allowing for the specification of reconfiguration policies.
+%
+The framework, implemented in Kotlin multiplatform and available as open source,
+is then evaluated in a small-scale real-world demo and in a city-scale simulated scenario.
 \end{abstract}
 
 \begin{IEEEkeywords}
 runtime reconfiguration, distributed systems, self-adaptation, self-organisation, pulverisation
 \end{IEEEkeywords}
 
-\section{Introduction}
+\section{Introduction}\label{sec:introduction}
 
-\nocite{*}
+\begin{itemize}
+    \item need for deployment-independent specs
+    \item need for runtime reconfiguration (achieve QoS in face of changing conditions --- green computing?)
+    \item declarativity over imperative approaches (note: can be compared with the trend in general softeng/build systems)
+\end{itemize}
+
++ related work
+
+\section{A framework for declarative runtime reconfiguration}\label{sec:contribution}
+
+\subsection{Domain model}
+
+\subsection{Domain-specific language}
+
+\subsection{Implementation details}
+
+Also mention that is multiplatform
+
+\section{Evaluation}\label{sec:evaluation}
+
+\subsection{Small scale: crowd alert}
+
+\subsection{Large scale: smart city application}
+\cite{PianiniJOS2013}
+
+\section{Conclusion and future work}\label{sec:conclusion}
+
+global policies
 
 \bibliographystyle{IEEEtran}
 \bibliography{bibliography}
