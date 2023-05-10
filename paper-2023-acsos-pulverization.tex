@@ -9,6 +9,7 @@
 \usepackage{xcolor}
 \usepackage{listings}
 \usepackage{listing-style}
+\usepackage[hidelinks]{hyperref}
 
 \usepackage{cleveref}
 
@@ -230,16 +231,29 @@ Also mention that is multiplatform
 
 \section{Evaluation}\label{sec:evaluation}
 
-The pulverization approach tries to solve the problem of the deployment independence of the system, in heterogeneous infrastructures.
+In this section,
+we exercise the proposed framework with two case studies.
 %
-The dynamic reconfiguration of the system is a key point to achieve flexibility and adaptability of the system on the requirements changing.
+In the former,
+we show a small-scale demonstrator of a safety system warning people when a room capacity is exceeded
+to showcase the integration of the framework with established technologies\footnote{
+    \url{https://github.com/nicolasfara/ACSOS-2023-pulverization-crowd-room}
+};
+in the latter,
+we simulate a city-scale distributed application deployed for a urban event
+and show how the dynamic reconfiguration may help achieving balance between energy consumption and QoS\footnote{
+    \url{https://github.com/nicolasfara/ACSOS-2023-pulverization-evaluation}
+}.
 %
-In this section are presented two case studies that show the effectiveness of the approach:
-the first case study shows the operation of the framework in a small-scale scenario, while the second case study simulate a large-scale scenario
-using the framework in a simulated environment showing the effectiveness of the approach in many different conditions.
+Both experiments have been released with a permissive open-source license and have been archived for future reference on Zenodo~\cite{TBD}.
 
-\subsection{Metrics}
-\meta{descrizione}
+\subsection{Small scale: crowd alert}
+
+\subsection{Large scale: smart city application}
+
+\cite{PianiniJOS2013}
+
+\subsubsection{Free variables}
 
 As follow are reported the free variables used in the evaluation:
 \begin{itemize}
@@ -251,6 +265,8 @@ As follow are reported the free variables used in the evaluation:
     \item let $EPI_{ratio}$ be the ratio of the consumption of the cloud and the device;
 \end{itemize}
 
+\subsubsection{Metrics}
+
 From the variables above are derived the following metrics:
 
 \begin{itemize}
@@ -261,14 +277,11 @@ From the variables above are derived the following metrics:
     \item let $P_{cloud}$ be the consumed power of the cloud;
     \item let $P_{total}$ be the total consumed power of the system;
     \item let $I_{cloud}$ be the number of server instances of the cloud;
-    \item let $\$_{cloud}$ be the cost of the cloud; 
+    \item let $\$_{cloud}$ be the cost of the cloud;
 \end{itemize}
 
+\subsubsection{Results}
 
-\subsection{Small scale: crowd alert}
-
-\subsection{Large scale: smart city application}
-\cite{PianiniJOS2013}
 
 
 \section{Related Work}
