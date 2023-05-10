@@ -167,7 +167,10 @@ but it is the way to specify the minimum requirements for the host that will exe
 \lstinputlisting[
     float=ht,
     language=Kotlin,
-    caption={TODO},
+    caption={
+        Example of the usage of the domain-specific language for the system configuration.
+        The example configures two types of devices, and for each device defines the components that compose it and which capabilities requires for the execution.
+    },
     label=lst:system-configuration,
 ]{listings/SystemConfig.kt}
 
@@ -192,21 +195,32 @@ the framework models the concept of \texttt{ReconfigurationEvent}
 that is the event that triggers the reconfiguration of the system.
 %
 The DSL allows the association of a \texttt{ReconfigurationEvent}
-to a new deployment of the system which is defined as the new association between component and host. 
-
-
+to a new deployment of the system which is defined as the new association between component and host.
 
 \lstinputlisting[
     float=ht,
     language=Kotlin,
-    caption={TODO},
+    caption={
+        Example of the usage of the domain-specific language for the runtime configuration.
+        The example defines the runtime configuration of the system, specifying the initial deployment and the reconfiguration rules.
+    },
     label=lst:runtime-configuration,
 ]{listings/RuntimeConfig.kt}
 
+A \texttt{ReconfigurationEvent} is characterized by the \emph{events}
+that it produces and the \emph{condition} that must be satisfied to trigger the reconfiguration.
+%
+The \emph{events} are represented as an asyncronous stream of valued produced by the device and the
+\emph{condition} is a predicate that is evaluated on the stream of events.
+%
+At the first match of the condition, the reconfiguration is triggered and the system is reconfigured with the new deployment.
+%
+The~\Cref{lst:reconfiguration-events} shows an example of the definition of a reconfiguration event.
+
 \lstinputlisting[
     float=ht,
     language=Kotlin,
-    caption={TODO},
+    caption={Example of the definition of a reconfiguration event.},
     label=lst:reconfiguration-events,
 ]{listings/ReconfigurationEvents.kt}
 
@@ -215,6 +229,41 @@ to a new deployment of the system which is defined as the new association betwee
 Also mention that is multiplatform
 
 \section{Evaluation}\label{sec:evaluation}
+
+The pulverization approach tries to solve the problem of the deployment independence of the system, in heterogeneous infrastructures.
+%
+The dynamic reconfiguration of the system is a key point to achieve flexibility and adaptability of the system on the requirements changing.
+%
+In this section are presented two case studies that show the effectiveness of the approach:
+the first case study shows the operation of the framework in a small-scale scenario, while the second case study simulate a large-scale scenario
+using the framework in a simulated environment showing the effectiveness of the approach in many different conditions.
+
+\subsection{Metrics}
+\meta{descrizione}
+
+As follow are reported the free variables used in the evaluation:
+\begin{itemize}
+    \item let $n$ be the number of devices;
+    \item let $t_d$ be the discharge time of the battery of the devices;
+    \item let $B_l$ be the low battery threshold;
+    \item let $B_h$ be the high battery threshold;
+    \item let $EPI_{cloud}$ be the energy per instruction of the cloud;
+    \item let $EPI_{ratio}$ be the ratio of the consumption of the cloud and the device;
+\end{itemize}
+
+From the variables above are derived the following metrics:
+
+\begin{itemize}
+    \item let $\beta_{device}$ be the number of \emph{behaviour} executed in the device;
+    \item let $\beta_{cloud}$ be the number of \emph{behaviour} executed in the cloud;
+    \item let $C_{\%}$ be the average battery percentage of the devices;
+    \item let $P_{devices}$ be the consumed power of the devices;
+    \item let $P_{cloud}$ be the consumed power of the cloud;
+    \item let $P_{total}$ be the total consumed power of the system;
+    \item let $I_{cloud}$ be the number of server instances of the cloud;
+    \item let $\$_{cloud}$ be the cost of the cloud; 
+\end{itemize}
+
 
 \subsection{Small scale: crowd alert}
 
