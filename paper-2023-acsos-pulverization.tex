@@ -447,9 +447,8 @@ This work provides
  and a framework for executing
  deployment plans and reconfigurations.
 %
-Therefore, this work deals 
- with multiple problems and perspectives,
- investigated by multiple research threads.
+Therefore, we provide an original solution
+ to different issues.
 %
 In~\cite{DBLP:journals/jss/ArcangeliBL15},
 the problem of (automatic) deployment of distributed software system is studied by considering
@@ -462,25 +461,67 @@ the problem of (automatic) deployment of distributed software system is studied 
 Accordingly, 
  we cover related works about
  languages for 
- specifying applications (\Cref{sec:rw:whatsw}),
+ specifying distributed systems (\Cref{sec:rw:whatsw}),
  languages for specifying infrastructures and deployments (\Cref{sec:rw:depdesc}),
  and
  techniques for automatic deployment and reconfiguration (\Cref{sec:rw:autodep}).
  
  
  
-\subsection{Application description languages: component models and pulverisation}
+\subsection{Application description languages: component-based software engineering and the pulverisation model}
 \label{sec:rw:whatsw}
 %
-A comprehensive survey on component-based software engineering is provided in~\cite{vale2016component-based-se}.
-
+%% A first distinction revolves around whether 
+%% the distributed software to be deployed 
+%% is a monolith 
+%% or is already broken into different components.
 %
-The approach of specifying in a single codebase 
- parts of the structure, behaviour, or interaction 
+We consider a distributed application 
+ as a graph of deployable units.
+%
+This partitioning may be 
+ manually specified at development time
+ (e.g., by explicitly defining and packaging different components)
+ or automatically defined
+ through \emph{application partitioning} approaches~\cite{DBLP:journals/jnca/LiuASGBQ15}. %exploiting the natural modularity of code (depending on the paradigm and language adopted).
+ 
+In our approach, the application partitioning into components is manually specified through a \ac{dsl}.
+%
+Therefore, it can be framed in the context of \emph{component-based software engineering},
+ with ~\cite{vale2016component-based-se} providing a comprehensive review.
+%
+The specification or design of distributed systems
+ may leverage
+ component models~\cite{DBLP:journals/tse/CrnkovicSVC11},
+ architectural description languages~\cite{DBLP:journals/tse/MedvidovicT00},
+ or frameworks.
+%
+
+Specifically,
+ this work generalises over the \emph{pulverisation model}~\cite{FI2020-pulverization,IEEE-IoTJ-pulverization-simulation},
+ whereby a large-scale cyber-physical system
+ is partitioned into a graph of devices
+ where each device is split into five deployable components:
+ (i) sensors interface, 
+ (ii) actuators interface, 
+ (iii) behaviour, 
+ (iv) state, and 
+ (v) communication component.
+%
+In~\cite{IEEE-IoTJ-pulverization-simulation},
+ a methodology on top of the pulverisation model
+ is proposed
+ for generating and testing deployments through simulation.
+
+Also,
+ the approach of specifying in a single codebase 
+ parts of the structure, behaviour, and/or interaction 
  for a whole distributed system
  is also related to \emph{macroprogramming}~\cite{Casadei2023macro}
  and, in particular, to \emph{multi-tier programming} paradigm~\cite{DBLP:journals/csur/WeisenburgerWS20},
  where the deployment units for different tiers (e.g., client and server tiers; or view, business logic, and data tiers) are obrained by compilation or interpretation of a single codebase.
+
+
 
 \subsection{Infrastructure and deployment description languages}
 \label{sec:rw:depdesc}
@@ -496,6 +537,8 @@ A more recent survey by Coullon et al. focusses
  on formal techniques for verifying the correctness of reconfigurations
  in component-based distributed software systems~\cite{coullon2023swreconfig}.
 %
+\meta{TODO: say something about our positioning wrt verification of reconfigurations}
+
 In the \emph{osmotic computing} approach~\cite{DBLP:journals/computer/VillariFDRJR19},
  microservices (the solvent)
  can migrate across 
