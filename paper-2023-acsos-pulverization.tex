@@ -11,8 +11,10 @@
 \usepackage{acronym}
 \usepackage{listing-style}
 \usepackage[hidelinks]{hyperref}
+\usepackage[inline]{enumitem}
 
 \acrodef{dsl}[DSL]{domain-specific language}
+\acrodef{iot}[IoT]{Internet of Things}
 
 \usepackage{cleveref}
 
@@ -107,7 +109,7 @@ whose actual host can be decided at deployment time.
 %
 This way, the designer can focus on the business logic at hand,
 delaying an optimised deployment to later stages of the sofware design,
-thus gaining resilience to changing infrastructures or non-functional requirements.
+thus gaining resilience to changes in the infrastructure or in non-functional requirements.
 %
 One limitation of the current pulverisation approach regards dynamicity:
 although the application can be deployed on arbitrary systems,
@@ -134,12 +136,76 @@ a small-scale real-wold demonstration, and a city-scale simulated scenario.
 
 \section{A framework for declarative runtime reconfiguration}\label{sec:contribution}
 
-\subsection{Domain model}
+The goal of pulverisation~\cite{FI2020-pulverization}
+is to provide application designers a way to specify the functional semantics of their software in a deployment-independent way.
+%
+To do so,
+the application logic should be designed considering a \emph{logical system},
+namely, a network of \emph{logical} devices forming a network with \emph{arbitrary} topology.
+%
+For a pulverisation system to work,
+the application of every single logical device must be decomposable into an ensemble of \emph{pulverised components}
+representing, respectively:
+\begin{itemize}
+    \item a set $\sigma$ of logical sensors;
+    \item a set $\alpha$ of logical actuators;
+    \item a state $\kappa$, representing the logical device's knowledge;
+    \item a communication component $\chi$,
+    handling interaction with reachable devices in the logical system, and
+    \item a computation component $\beta$, modelling the behaviour of the logic device.
+\end{itemize}
+%
+Decomposition of an application into pulverised components can be achieved in two ways:
+either the application is designed with pulverisation in mind,
+or the application is developed using a framework supporting automatic decomposition
+(one notable example are aggregate computing frameworks~\cite{BealIEEEComputer2015}).
+%
+Once the application has been pulverised,
+a mapping must be provided between the pulverised logical system and the hosts that will execute the pulverised components.
+%
+In this process,
+a single logical component could be (and usually does) end up being executed on multiple hosts.
 
-\subsection{Domain-specific language}
+For instance, let us assume a minimal logical system counting two devices:
+two rain gauges logging the water level for future reference,
+and opening a valve when the water level crosses a threshold in both devices.
+%
+Once pulverised, the logical system would be split in ten deployable pulverised components
+(that we indicate with their component symbol and an index, e.g., $\sigma_1$ is the logical sensor of the first device).
+%
+These pulverised components can be deployed in arbitrary hosts,
+as far as they have the \emph{capabilities} required to host them
+(for instance, the component hosting a rain gauge logical sensor must have an actual sensor,
+while the component hosting the behaviour must be sufficiently powerful to execute the logic).
+%
+Thus, with \emph{no change to the application logic},
+the system could be deployed on very different systems:
+let us assume, for instance,
+that our actual target infrastructure is not composed of two connected devices,
+but it is an existing \ac{iot} system
+where the rain gauges are connected to two LoRaWAN motes
+(which are too weak and energy-critical to execute the logic),
+the valves are controlled by a dedicated device,
+the levels must be logged on a database hosted on a cloud server reachable via HTTPS,
+and we have an internal edge server that we can use as we please.
+%
+In this case, we would deploy $\sigma_1$ and $\sigma_2$ on the motes,
+$\alpha_1$ and $\alpha_2$ on the valve controller,
+$\kappa_1$ and $\kappa_2$ on the cloud server,
+and the remaining components on the edge server.
 
-The framework allows the system configuration via two distinct \acp{dsl}, one for defining the system's devices and their components,
-and one for defining the runtime configuration of the system.
+\meta{maybe import the image from the pulverisation paper?}
+
+\subsection{Domain-specific languages for pulverisation}
+
+From the previous section,
+we can identify two main phases in the pulverisation process:
+\begin{enumerate*}[label=\it{(\roman*)}]
+  \item the definition of the available devices and their capabilities; and
+  \item the allocation of the pulverised components to them.
+\end{enumerate*}
+%
+We decided to capture these phases into two distinct \acp{dsl}.
 
 The first domain-specific language allows to define the system in terms of
 \emph{devices}, \emph{components} and which \emph{capabilities} requires to be executed.
