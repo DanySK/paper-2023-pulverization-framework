@@ -55,27 +55,25 @@ email address or ORCID}
 \maketitle
 
 \begin{abstract}
-In recent years, we witnessed a radical change in the deployed form of distributed systems.
+In recent years, we witnessed a fast-paced evolution of the infrastructure hosting distributed computations.
 %
 Modern applications are designed to be executed on very diverse devices
-and to be deployed on heterogeneous infrastructures,
-ranging from cloud servers to mobile and IoT devices.
+and to be deployed on infrastructures composed of devices ranging from cloud servers to mobile and IoT devices,
+constituting together a cloud-edge continuum.
 %
-De facto, complex distributed computation is happening across a cloud-edge continuum composed of heterogeneous devices and infrastructures.
+The availability of such an infrastructure opens to better resource utilisation and performance,
+but, contextually, introduces new challenges to software designers,
+as applications must be conceived to be able to adapt their deployment to changing conditions.
 %
-The availablity of such an infrastructure opens to new possibilities in terms of better resource utilisation and performance,
-but also poses new challenges to the application designer,
-as the application must be conceived to be able to adapt its deployment to changing conditions.
-%
-In this paper we present a framework for the development of distributed systems
+In this paper,
+we introduce a framework for the development of distributed systems
 based on the concept of \emph{pulverisation},
-which is meant to neatly separate business logic and deployment concerns,
+meant to neatly separate business logic and deployment concerns,
 allowing applications to be defined independent of the infrastructure they will execute upon.
 %
 The framework is based on a domain-specific language capturing,
 in a declarative fashion,
-the concepts composing a pulverised application and any potential target network,
-also allowing for the specification of reconfiguration policies.
+pulverised application components, device capabilities, resource allocation, and (runtime re-) configuration policies.
 %
 The framework, implemented in Kotlin multiplatform and available as open source,
 is then evaluated in a small-scale real-world demo and in a city-scale simulated scenario.
