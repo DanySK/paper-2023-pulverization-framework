@@ -8,9 +8,12 @@
 \usepackage{textcomp}
 \usepackage{xcolor}
 \usepackage{listings}
+\usepackage{acronym}
 \usepackage{listing-style}
 \usepackage[hidelinks]{hyperref}
 \usepackage{svg}
+
+\acrodef{dsl}[DSL]{domain-specific language}
 
 \usepackage{cleveref}
 
@@ -138,7 +141,7 @@ a small-scale real-wold demonstration, and a city-scale simulated scenario.
 
 \subsection{Domain-specific language}
 
-The framework allows the system configuration via two distinct DSLs, one for defining the system's devices and their components,
+The framework allows the system configuration via two distinct \acp{dsl}, one for defining the system's devices and their components,
 and one for defining the runtime configuration of the system.
 
 The first domain-specific language allows to define the system in terms of
@@ -342,13 +345,49 @@ From the variables above are derived the following metrics:
 
 \section{Related Work}
 
-A recent survey on 
- formal techniques for verifying the correctness of reconfigurations
- in component-based distributed software systems is provided in~\cite{coullon2023swreconfig}.
+This work provides 
+ \acp{dsl}
+ for specifying 
+ distributed systems and
+ corresponding deployment plans,
+ and a framework for executing
+ deployment plans and reconfigurations.
+%
+Therefore, this work deals 
+ with multiple problems,
+ investigated by multiple research threads.
+%
+
+%
+The approach of specifying in a single codebase 
+ parts of the structure, behaviour, or interaction 
+ for a whole distributed system
+ is also related to \emph{macroprogramming}~\cite{Casadei2023macro}
+ and, in particular, to \emph{multi-tier programming} paradigm~\cite{DBLP:journals/csur/WeisenburgerWS20},
+ where the deployment units for different tiers (e.g., client and server tiers; or view, business logic, and data tiers) are obrained by compilation or interpretation of a single codebase.
  
-A related approach is also provided by the so-called \emph{multi-tier programming} paradigm~\cite{DBLP:journals/csur/WeisenburgerWS20},
- whereby the code for multiple tiers (e.g., client and server tiers; or view, business logic, and data tiers) is specified in a single codebase,
- from which the code of each individual tier is compiled.
+ 
+\subsection{Application description languages: component models and pulverisation}
+%
+
+\subsection{Infrastructure and deployment description languages}
+
+\subsection{Automatic deployment and reconfiguration}
+%
+A comprehensive conceptual framework
+ on automatic deployment of distributed systems
+ is provided in a 2015 survey by Arcangeli et al. \cite{DBLP:journals/jss/ArcangeliBL15}.
+%
+A more recent survey by Coullon et al. focusses
+ on formal techniques for verifying the correctness of reconfigurations
+ in component-based distributed software systems~\cite{coullon2023swreconfig}.
+%
+In the \emph{osmotic computing} approach~\cite{DBLP:journals/computer/VillariFDRJR19},
+ microservices (the solvent)
+ can migrate across 
+ the edge-cloud infrastructure (the solution),
+ passing through layer boundaries (the semi-permeable membranes),
+ in order to keep a balance in the desired properties (the solute).
 
 \meta{
 MuScADeL (Multi-Scale Autonomic Deployment Language)~\cite{DBLP:conf/compsac/BoujbelRLTAL14/muscadel}
@@ -362,13 +401,13 @@ ADSL (AWaRE DSL)~\cite{DBLP:conf/aswec/ChhetriLUVKNR18/adsl} % and see corresp R
 %
 %\meta{TODO: add works on deployment independence, e.g., osmotic~\citep{DBLP:journals/computer/VillariFDRJR19}, BIP~\citep{lekidis2015bip-wsn,bastarrica2001optimization-techniques-deployment-components-bip}}
 %
-We highlight a number of representatieve research efforts on deployment and automatic reconfiguration of systems.
-%
-%For instance, 
-\emph{Osmotic computing}~\cite{DBLP:journals/computer/VillariFDRJR19} is an approach to opportunistic deployment of microservices on the edge-fog-cloud platform.
-An osmotic platform aims to reach and maintain an ``osmotic equilibrium'' 
-between infrastructural and application requirements
-by automatically migrating microservices to deployment locations.
+%We highlight a number of representatieve research efforts on deployment and automatic reconfiguration of systems.
+%%
+%%For instance, 
+%\emph{Osmotic computing}~\cite{DBLP:journals/computer/VillariFDRJR19} is an approach to opportunistic deployment of microservices on the edge-fog-cloud platform.
+%An osmotic platform aims to reach and maintain an ``osmotic equilibrium'' 
+%between infrastructural and application requirements
+%by automatically migrating microservices to deployment locations.
 %
 However, the approach mainly targets centrally orchestrated systems.
 %
