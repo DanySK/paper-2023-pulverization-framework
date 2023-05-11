@@ -10,6 +10,7 @@
 \usepackage{listings}
 \usepackage{listing-style}
 \usepackage[hidelinks]{hyperref}
+\usepackage{svg}
 
 \usepackage{cleveref}
 
@@ -248,6 +249,61 @@ and show how the dynamic reconfiguration may help achieving balance between ener
 Both experiments have been released with a permissive open-source license and have been archived for future reference on Zenodo~\cite{TBD}.
 
 \subsection{Small scale: crowd alert}
+\label{sec:small-scale-crowd-alert}
+
+In this section we present a simple scenario where the pulverization framework is used to implement a crowd alert system:
+we simulate a laboratory where a safety system warns people when they are too close to each other.
+%
+Each person is equipped with a wearable device that is able to detect the distance from other devices and send the distances data to the
+alert system.
+%
+The people in the laboratory must observe a safety distance, and the system warns them when the distance is not respected by showing a red light
+when they are too close to each other, and a green color when the distance is respected (see~\Cref{fig:crowd-alert}).
+%
+\begin{figure*}[ht]
+    \centering
+    \includesvg[width=.8\textwidth]{figures/crow-laboratory-demo.drawio.svg}
+    \caption{
+        Representation of the scenario described in the~\Cref{sec:small-scale-crowd-alert}
+        where more the people are far from each other, more the color of the screen is green.
+        More the people are close to each other, more the color of the screen is red.
+        The blue dot represents the wearable device and the link between the devices represents the distance between them.
+        The rectangle represents the monitor in the laboratory which shows the congestion level of the laboratory (via the color described above).
+    }
+    \label{fig:crowd-alert}
+\end{figure*}
+%
+The system is composed of two kind of devices: \emph{wearable} and \emph{laboratory}.
+%
+The former represents the wearable devices that is worn by the people, and consists of the following pulverized components:
+$\beta$, $\chi$, and $\sigma$.
+%
+The \emph{behaviour} ($\beta$) component is responsible for converting the raw data from the sensor into the distance
+between the device and the others; the \emph{sensors} ($\sigma$) component is responsible for perceiving the other devices and
+the \emph{communication} ($\chi$) component is responsible for sending the data to the alert system.
+%
+The latter represents the alert system and consists of the following pulverized components:
+$\beta$, $\kappa$, $\chi$, and $\alpha$.
+%
+The \emph{behaviour} ($\beta$) component is responsible for evaluating the meand distance between the devices,
+the \emph{actuators} ($\alpha$) is responsible for triggering the alarm showing a color in the screen,
+and the \emph{communication} ($\chi$) component is responsible for receiving the data from the wearable devices.
+
+The infrastructure defined for this scenario is described as follow:
+
+\begin{itemize}
+    \item \emph{Smartphones} are the devices used by the people to detect the distance from the others;
+    \item \emph{Local PC} is the device used to show the alarm in the laboratory;
+    \item \emph{Server} is the device used run the crowd algorithm and the wearable logic. 
+\end{itemize}
+
+The initial deployment of the system starts with the $\beta_{werable}$ executed in the \emph{Server},
+the $\sigma_{wearable}$ and $\chi_{werable}$ executed in the \emph{Smartphones},
+and all the \emph{Laboratory} components are executed in the \emph{Local PC}.
+%
+Given the infrastracture defined above, we simulate also a condition where the \emph{Server} is overloaded and, via pulverization,
+we reconfigure the execution of all the $\beta_{werable}$ component to the \emph{Smartphone}.
+%
 
 \subsection{Large scale: smart city application}
 
