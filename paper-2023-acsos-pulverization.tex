@@ -385,9 +385,31 @@ This work provides
  deployment plans and reconfigurations.
 %
 Therefore, this work deals 
- with multiple problems,
+ with multiple problems and perspectives,
  investigated by multiple research threads.
 %
+In~\cite{DBLP:journals/jss/ArcangeliBL15},
+the problem of (automatic) deployment of distributed software system is studied by considering
+ (i) the nature of software to be deployed,
+ (ii) the nature of the deployment domain (i.e. the available infrastructure),
+ (iii) how the deployment is designed,
+ and 
+ (iv) how the deployment is performed.
+%
+Accordingly, 
+ we cover related works about
+ languages for 
+ specifying applications (\Cref{sec:rw:whatsw}),
+ languages for specifying infrastructures and deployments (\Cref{sec:rw:depdesc}),
+ and
+ techniques for automatic deployment and reconfiguration (\Cref{sec:rw:autodep}).
+ 
+ 
+ 
+\subsection{Application description languages: component models and pulverisation}
+\label{sec:rw:whatsw}
+%
+A comprehensive survey on component-based software engineering is provided in~\cite{vale2016component-based-se}.
 
 %
 The approach of specifying in a single codebase 
@@ -396,14 +418,12 @@ The approach of specifying in a single codebase
  is also related to \emph{macroprogramming}~\cite{Casadei2023macro}
  and, in particular, to \emph{multi-tier programming} paradigm~\cite{DBLP:journals/csur/WeisenburgerWS20},
  where the deployment units for different tiers (e.g., client and server tiers; or view, business logic, and data tiers) are obrained by compilation or interpretation of a single codebase.
- 
- 
-\subsection{Application description languages: component models and pulverisation}
-%
 
 \subsection{Infrastructure and deployment description languages}
+\label{sec:rw:depdesc}
 
 \subsection{Automatic deployment and reconfiguration}
+\label{sec:rw:autodep}
 %
 A comprehensive conceptual framework
  on automatic deployment of distributed systems
