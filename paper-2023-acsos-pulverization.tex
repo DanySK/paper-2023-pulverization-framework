@@ -444,16 +444,16 @@ From the variables above are derived the following metrics:
 This work provides 
  \acp{dsl}
  for specifying 
- distributed systems and
+ distributed systems (partitioned according to the 
+ pulverisation model)
+ and
  corresponding deployment plans,
  and a framework for executing
  deployment plans and reconfigurations.
 %
-Therefore, we provide an original solution
- to different issues.
-%
-In~\cite{DBLP:journals/jss/ArcangeliBL15},
-the problem of (automatic) deployment of distributed software system is studied by considering
+A way to structure all this 
+ is by using the analytical framework of~\cite{DBLP:journals/jss/ArcangeliBL15},
+  where the problem of (automatic) deployment of distributed software system is studied by considering
  (i) the nature of software to be deployed,
  (ii) the nature of the deployment domain (i.e. the available infrastructure),
  (iii) how the deployment is designed,
@@ -500,7 +500,7 @@ The specification or design of distributed systems
 %
 
 Specifically,
- this work generalises over the \emph{pulverisation model}~\cite{FI2020-pulverization,IEEE-IoTJ-pulverization-simulation},
+ this work builds on the \emph{pulverisation} component model~\cite{FI2020-pulverization,IEEE-IoTJ-pulverization-simulation},
  whereby a large-scale cyber-physical system
  is partitioned into a graph of devices
  where each device is split into five deployable components:
@@ -515,7 +515,7 @@ In~\cite{IEEE-IoTJ-pulverization-simulation},
  is proposed
  for generating and testing deployments through simulation.
 
-Also,
+Additionally,
  the approach of specifying in a single codebase 
  parts of the structure, behaviour, and/or interaction 
  for a whole distributed system
@@ -528,6 +528,32 @@ Also,
 \subsection{Infrastructure and deployment description languages}
 \label{sec:rw:depdesc}
 
+A \emph{deployment plan} is a configured mapping of a software system onto a deployment domain.
+%
+Given a deployable software system developed using the techniques of the previous subsection,
+ what is needed now is a language to describe a deployment domain 
+ and the deployment mapping.
+%
+Languages have been proposed 
+ targetting specific kinds of deployment domains
+ such as the smart grid (cf. the deployment specification language \emph{dspec} in the \emph{Resilient Information Architecture Platform for Smart Grids [RIAPS]} platform~\cite{DBLP:conf/coins/GhoshTKKL22})
+ or the cloud (cf. the \emph{Cloud Application Modelling and Execution Language [CAMEL]} multi-\ac{dsl}~\cite{DBLP:journals/jcloudc/AchilleosKRKDOS19}).
+
+In this work,
+ we are especially interested deployments over large-scale cyber-physical systems and the edge-fog-cloud continuum.
+%
+The \emph{MultiScale Autonomic Deployment Language (MuScADeL)}~\cite{DBLP:conf/compsac/BoujbelRLTAL14/muscadel}
+ is a \ac{dsl} that allows to express deployment properties of 
+ componentised applications on multi-scale deployment domains, i.e., large and heterogeneous infrastructures considered under several viewpoints (device, geography, network, administrative domains, etc.).
+%
+In~\cite{DBLP:journals/sosym/SongDFSF22},
+  a model-based deployment approach is proposed
+  targetting so-called \emph{fleets}, i.e.,
+  distributed and heterogeneous devices at the edge chaaracterised by different cyber-physical contexts (cf. resources, connectivity, etc.).
+%
+It is based on the \emph{Generation and Deployment
+of Smart IoT Systems (GeneSIS)} modelling language, where a \texttt{DeploymentModel} consists of sets of \texttt{Resources} (e.g., \texttt{Component}s, specialised by \texttt{InfrastructureComponent}s and \texttt{SoftwareComponent}s) with associated \texttt{Property}s and \texttt{Link}s.
+
 \subsection{Automatic deployment and reconfiguration}
 \label{sec:rw:autodep}
 %
@@ -539,6 +565,16 @@ A more recent survey by Coullon et al. focusses
  on formal techniques for verifying the correctness of reconfigurations
  in component-based distributed software systems~\cite{coullon2023swreconfig}.
 %
+Two formal models for specifying reconfigurable architectures are \emph{DR-BIP (Dynamically Reconfigurable - Behaviour Interaction Priority model)}~\cite{,Ballouli18dr-bip}
+and \emph{DReAM (Dynamically Reconfigurable Architectural Modelling)}~\cite{denicola2020dream-dynamic-reconfig-arch-modelling}.
+%
+Both are based on the same conceptual model: they 
+ feature \emph{components} (capturing behaviour), \emph{connectors} (capturing interaction between components' \emph{ports}), 
+\emph{maps} (logical topologies),
+and \emph{deployments} (associating components to map locations),
+overall organised in \emph{motifs} (dynamic architectural configurations),
+to model and analyse dynamic architectures.
+%
 \meta{TODO: say something about our positioning wrt verification of reconfigurations}
 
 In the \emph{osmotic computing} approach~\cite{DBLP:journals/computer/VillariFDRJR19},
@@ -548,49 +584,49 @@ In the \emph{osmotic computing} approach~\cite{DBLP:journals/computer/VillariFDR
  passing through layer boundaries (the semi-permeable membranes),
  in order to keep a balance in the desired properties (the solute).
 
-\meta{
-MuScADeL (Multi-Scale Autonomic Deployment Language)~\cite{DBLP:conf/compsac/BoujbelRLTAL14/muscadel}
-
-ADSL (AWaRE DSL)~\cite{DBLP:conf/aswec/ChhetriLUVKNR18/adsl} % and see corresp RW: the most related DSLs are those in the area of automated deployment [17]. Such DSLs include Deladas [31], [32], ConfSolve [15], [33], j-ASD’s DSL [34] and MuScADeL [35], [36].
-% [17]: J.-P. Arcangeli, R. Boujbel, and S. Leriche, "Automatic deployment of distributed software systems: Definitions and state of the art," Journal of Systems and Software, vol. 103, pp. 198–218, 2015
-
+%\meta{
+%MuScADeL (Multi-Scale Autonomic Deployment Language)~\cite{DBLP:conf/compsac/BoujbelRLTAL14/muscadel}
 %
-%\subsection{Approaches to Deployment Independence}
-%\label{s:rw:deployment-independence}
-%
-%\meta{TODO: add works on deployment independence, e.g., osmotic~\citep{DBLP:journals/computer/VillariFDRJR19}, BIP~\citep{lekidis2015bip-wsn,bastarrica2001optimization-techniques-deployment-components-bip}}
-%
-%We highlight a number of representatieve research efforts on deployment and automatic reconfiguration of systems.
+%ADSL (AWaRE DSL)~\cite{DBLP:conf/aswec/ChhetriLUVKNR18/adsl} % and see corresp RW: the most related DSLs are those in the area of automated deployment [17]. Such DSLs include Deladas [31], [32], ConfSolve [15], [33], j-ASD’s DSL [34] and MuScADeL [35], [36].
+%% [17]: J.-P. Arcangeli, R. Boujbel, and S. Leriche, "Automatic deployment of distributed software systems: Definitions and state of the art," Journal of Systems and Software, vol. 103, pp. 198–218, 2015
 %%
-%%For instance, 
-%\emph{Osmotic computing}~\cite{DBLP:journals/computer/VillariFDRJR19} is an approach to opportunistic deployment of microservices on the edge-fog-cloud platform.
-%An osmotic platform aims to reach and maintain an ``osmotic equilibrium'' 
-%between infrastructural and application requirements
-%by automatically migrating microservices to deployment locations.
-%
-However, the approach mainly targets centrally orchestrated systems.
-%
-Other approaches leverage component-based, architectural descriptions to decouple application logic and deployment.
-%
-For instance, \emph{DR-BIP (Dynamically Reconfigurable - Behaviour Interaction Priority model)}~\cite{,Ballouli18dr-bip}
-and \emph{DReAM (Dynamically Reconfigurable Architectural Modelling)}~\cite{denicola2020dream-dynamic-reconfig-arch-modelling}
-use \emph{components} (capturing behaviour), \emph{connectors} (capturing interaction between components' \emph{ports}), 
-\emph{maps} (logical topologies),
-and \emph{deployments} (associating components to map locations),
-overall organised in \emph{motifs} (dynamic architectural configurations),
-to model and analyse dynamic architectures.
-%
-
-These approaches have some similarity with the approach presented in this paper, but they are arguably more complex and our  
-%than the one introduced in this paper,
- %, though also fostering an exogenous, declarative (logics-based) modelling approach.
-approach explicitly addresses self-organising CPS.
-%
-%
-%By constrast, our approach explicitly addresses self-organising CPS.
-%
-%A more in-depth, formal comparison is left as future work.
-}
+%%%
+%%%\subsection{Approaches to Deployment Independence}
+%%%\label{s:rw:deployment-independence}
+%%%
+%%%\meta{TODO: add works on deployment independence, e.g., osmotic~\citep{DBLP:journals/computer/VillariFDRJR19}, BIP~\citep{lekidis2015bip-wsn,bastarrica2001optimization-techniques-deployment-components-bip}}
+%%%
+%%%We highlight a number of representatieve research efforts on deployment and automatic reconfiguration of systems.
+%%%%
+%%%%For instance, 
+%%%\emph{Osmotic computing}~\cite{DBLP:journals/computer/VillariFDRJR19} is an approach to opportunistic deployment of microservices on the edge-fog-cloud platform.
+%%%An osmotic platform aims to reach and maintain an ``osmotic equilibrium'' 
+%%%between infrastructural and application requirements
+%%%by automatically migrating microservices to deployment locations.
+%%%
+%%However, the approach mainly targets centrally orchestrated systems.
+%%%
+%%Other approaches leverage component-based, architectural descriptions to decouple application logic and deployment.
+%%%
+%%For instance, \emph{DR-BIP (Dynamically Reconfigurable - Behaviour Interaction Priority model)}~\cite{,Ballouli18dr-bip}
+%%and \emph{DReAM (Dynamically Reconfigurable Architectural Modelling)}~\cite{denicola2020dream-dynamic-reconfig-arch-modelling}
+%%use \emph{components} (capturing behaviour), \emph{connectors} (capturing interaction between components' \emph{ports}), 
+%%\emph{maps} (logical topologies),
+%%and \emph{deployments} (associating components to map locations),
+%%overall organised in \emph{motifs} (dynamic architectural configurations),
+%%to model and analyse dynamic architectures.
+%%%
+%%
+%%These approaches have some similarity with the approach presented in this paper, but they are arguably more complex and our  
+%%%than the one introduced in this paper,
+%% %, though also fostering an exogenous, declarative (logics-based) modelling approach.
+%%approach explicitly addresses self-organising CPS.
+%%%
+%%%
+%%%By constrast, our approach explicitly addresses self-organising CPS.
+%%%
+%%%A more in-depth, formal comparison is left as future work.
+%}
 
 \section{Conclusion and future work}\label{sec:conclusion}
 
