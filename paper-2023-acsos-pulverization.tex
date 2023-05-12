@@ -85,7 +85,7 @@ is then evaluated in a small-scale real-world demo and in a city-scale simulated
 runtime reconfiguration, distributed systems, self-adaptation, self-organisation, pulverisation
 \end{IEEEkeywords}
 
-\newcommand{\ourframework}{Porbione}
+\newcommand{\ourframework}{\texttt{pulse-refrakt}}
 
 \meta{LIMIT 10 pages incl. refs; DEADLINE 19 may}
 
@@ -203,16 +203,14 @@ and the remaining components on the edge server.
 From the previous section,
 we can identify two main phases in the pulverisation process:
 \begin{enumerate*}[label=\it{(\roman*)}]
-  \item the definition of the available devices and their capabilities; and
-  \item the allocation of the pulverised components to them.
+  \item the definition of the available devices and their capabilities (infrastructure); and
+  \item the allocation of the pulverised components to them (runtime).
 \end{enumerate*}
 %
 We decided to capture these phases into two distinct \acp{dsl}.
 
-The first domain-specific language allows to define the system in terms of
-\emph{devices}, \emph{components} and which \emph{capabilities} requires to be executed.
-%
-In this way, infrastructural and deployment aspects are abstracted, allowing the focus to be on functional aspects of the system.
+The infrastructure \ac{dsl} captures the concepts of
+\emph{logical device}, \emph{component}, \emph{capability}, and \emph{requirement}.
 %
 The DSL enables the definition of the type of devices that took part in the system,
 and for each device can be specified which components constitute it and where those component must run on (e.g. which host must execute the component).
