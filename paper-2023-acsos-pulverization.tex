@@ -15,6 +15,8 @@
 
 \acrodef{dsl}[DSL]{domain-specific language}
 \acrodef{iot}[IoT]{Internet of Things}
+\acrodef{cas}[CAS]{collective adaptive system}
+\acrodef{qos}[QoS]{quality of service}
 
 \usepackage{cleveref}
 
@@ -98,10 +100,18 @@ an infrastructure composed of heterogeneous devices ranging from large and power
 on which software computes in a distributed fashion,
 optimising for performance and resource utilisation.
 %
+This kind of infrastructure is ideal for the execution of \ac{cas},
+which have components that,
+depending con the conditions at hand,
+could benefit from being deployed on different devices.
+%
 Exploiting this intriguing infrastructure, however, poses new challenges to the application designer.
 %
 Commonly, in fact, applications are designed with a specific infrastructure in mind,
-whose assumptions leak into the application logic.
+whose assumptions unavoidably leak into the application logic~\cite{Spolsky2004},
+unless captured and encapsulated away from it:
+the higher the coupling between the application and the infrastructure,
+the harder it is for the former to exploit the latter's full potential and adapt to changes.
 
 Previous work suggests a technique for decoupling business logic and deployment concerns
 called \emph{pulverization}~\cite{FI2020-pulverization}.
@@ -121,9 +131,9 @@ there is no support for the reconfiguration of components in face of changing co
 
 In this work,
 we continue the research on pulverised systems by providing two key contributions:
-first, we extend the theoretical framework of pulverisation by adding support for
+\textbf{first}, we extend the theoretical framework of pulverisation by adding support for
 \emph{runtime configuration rules}, allowing pulverised components to move at runtime across different hosts;
-the providing a practical implementation called \ourframework{} which,
+\textbf{second}, we provide a practical implementation called \ourframework{} which,
 to the best of our knowledge,
 is the first \emph{practical framework supporting pulverisation} for a general-purpose language.
 %
@@ -132,11 +142,9 @@ a small-scale real-wold demonstration, and a city-scale simulated scenario.
 
 \begin{itemize}
     \item need for deployment-independent specs
-    \item need for runtime reconfiguration (achieve QoS in face of changing conditions --- green computing?)
+    \item need for runtime reconfiguration (achieve \ac{qos} in face of changing conditions --- green computing?)
     \item declarativity over imperative approaches (note: can be compared with the trend in general softeng/build systems)
 \end{itemize}
-
-+ related work
 
 \section{A framework for declarative runtime reconfiguration}\label{sec:contribution}
 
@@ -171,7 +179,7 @@ In this process,
 a single logical component could be (and usually does) end up being executed on multiple hosts.
 
 For instance, let us assume a minimal logical system counting two devices:
-two rain gauges logging the water level for future reference,
+two rain gauges logging the water level for future reference
 and opening a valve when the water level crosses a threshold in both devices.
 %
 Once pulverised, the logical system would be split in ten deployable pulverised components
@@ -200,7 +208,46 @@ and the remaining components on the edge server.
 
 \meta{maybe import the image from the pulverisation paper?}
 
+Although the idea behind pulverisation is simple,
+finding a way to implement it effectively requires tackling several challenges at different levels:
+\begin{itemize}
+    \item \textbf{communication}: spliting logical devices into small deployment units implies communication among them,
+    thus requiring to consider networking at two levels:
+    across pulverised components (intra-device) and among logical devices (inter-device);
+    \item \textbf{portability}: hosts will have very diverse hardware specifications, operang systems, and software stacks,
+    \item \textbf{runtime}: runtime reconf how to handle the communication between pulverised components across different runtimes?
+    \item \textbf{language}: for the idea to be exploitable by designers is quintessential that
+    the pulverised configuration
+    and the mapping of pulverised components to the underlying infrastructure
+    can be expressed nimbly and, possibly, declaratively.
+\end{itemize}
+
 \subsection{Domain-specific languages for pulverisation}
+
+In principle, there are several possibilities to implement a pulverisation configurator and runtime:
+as a library
+(configured and executed by a target programming language),
+as a framework/runtime (configured by means of configuration files and with its own runtime),
+or as a \ac{dsl} (configured with its own custom syntax).
+%
+The approaches have different trade-offs.
+%
+A (well designed) library can be flexible and easier to adopt
+as it does not require to learn new languages;
+but it will be usable only in the language/runtime it has been designed for,
+and will require its own framework/runtime to be executed
+(or appropriate bindings for existing ones).
+%
+A framework/runtime configured via declarative files enforces declarativity at the configuration level,
+but it usually dictates network protocols and features limited flexibility,
+as options that have not been accounted for at design time can hardly be injected through configuration files.
+%
+Finally, a \ac{dsl} can be designed to be as expressive as needed,
+but has high maintenance cost and, potentially, a steep learning curve due to the need of learning a new (custom) language.
+%
+
+TODO: recently, internal DSLs
+
 
 From the previous section,
 we can identify two main phases in the pulverisation process:
@@ -310,7 +357,7 @@ to showcase the integration of the framework with established technologies\footn
 };
 in the latter,
 we simulate a city-scale distributed application deployed for a urban event
-and show how the dynamic reconfiguration may help achieving balance between energy consumption and QoS\footnote{
+and show how the dynamic reconfiguration may help achieving balance between energy consumption and \ac{qos}\footnote{
     \url{https://github.com/nicolasfara/ACSOS-2023-pulverization-evaluation}
 }.
 %
