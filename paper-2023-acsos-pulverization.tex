@@ -99,23 +99,44 @@ is then evaluated in a small-scale real-world demo and in a city-scale simulated
 runtime reconfiguration, distributed systems, self-adaptation, self-organisation, pulverisation, deployment.
 \end{IEEEkeywords}
 
-\newcommand{\ourframework}{\texttt{pulse-refrakt}}
+\newcommand{\ourframework}{\textsc{pulse-refrakt}}
 
 \meta{LIMIT 10 pages incl. refs; DEADLINE 19 may}
 
 \section{Introduction}\label{sec:introduction}
 
-Recent research trends in topics related to the Internet of Things promote the idea of a cloud-edge continuum~\cite{DBLP:journals/iot/BittencourtISFM18},
-an infrastructure composed of heterogeneous devices ranging from large and powerful cloud servers to small connected things
-on which software computes in a distributed fashion,
+Recent technological and scientific advances
+ are extending 
+ both the \emph{kinds of applications and systems} that are being addressed  
+ as well as their \emph{supporting infrastructure}.
+%
+Emerging applications
+ are, for instance, those based on \emph{\acp{cas}}~\cite{DBLP:journals/sttt/NicolaJW20},
+ namely collections of devices and agents
+ that interact to solve problems or provide services while adapting as a whole to dynamic environments.
+%
+Examples include 
+  large-scale sensor-actuator networks, 
+  swarms of robots,
+  social computing systems,
+  crowds of wearable-augmented people, etc.
+  supporting activities like monitoring,
+  transportation, coordination, and collective intelligence.
+%
+Regarding infrastructure,
+ it is mounting the idea of the \emph{cloud-edge continuum}~\cite{DBLP:journals/iot/BittencourtISFM18}: 
+a multi-layer heterogeneous network of devices (ranging from large and powerful cloud servers to small connected \emph{things})
+on which software can compute, store, and exchange data in a distributed fashion, while 
 optimising for performance and resource utilisation.
 %
-This kind of infrastructure is ideal for the execution of \ac{cas},
-which have components that,
-depending con the conditions at hand,
-could benefit from being deployed on different devices.
+
+This kind of infrastructure is also valuable for  \acp{cas}~\cite{DBLP:journals/tpds/HongCHGZ19,DBLP:journals/comsur/WangZZMLW20,DBLP:journals/comsur/AfrinJRRWH21,IEEE-IoTJ-pulverization-simulation},
+which generally feature components that,
+depending on the conditions at hand,
+could benefit from being deployed on different devices or from \emph{offloading} some of their  tasks.
 %
-Exploiting this intriguing infrastructure, however, poses new challenges to the application designer.
+Exploiting this %intriguing infrastructure, 
+ however, poses new challenges to \ac{cas} application designers.
 %
 Commonly, in fact, applications are designed with a specific infrastructure in mind,
 whose assumptions unavoidably leak into the application logic~\cite{Spolsky2004},
@@ -124,12 +145,12 @@ the higher the coupling between the application and the infrastructure,
 the harder it is for the former to exploit the latter's full potential and adapt to changes.
 
 Previous work suggests a technique for decoupling business logic and deployment concerns
-called \emph{pulverization}~\cite{FI2020-pulverization}.
+in \acp{cas} called \emph{pulverisation}~\cite{FI2020-pulverization}.
 %
 In short, the core idea is to consider devices as \emph{logical} entities,
-whose software can be designed as (or broken down to, if already existing) an ensemble of five micro-components
-(behaviour, state, communication, sensors, and actuators)
-whose actual host can be decided at deployment time.
+whose software can be designed as (or broken down to, if already existing) an ensemble of \emph{five components
+(behaviour, state, communication, sensors, and actuators)}
+ that can be deployed with flexibility on available infrastructure without (ideally) affecting application functionality. %whose actual host can be decided at deployment time.
 %
 This way, the designer can focus on the business logic at hand,
 delaying an optimised deployment to later stages of the sofware design,
@@ -137,24 +158,38 @@ thus gaining resilience to changes in the infrastructure or in non-functional re
 %
 One limitation of the current pulverisation approach regards dynamicity:
 although the application can be deployed on arbitrary systems,
-there is no support for the reconfiguration of components in face of changing conditions or requirements.
+there is no support for the reconfiguration of components at runtime, as a reaction to changing conditions or requirements.
 
 In this work,
 we continue the research on pulverised systems by providing two key contributions:
 \textbf{first}, we extend the theoretical framework of pulverisation by adding support for
 \emph{runtime configuration rules}, allowing pulverised components to move at runtime across different hosts;
-\textbf{second}, we provide a practical implementation called \ourframework{} which,
+\textbf{second}, we provide a practical implementation in Kotlin called \ourframework{} which,
 to the best of our knowledge,
-is the first \emph{practical framework supporting pulverisation} for a general-purpose language.
+is the first \emph{practical framework supporting pulverisation}. % for a general-purpose language.
 %
-We exercise \ourframework{} with two case studies:
+To evaluate \ourframework{}, we exercise it through two case studies:
 a small-scale real-wold demonstration, and a city-scale simulated scenario.
 
+\meta{
 \begin{itemize}
     \item need for deployment-independent specs
     \item need for runtime reconfiguration (achieve \ac{qos} in face of changing conditions --- green computing?)
     \item declarativity over imperative approaches (note: can be compared with the trend in general softeng/build systems)
 \end{itemize}
+}
+
+The manuscript is organised as follows.
+%
+\Cref{sec:background} provides background on \meta{deployment and} pulverisation.
+%
+\Cref{sec:contribution} describes the proposed \ac{dsl} and platform.
+%
+\Cref{sec:evaluation} provides an evaluation of the approach.
+%
+\Cref{sec:rw} covers related work.
+%
+Finally, \Cref{sec:conclusion} concludes the paper and highlights directions for future work.
 
 \section{Background}\label{sec:background}
 
@@ -525,6 +560,7 @@ From the variables above are derived the following metrics:
 
 
 \section{Related Work}
+\label{sec:rw}
 
 This work provides 
  \acp{dsl}
