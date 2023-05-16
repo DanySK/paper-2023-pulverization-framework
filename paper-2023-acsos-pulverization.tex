@@ -292,13 +292,15 @@ we can identify two main phases in the pulverisation process:
   \item the allocation of the pulverised components to them (\emph{runtime}).
 \end{enumerate*}
 %
-Coherently with the single responsibility principle,
+Coherently withush the single responsibility principle,
 we decided to capture these phases into two distinct \acp{dsl}.
 
 The infrastructure \ac{dsl} captures the concepts of
 \emph{logical device}, \emph{component}, \emph{capability}, and \emph{requirement}.
 %
-The DSL enables the definition of the type of devices that took part in the system,
+
+
+The DSL enables the definition of the type of devices that take part in the system,
 and for each device can be specified which components constitute it and where those component must run on (e.g. which host must execute the component).
 %
 The execution of a component is constrained to hosts with predetermined characteristics:
