@@ -226,11 +226,11 @@ finding a way to implement it effectively requires tackling several challenges a
 
 In principle, there are several possibilities to implement a pulverisation configurator and runtime:
 as a library
-(configured and executed by a target programming language),
-as a framework/runtime (configured by means of configuration files and with its own runtime),
-or as a \ac{dsl} (configured with its own custom syntax).
+configured and executed by a target programming language,
+as a framework/runtime configured by means of configuration files and with its own runtime,
+or as a \ac{dsl} configured with its own custom syntax.
 %
-The approaches have different trade-offs.
+These approaches have different trade-offs.
 %
 A (well designed) library can be flexible and easier to adopt
 as it does not require to learn new languages;
@@ -243,11 +243,16 @@ but it usually dictates network protocols and features limited flexibility,
 as options that have not been accounted for at design time can hardly be injected through configuration files.
 %
 Finally, a \ac{dsl} can be designed to be as expressive as needed,
-but has high maintenance cost and, potentially, a steep learning curve due to the need of learning a new (custom) language.
+but it has high maintenance cost (as the language maintenance costs stack upon those of the library/API) and, potentially,
+a steep learning curve due to the need of learning a new (custom) language.
 %
+Recent evolution in programming languages,
 
+such as Kotlin, Ruby, and Scala~\cite{Riti2018}
+however,
+a trend has emerged that
 TODO: recently, internal DSLs
-
+adopted by gradle
 
 From the previous section,
 we can identify two main phases in the pulverisation process:
