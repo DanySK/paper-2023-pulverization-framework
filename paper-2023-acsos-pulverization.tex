@@ -391,11 +391,8 @@ it implies that the component can be moved from at runtime across any host imple
 
 \subsection{Runtime and reconfiguration}
 
-The second domain-specific language allows to define the concrete implementation of each component associating it to a specific start host;
-moreover, it allows to define the creteria on which the system should be reconfigured by specifying which events should trigger a reconfiguration.
-%
-This DSL binds the more abstrac definition specified in the previous DSL to the topology of the available infrastracture,
-defining the actual deployment of the system, and the reconfiguration policies.
+The second \ac{dsl} supports the definition of the mapping between pulverised components and specific hosts,
+as well as the definition of reactive reconfiguration policies.
 %
 The~\Cref{lst:runtime-configuration} provides an example of the usage of the domain-specific language where is defined the runtime configuration of the system.
 %

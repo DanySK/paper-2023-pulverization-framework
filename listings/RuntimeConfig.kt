@@ -1,33 +1,32 @@
+// Reconfiguration events
+object HighLoad : ReconfigurationEvent() {
+    override val predicate = { it > 0.90 }
+    override val events = ...
+}
+object LowBattery : ReconfigurationEvent() {
+    override val predicate = { it < 0.20 }
+    override val events = ...
+}
+// Available hosts
 object Smartphone : Host {
     override val hostname = "smartphone"
-    override val capabilities =
-        setOf(EmbeddedDevice)
+    override val capabilities = setOf(EmbeddedDevice)
 }
-
 object Server : Host {
-    override val hostname = "server-1"
-    override val capabilities =
-        setOf(HighCPU, LowLatencyComm)
+    override val hostname = "amazon-aws"
+    override val capabilities = setOf(HighCPU, LowLatencyComm)
 }
-
-pulverizationRuntime(
-    configuration,
-    "device-1",
-    setOf(Smartphone, Server),
-) {
-    DeviceBehaviour() startsOn Server
-    DeviceCommunication() startsOn Server
-    DeviceSensor() startsOn Smartphone
-    DeviceActuators() startsOn Smartphone
-
-    reconfigurationRules {
-        onDevice {
-            HighLoadOnServer reconfigures {
-                Behaviour movesTo Smartphone
-            }
-            LowBattery reconfigures {
-                Behaviour movesTo Server
-            }
-        }
+// Runtime initial setup and runtime reconfiguration rules
+val infrastructure = setOf(Smartphone, Server)
+pulverizationRuntime(conf, "iot-sensor", infrastructure) {
+  DeviceBehaviour() startsOn Server
+  DeviceCommunication() startsOn Server
+  DeviceSensor() startsOn Smartphone
+  DeviceActuators() startsOn Smartphone
+  reconfigurationRules {
+    onDevice {
+      HighLoad reconfigures {Behaviour movesTo Smartphone}
+      LowBattery reconfigures { Behaviour movesTo Server }
     }
+  }
 }
