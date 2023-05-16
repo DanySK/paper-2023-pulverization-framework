@@ -24,6 +24,15 @@
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
     
 \newcommand{\meta}[1]{{\color{blue}#1}}    
+
+\makeatletter
+\newcommand{\linebreakand}{%
+  \end{@IEEEauthorhalign}
+  \hfill\mbox{}\par
+  \mbox{}\hfill\begin{@IEEEauthorhalign}
+}
+\makeatother
+
     
 \begin{document}
 
@@ -42,7 +51,7 @@ danilo.pianini@unibo.it}
 \textit{Alma Mater Studiorum---Università di Bologna}\\
 Cesena, Italy \\
 roby.casadei@unibo.it}
-\and
+\linebreakand
 \IEEEauthorblockN{3\textsuperscript{rd} Nicolas Farabegoli}
 \IEEEauthorblockA{\textit{Department of Computer Science and Engineering} \\
 \textit{Alma Mater Studiorum---Università di Bologna}\\
@@ -53,7 +62,7 @@ nicolas.farabegoli@unibo.it}
 \IEEEauthorblockA{\textit{Department of Computer Science and Engineering} \\
 \textit{Alma Mater Studiorum---Università di Bologna}\\
 Cesena, Italy \\
-email address or ORCID}
+mirko.viroli@unibo.it}
 }
 
 \maketitle
