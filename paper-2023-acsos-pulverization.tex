@@ -295,40 +295,39 @@ we can identify two main phases in the pulverisation process:
 Coherently withush the single responsibility principle,
 we decided to capture these phases into two distinct \acp{dsl}.
 
+\subsection{Infrastructure and requirements}
+
 The infrastructure \ac{dsl} captures the concepts of
-\emph{logical device}, \emph{component}, \emph{capability}, and \emph{requirement}.
+\emph{device type}, \emph{component}, \emph{capability}, and \emph{requirement}.
 %
-
-
-The DSL enables the definition of the type of devices that take part in the system,
-and for each device can be specified which components constitute it and where those component must run on (e.g. which host must execute the component).
+A reference sample is presented in \Cref{lst:system-configuration}.
 %
-The execution of a component is constrained to hosts with predetermined characteristics:
-the framework models the constraint with the \texttt{Capability} concept,
-namely the property that a host must to ``implement'' to run the component.
+The DSL provides simple means to define capabilities as types in the host language,
+and then to associate them to pulverised components for each device type.
 %
-Different capabilities can be specified for each component to provide a more flexible and scalable deployment of the system.
-
-The~\Cref{lst:system-configuration} provides an example of the usage of the domain-specific language where is defined a system composed of two kind of devices.
+This \ac{dsl} is meant to define constraints that the application imposes on the infrastructure,
+ruling out configurations that are not capable to support the system
+(for instance, deploying the sensor component of a device in a host that exposes no sensor).
 %
-The DSL returns the system's configuration that will be used by the runtime.
-
-One key-point of the domain-specific language can be observed in the definition of the \texttt{device-2} device:
-the \emph{Behaviour} component can be deployed on hosts that implement the \texttt{HighCPU} and \texttt{EmbeddedDevice} capabilities,
-in this way the behaviour can be moved (at runtime) from a host to another one that implements the same capabilities.
+All combinations of components and capabilities that are defined as supported become instead amenable to
+\emph{runtime reconfiguration}.
 %
-The association between a component and a single capability do not necessarily imply that the component can be executed only on a single host,
-but it is the way to specify the minimum requirements for the host that will execute the component.
+Notice, for instance, that \texttt{Behavior} in \texttt{iot-sensor} is defined as executable on any of host exposing
+\texttt{HighCPU} and/or \texttt{EmbeddedDevice} as capabilities:
+it implies that the component can be moved from at runtime across any host implementing any such capability.
 
 \lstinputlisting[
     float=ht,
     language=Kotlin,
     caption={
-        Example of the usage of the domain-specific language for the system configuration.
-        The example configures two types of devices, and for each device defines the components that compose it and which capabilities requires for the execution.
+        Example infrastructure configuration,
+        defining three capabilities and a system composed of two device types,
+        each component of which is then bound to the set of capabilities it needs to execute.
     },
     label=lst:system-configuration,
 ]{listings/SystemConfig.kt}
+
+\subsection{Runtime and reconfiguration}
 
 The second domain-specific language allows to define the concrete implementation of each component associating it to a specific start host;
 moreover, it allows to define the creteria on which the system should be reconfigured by specifying which events should trigger a reconfiguration.
