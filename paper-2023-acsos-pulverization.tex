@@ -865,22 +865,25 @@ the shorter the distance, the more red the tone.
     }
     \label{fig:crowd-alert}
 \end{figure}
+
+The system is composed of two kinds of device: \emph{wearable} and \emph{alert}.
 %
-The system is composed of two kind of devices: \emph{wearable} and \emph{laboratory}.
+Wearables consist of the following pulverised components:
+sensors ($\sigma^w$), perceiving other devices by their signal strenght;
+behaviour ($\beta^w$), converting raw data from the sensor into messages for the alert system; and
+communication ($\chi^w$) sending data to the alert system.
 %
-The former represents the wearable devices that is worn by the people, and consists of the following pulverized components:
-$\beta$, $\chi$, and $\sigma$.
+They do not need state nor actuators.
 %
-The \emph{behaviour} ($\beta$) component is responsible for converting the raw data from the sensor into the distance
-between the device and the others; the \emph{sensors} ($\sigma$) component is responsible for perceiving the other devices and
-the \emph{communication} ($\chi$) component is responsible for sending the data to the alert system.
+The alert consists of the following pulverized components:
+$\beta^a$, computing the mean distance among devices;
+$\kappa^a$ \meta{
+    NICOLAS what does this do? write within this meta block
+};
+$\chi^a$, responsible for receiving the data from the wearable devices;
+$\alpha^a$, enacting the alarm by showing a color on the screen.
 %
-The latter represents the alert system and consists of the following pulverized components:
-$\beta$, $\kappa$, $\chi$, and $\alpha$.
-%
-The \emph{behaviour} ($\beta$) component is responsible for evaluating the meand distance between the devices,
-the \emph{actuators} ($\alpha$) is responsible for triggering the alarm showing a color in the screen,
-and the \emph{communication} ($\chi$) component is responsible for receiving the data from the wearable devices.
+It needs no sensors.
 
 The infrastructure defined for this scenario is described as follow:
 
