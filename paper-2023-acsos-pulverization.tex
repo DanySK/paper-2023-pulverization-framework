@@ -584,8 +584,8 @@ finding a way to implement it effectively requires tackling several challenges a
     \item \textbf{communication}: spliting logical devices into small deployment units implies communication among them,
     thus requiring to consider networking at two levels:
     across pulverised components (intra-device) and among logical devices (inter-device);
-    \item \textbf{portability}: hosts will have very diverse hardware specifications, operang systems, and software stacks,
-    \item \textbf{runtime}: runtime reconf how to handle the communication between pulverised components across different runtimes?
+    \item \textbf{portability}: hosts will have very diverse hardware specifications, operating systems, and software stacks;
+    \item \textbf{runtime}: the system should be able to reconfigure its deployment at runtime without disrupting the application logic; and
     \item \textbf{language}: for the idea to be exploitable by designers is quintessential that
     the pulverised configuration
     and the mapping of pulverised components to the underlying infrastructure
@@ -649,7 +649,7 @@ hardware design~\cite{DBLP:journals/trets/SerreP20} to
 logic~\cite{2pkt-swx16} and aggregate programming~\cite{DBLP:journals/softx/CasadeiVAP22}.
 %
 
-\section{A \ac{dsl} for runtime reconfiguration of pulverised systems}\label{sec:contribution}
+\section{A DSL for reconfigurable pulverised systems}\label{sec:contribution}
 
 From the previous section,
 we can identify two main phases in the pulverisation process:
@@ -752,9 +752,9 @@ plain lambda expressions, supporting any kind of computation.
 %     label=lst:reconfiguration-events,
 % ]{listings/ReconfigurationEvents.kt}
 
-\subsection{Implementation details}
+\subsection{Implementation details and underlying runtime}
 
-We implemented the proposed \ac{acronym} in Kotlin.
+We implemented the proposed \ac{dsl} in Kotlin.
 %
 We wanted a language with a strongly typed syntax to help developers with better contextual assist,
 and we wanted the possibility to target multiple runtimes
