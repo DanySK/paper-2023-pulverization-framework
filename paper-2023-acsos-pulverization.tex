@@ -754,7 +754,18 @@ plain lambda expressions, supporting any kind of computation.
 
 \subsection{Implementation details}
 
-Also mention that is multiplatform
+We implemented the proposed \ac{acronym} in Kotlin.
+%
+We wanted a language with a strongly typed syntax to help developers with better contextual assist,
+and we wanted the possibility to target multiple runtimes
+(Kotlin currently targets the JVM, JavaScript, and native code for many platforms\footnote{\url{https://archive.is/JSiTg}},
+including mobile and wearable devices)
+and be as interoperable as possible with other languages.
+%
+Scala could have been a good alternative,
+but we deemed the multiplatform support of Kotlin a better fit for our needs.
+%
+The framework has been open sourced and released with a permissive license\footnote{\url{https://github.com/nicolasfara/pulverization-framework}}.
 
 \subsection{Limitations}
 
