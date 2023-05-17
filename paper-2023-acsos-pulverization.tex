@@ -629,15 +629,23 @@ they allow for great flexibility and ergonomy
 (although not total as the one of a custom \ac{dsl}, as they are subject to the syntactic constraints of the host language)
 while retaining a reduced maintenance cost
 (as the host language ecosystem and tooling can be reused directly)
-and a gentle learning curve
+and a gentle learning curve compared to stand-alone \acp{dsl}
 (as the syntax will be largely familiar to the host language users).
 %
-The internal DSL approach has been successfully applied in several domains,
+The killer feature of internal \acp{dsl}, compared to external ones,
+is the counterpass of the limited syntax imposed by the host:
+if some peculiar entity or process cannot be express by the \ac{dsl},
+the designer can fall back to the host language directly,
+with no need to resort to interoperability features,
+and with the possibility to exploit all the libraries designed for the host language.
+%
+The internal DSL approach has thus been successfully applied in several domains,
 spanning from
 build systems\footnote{\url{https://archive.is/5xtaN}}
 and ontologies~\cite{DBLP:journals/jossw/Balhoff16} to
 hardware design~\cite{DBLP:journals/trets/SerreP20} to
 logic~\cite{2pkt-swx16} and aggregate programming~\cite{DBLP:journals/softx/CasadeiVAP22}.
+%
 
 \section{A \ac{dsl} for runtime reconfiguration of pulverised systems}\label{sec:contribution}
 
@@ -688,22 +696,32 @@ it implies that the component can be moved from at runtime across any host imple
 The second \ac{dsl} supports the definition of the mapping between pulverised components and specific hosts,
 as well as the definition of reactive reconfiguration policies.
 %
-The~\Cref{lst:runtime-configuration} provides an example of the usage of the domain-specific language where is defined the runtime configuration of the system.
+It works with the concepts of \texttt{Host}
+(associated to \texttt{Capability}),
+\texttt{ReconfigurationEvent},
+and \texttt{ReconfigurationRule}.
 %
-The framework define the concept of \texttt{Host} that is the representation of an available physical host where the components can be deployed;
-for each host is possible to specify the capabilities that it implements.
+Using \Cref{lst:runtime-configuration} as a reference example,
+we show how reconfiguration events can be captured at the type system level
+by expressing them as a predicate over the asynchronous flow of \texttt{events} the system's state.
 %
-In this way, the framework can check if a host can execute a component by verifying if the host implements the required capabilities.
+Similarly, hosts can be configured by defining their name and capabilities.
 %
-The runtime is configured be specifying for each implementation of a \emph{component},
-its associated startup host enabling the definition of the initial deployment of the system.
+Once the hosts composing the system have been configured,
+the entire infrastructure can be set up by defining,
+for each logical device,
+which host should host each pulverised component.
 %
-The most relevant part of the domain-specific language, is the definition of the reconfiguration rules:
-the framework models the concept of \texttt{ReconfigurationEvent}
-that is the event that triggers the reconfiguration of the system.
+Additionally,
+reconfiguration rules can be defined to specify how the system should react to reconfiguration events.
 %
-The DSL allows the association of a \texttt{ReconfigurationEvent}
-to a new deployment of the system which is defined as the new association between component and host.
+In this context, the \ac{dsl} exposes a special syntax to express the migration of a pulverised component on a different host.
+%
+Crucially, being the DSL internal,
+specialised behaviour not supported by the \ac{dsl} can be defined in the host language directly:
+configuration blocks surrounded by curly brackets are,
+in fact,
+plain lambda expressions, supporting any kind of computation.
 
 \lstinputlisting[
     float=ht,
@@ -735,6 +753,8 @@ The~\Cref{lst:reconfiguration-events} shows an example of the definition of a re
 \subsection{Implementation details}
 
 Also mention that is multiplatform
+
+\subsection{Limitations}
 
 \section{Evaluation}\label{sec:evaluation}
 
@@ -1085,6 +1105,8 @@ These approaches, however, typically suffer from scalability issues.
 %}
 
 \section{Conclusion and future work}\label{sec:conclusion}
+
+openness
 
 global policies
 

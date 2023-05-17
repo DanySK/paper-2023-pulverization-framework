@@ -1,20 +1,20 @@
 // Reconfiguration events
 object HighLoad : ReconfigurationEvent() {
-    override val predicate = { it > 0.90 }
-    override val events = ...
+  override val predicate = { it > 0.90 }
+  override val events = ...
 }
 object LowBattery : ReconfigurationEvent() {
-    override val predicate = { it < 0.20 }
-    override val events = ...
+  override val predicate = { it < 0.20 }
+  override val events = ...
 }
 // Available hosts
 object Smartphone : Host {
-    override val hostname = "smartphone"
-    override val capabilities = setOf(EmbeddedDevice)
+  override val hostname = "smartphone"
+  override val capabilities = setOf(EmbeddedDevice)
 }
 object Server : Host {
-    override val hostname = "amazon-aws"
-    override val capabilities = setOf(HighCPU, LowLatencyComm)
+  override val hostname = "amazon-aws"
+  override val capabilities = setOf(HighCPU,LowLatencyComm)
 }
 // Runtime initial setup and runtime reconfiguration rules
 val infrastructure = setOf(Smartphone, Server)
