@@ -896,7 +896,7 @@ the shorter the distance, the more red the tone.
 The system is composed of two kinds of device: \emph{wearable} and \emph{alert}.
 %
 Wearables consist of the following pulverised components:
-sensors ($\sigma^w$), perceiving other devices by their signal strenght;
+sensors ($\sigma^w$), perceiving other devices by their signal strength;
 behaviour ($\beta^w$), converting raw data from the sensor into messages for the alert system; and
 communication ($\chi^w$) sending data to the alert system.
 %
@@ -905,7 +905,9 @@ They do not need state nor actuators.
 The alert consists of the following pulverized components:
 $\beta^a$, computing the mean distance among devices;
 $\kappa^a$ \meta{
-    NICOLAS what does this do? write within this meta block
+    NICOLAS what does this do? write within this meta block.
+    %
+    Hold in memory the updated distances between the devices.
 };
 $\chi^a$, responsible for receiving the data from the wearable devices;
 $\alpha^a$, enacting the alarm by showing a color on the screen.
@@ -924,31 +926,31 @@ The initial deployment of the system starts with the $\beta_{werable}$ executed 
 the $\sigma_{wearable}$ and $\chi_{werable}$ executed in the \emph{Smartphones},
 and all the \emph{Laboratory} components are executed in the \emph{Local PC}.
 %
-Given the infrastracture defined above, we simulate also a condition where the \emph{Server} is overloaded and, via pulverization,
-we want to lighteninig the load of the \emph{Server} by moving the $\beta_{werable}$ in the \emph{Smartphones}.
+Given the infrastructure defined above, we simulate also a condition where the \emph{Server} is overloaded and, via pulverization,
+we want to lightening the load of the \emph{Server} by moving the $\beta_{werable}$ in the \emph{Smartphones}.
 %
 Formally, we can write the reconfiguration event as follow: $\beta^{werable}_{server} \xrightarrow{\mathcal{E}} \beta^{werable}_{smartphone}$
 where $\mathcal{E}$ represents the reconfiguration event due to the high load in the \emph{Server}.
 
-At the start of the system, each \emph{Werable} device, with the $\sigma$ component,
+At the start of the system, each \emph{Wearable} device, with the $\sigma$ component,
 start to perceive the other devices in the laboratory using the RSSI signal from the Bluetooth.
 %
 The $\beta$ component, initially executed in the \emph{Server}, starts to compute the distances from the other devices
 based on the received RSSI signal from the $\sigma$ component.
 %
 Once the distances are computed, the $\chi$ component sends the data to the
-\emph{Laboratory} containing the dinstances perceived by the device.
+\emph{Laboratory} containing the distances perceived by the device.
 %
 
 Similarity, the \emph{Laboratory} device has all the components executed in the \emph{Local PC},
 where the $\chi$ component receives the data from the \emph{Wearable},
 the $\beta$ component computes the mean distance between the devices.
 %
-The $\kappa$ component persist in memory the updated devices grpah based on the distances retreived by the $\chi$ component.
+The $\kappa$ component persist in memory the updated devices graph based on the distances retrieved by the $\chi$ component.
 and the $\alpha$ component show in the monitor the color based on the mean distance computed by the $\beta$ component.
 
-As soon as the reconfiguration event is triggered, the $\beta$ component of the \emph{Werable} is moved from the \emph{Server} to the \emph{Smartphone}
-lighteninig the server and preserving from one side the functional semantic of the system and from the other side maintain the system operational.
+As soon as the reconfiguration event is triggered, the $\beta$ component of the \emph{Wearable} is moved from the \emph{Server} to the \emph{Smartphone}
+lightening the server and preserving from one side the functional semantic of the system and from the other side maintain the system operational.
 %
 The reconfiguration of the system in entirely managed by the framework, which handle all the machinery and communication to move the component from
 one host to another.
@@ -956,7 +958,7 @@ one host to another.
 With this simple example we show how the pulverization framework can be used in practice to manage a system with different devices and an heterogeneous
 infrastructure.
 %
-Moreover, we show how the pulverization framework can be used adapt the system to changing requirement without loosing the funcional semantic of the system
+Moreover, we show how the pulverization framework can be used adapt the system to changing requirement without loosing the functional semantic of the system
 by describing the system in a declarative way.
 
 \subsection{Large scale: urban event}
