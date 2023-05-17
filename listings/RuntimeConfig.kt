@@ -1,11 +1,12 @@
 // Reconfiguration events
-object HighLoad : ReconfigurationEvent() {
+expect fun cpuLoad(): Double
+object HighLoad : ReconfigurationEvent<Double>() {
   override val predicate = { it > 0.90 }
-  override val events = ...
+  override val events: Flow<Double> = cpuLoad()
 }
-object LowBattery : ReconfigurationEvent() {
+object LowBattery : ReconfigurationEvent<Double>() {
   override val predicate = { it < 0.20 }
-  override val events = ...
+  override val events: Flow<Double> = cpuLoad()
 }
 // Available hosts
 object Smartphone : Host {

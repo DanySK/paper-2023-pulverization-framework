@@ -705,7 +705,7 @@ and \texttt{ReconfigurationRule}.
 %
 Using \Cref{lst:runtime-configuration} as a reference example,
 we show how reconfiguration events can be captured at the type system level
-by expressing them as a predicate over the asynchronous flow of \texttt{events} the system's state.
+by expressing them as a predicate over an asynchronous flow of \texttt{events} influencing the system's state.
 %
 Similarly, hosts can be configured by defining their name and capabilities.
 %
@@ -735,22 +735,22 @@ plain lambda expressions, supporting any kind of computation.
     label=lst:runtime-configuration,
 ]{listings/RuntimeConfig.kt}
 
-A \texttt{ReconfigurationEvent} is characterized by the \emph{events}
-that it produces and the \emph{condition} that must be satisfied to trigger the reconfiguration.
-%
-The \emph{events} are represented as an asyncronous stream of valued produced by the device and the
-\emph{condition} is a predicate that is evaluated on the stream of events.
-%
-At the first match of the condition, the reconfiguration is triggered and the system is reconfigured with the new deployment.
-%
-The~\Cref{lst:reconfiguration-events} shows an example of the definition of a reconfiguration event.
+% A \texttt{ReconfigurationEvent} is characterized by the \emph{events}
+% that it produces and the \emph{condition} that must be satisfied to trigger the reconfiguration.
+% %
+% The \emph{events} are represented as an asyncronous stream of valued produced by the device and the
+% \emph{condition} is a predicate that is evaluated on the stream of events.
+% %
+% At the first match of the condition, the reconfiguration is triggered and the system is reconfigured with the new deployment.
+% %
+% The~\Cref{lst:reconfiguration-events} shows an example of the definition of a reconfiguration event.
 
-\lstinputlisting[
-    float=ht,
-    language=Kotlin,
-    caption={Example of the definition of a reconfiguration event.},
-    label=lst:reconfiguration-events,
-]{listings/ReconfigurationEvents.kt}
+% \lstinputlisting[
+%     float=ht,
+%     language=Kotlin,
+%     caption={Example of the definition of a reconfiguration event.},
+%     label=lst:reconfiguration-events,
+% ]{listings/ReconfigurationEvents.kt}
 
 \subsection{Implementation details}
 
