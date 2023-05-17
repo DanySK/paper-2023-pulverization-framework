@@ -914,20 +914,33 @@ $\alpha^a$, enacting the alarm by showing a color on the screen.
 %
 It needs no sensors.
 
-The infrastructure defined for this scenario is described as follow:
-
+We use the following hosts in the scenario:
 \begin{itemize}
-    \item \emph{Smartphones} are the devices used by the people to detect the distance from the others;
-    \item \emph{Local PC} is the device used to show the alarm in the laboratory;
-    \item \emph{Server} is the device used run the crowd algorithm and the wearable logic. 
+    \item multiple \emph{Smartphones} used by the people to detect the distance from the others;
+    \item a \emph{Monitor} used to show the alarm in the laboratory;
+    \item a \emph{Server} used run the crowd algorithm and the wearable logic.
 \end{itemize}
 
-The initial deployment of the system starts with the $\beta_{werable}$ executed in the \emph{Server},
-the $\sigma_{wearable}$ and $\chi_{werable}$ executed in the \emph{Smartphones},
-and all the \emph{Laboratory} components are executed in the \emph{Local PC}.
+Initially, $\beta^{w}$ is allocated to the \emph{Server} while
+$\sigma^{w}$ and $\chi^{w}$ are executed on the \emph{Smartphones},
+and all the \emph{alert} components are executed in the \emph{Monitor}.
 %
-Given the infrastructure defined above, we simulate also a condition where the \emph{Server} is overloaded and, via pulverization,
-we want to lightening the load of the \emph{Server} by moving the $\beta_{werable}$ in the \emph{Smartphones}.
+In the experiment,
+we define a rule by which,
+if the \emph{Server} is overloaded,
+$\beta^{w}$ is moved to the \emph{Smartphones}
+(with each smartphone running the $\beta^{w}$ corresponding to its $\sigma^{w}$).
+%
+During the experiment,
+we launch several heavy-duty processes on the \emph{Server},
+and we observe how the system reacts to the overload.
+
+
+
+
+
+Given the infrastracture defined above, we simulate also a condition where the \emph{Server} is overloaded and, via pulverization,
+we want to lighteninig the load of the \emph{Server} by moving the $\beta_{werable}$ in the \emph{Smartphones}.
 %
 Formally, we can write the reconfiguration event as follow: $\beta^{werable}_{server} \xrightarrow{\mathcal{E}} \beta^{werable}_{smartphone}$
 where $\mathcal{E}$ represents the reconfiguration event due to the high load in the \emph{Server}.
