@@ -767,7 +767,42 @@ but we deemed the multiplatform support of Kotlin a better fit for our needs.
 %
 The framework has been open sourced and released with a permissive license\footnote{\url{https://github.com/nicolasfara/pulverization-framework}}.
 
-\subsection{Limitations}
+The configuration produced by the \ac{dsl} needs a platform that instructs the system on the way actual communication needs to be performed.
+%
+In our current implementation,
+we provide out of the box a JVM platform based on the MQTT protocol
+and supporting both intra- and inter-device communication.
+%
+For the large scale experiment,
+we implemented a second platform,
+this time to comply with the requirements of the simulation engine we used.
+%
+The implementation required little effort,
+and it has been made available as part of the evaluation repositories.
+
+\subsection{Limitations of the current version of the DSL}
+
+In its current form, the proposed \ac{dsl} has two major limitations.
+%
+First and foremost, currently it does not consider openness:
+hosts get specified in the runtime and reconfiguration \ac{dsl} as a closed set,
+so the specification is not robust to the addition of new hosts or the loss of existing ones.
+%
+This is a major limitation that,
+although planned to be addressed shortly with minor additions to the \ac{dsl},
+must be highlighted in this manuscript.
+%
+The second limitation is related to the policies that can be expressed in the reconfiguration \ac{dsl}:
+currently, only policies that can be assessed at the local host level can be assessed.
+%
+A policy that requires to consider the state of multiple hosts would require to resort to the host language primitive mechanisms and make explicit communications outside the framework,
+thus breaking the abstraction.
+%
+This limitation can be addressed by extending the current reconfiguration
+block of the \ac{dsl} in such a way that queries can be performed on any reachable host of the system,
+thus making all communications
+(including reconfiguration-related ones)
+pass through the channels controlled by the framework.
 
 \section{Evaluation}\label{sec:evaluation}
 
@@ -1181,6 +1216,8 @@ These approaches, however, typically suffer from scalability issues.
 \section{Conclusion and future work}\label{sec:conclusion}
 
 openness
+
+more platforms
 
 global policies
 
