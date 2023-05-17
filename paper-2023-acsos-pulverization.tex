@@ -199,31 +199,39 @@ Finally, \Cref{sec:conclusion} concludes the paper and highlights directions for
 
 \section{Background}\label{sec:background}
 
-\subsection{Deployment and Reconfiguration: Basic Concepts}
+\subsection{Deployment and Reconfiguration: Basic Concepts}\label{sec:background:dep}
 
 The \emph{deployment view} is a well-known architectural viewpoint for software systems,
-concerned with the mapping of \emph{software components} to \emph{physical machines}~\cite{DBLP:journals/software/Kruchten95}
+concerned with the mapping of \emph{software components} to \emph{physical machines}~\cite{DBLP:journals/software/Kruchten95}, 
  and supported by modelling notations like \emph{UML Deployment diagrams}.
 %
 Here, we provide a brief introduction to deployment and reconfiguration, based on the conceptual characterisation of~\cite{DBLP:journals/jss/ArcangeliBL15,carzaniga1998characterization}.
 %
 A \emph{site} is a set of computers (\emph{hosts}) that may host a \emph{software system}, i.e., a coherent collection of artifacts.
 %
-\emph{(Software) Deployment} is the process of moving and making a software product available and operational from one or more \emph{producer sites} to a target \emph{deployment domain} (i.e., a set of \emph{consumer sites}).
+\emph{(Software) Deployment} is the process of moving and making a software system available and operational from one or more \emph{producer sites} to a target set of \emph{consumer sites}, also called the \emph{deployment domain}.
 %
 The \emph{deployment plan} defines 
  the mapping between the software system
  and the deployment domain,
- augmented with further information (e.g., metadata).
+ possibly augmented with further information (e.g., metadata, constraints, preferences).
 %
-Deployment-related activities 
+Common deployment-related activities 
  include: (i) \emph{release/update} of the software system at the producer site;
  (ii) \emph{installation/deinstallation} at/from the consumer sites;
  (iii) \emph{activation/deactivation}, for starting/stopping the components;
  (iv) \emph{reorganisation} of the software system;
  and (v) \emph{redistribution}, i.e., changing the deployment plan.
- 
-
+%
+According to the analytical framework of~\cite{DBLP:journals/jss/ArcangeliBL15},
+  the problem of (automatic) deployment of distributed software system can be addressed by considering
+ (i) the nature of the software to be deployed (e.g., how the software system is split into components);
+ (ii) the nature of the deployment domain (i.e. the characteristics and topology of the available infrastructure);
+ (iii) how the deployment is designed (e.g., how the deployment plan is specified);
+ and 
+ (iv) how the deployment is performed (e.g., how deployment activities are carried out).
+%
+Related work covering these issues is provided in \Cref{sec:rw}.
 
 
 \subsection{Pulverisation}
@@ -592,27 +600,18 @@ From the variables above are derived the following metrics:
 \section{Related Work}
 \label{sec:rw}
 
-This work provides 
- \acp{dsl}
- for specifying 
- distributed systems (partitioned according to the 
- pulverisation model)
- and
- corresponding deployment plans,
- and a framework for executing
- deployment plans and reconfigurations.
+%This work provides 
+% \acp{dsl}
+% for specifying 
+% distributed systems (partitioned according to the 
+% pulverisation model)
+% and
+% corresponding deployment plans,
+% and a framework for executing
+% deployment plans and reconfigurations.
 %
-A way to structure all this 
- is by using the analytical framework of~\cite{DBLP:journals/jss/ArcangeliBL15},
-  where the problem of (automatic) deployment of distributed software system is studied by considering
- (i) the nature of software to be deployed,
- (ii) the nature of the deployment domain (i.e. the available infrastructure),
- (iii) how the deployment is designed,
- and 
- (iv) how the deployment is performed.
-%
-Accordingly, 
- we cover related works about
+Following the conceptual framework introduced in \Cref{sec:background:dep},
+ in this section we cover related work about
  languages for 
  specifying distributed systems (\Cref{sec:rw:whatsw}),
  languages for specifying infrastructures and deployments (\Cref{sec:rw:depdesc}),
