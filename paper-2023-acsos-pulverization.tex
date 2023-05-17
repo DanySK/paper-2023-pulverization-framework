@@ -807,7 +807,7 @@ pass through the channels controlled by the framework.
 \section{Evaluation}\label{sec:evaluation}
 
 In this section,
-we exercise the proposed framework with two case studies.
+we exercise the proposed framework through two case studies.
 %
 In the former,
 we show a small-scale demonstrator of a safety system warning people when a room capacity is exceeded
@@ -825,27 +825,46 @@ Both experiments have been released with a permissive open-source license and ha
 \subsection{Small scale: crowd alert}
 \label{sec:small-scale-crowd-alert}
 
-In this section we present a simple scenario where the pulverization framework is used to implement a crowd alert system:
-we simulate a laboratory where a safety system warns people when they are too close to each other.
+In this example, we exercise the framework on a real-world testbed
+located in a laboratory.
 %
-Each person is equipped with a wearable device that is able to detect the distance from other devices and send the distances data to the
-alert system.
+In particular,
+we want to avoid situations in which too many people are too close to each other in the same room for safety reasons.
 %
-The people in the laboratory must observe a safety distance, and the system warns them when the distance is not respected by showing a red light
-when they are too close to each other, and a green color when the distance is respected (see~\Cref{fig:crowd-alert}).
+To do so,
+we equip each person with a wearable device that is able to detect the distance from other simialr devices via Bluetooth.
 %
-\begin{figure*}[ht]
+For the sake of simplicity,
+in the experiment we relied on smartphones to emulate wearables,
+and we used \meta{
+    NICOLAS please write here (within meta, so that it remains blue)
+    what you used to measure the signal strenght and estimate the distance.
+    Even formulas, calibration procedures, and stuff
+}
+%
+In our case the warning was issued through a monitor,
+whose color was set to tones ranging from green to red depending on the average distance among people:
+the shorter the distance, the more red the tone.
+%
+\Cref{fig:crowd-alert} shows a representation of the scenario.
+%
+\begin{figure}
     \centering
-    \includegraphics[width=.8\textwidth]{figures/crow-laboratory-demo.drawio.pdf}
+    \includegraphics[width=\columnwidth]{figures/crow-laboratory-demo.drawio.pdf}
     \caption{
-        Representation of the scenario described in the~\Cref{sec:small-scale-crowd-alert}
-        where more the people are far from each other, more the color of the screen is green.
-        More the people are close to each other, more the color of the screen is red.
-        The blue dot represents the wearable device and the link between the devices represents the distance between them.
-        The rectangle represents the monitor in the laboratory which shows the congestion level of the laboratory (via the color described above).
+        Representation of the scenario described in \Cref{sec:small-scale-crowd-alert}.
+        graph dots represent wearables,
+        and arcs lenghts represent the distance between them.
+        %
+        The rectangle at the bottom represents the monitor.
+        %
+        The closer the wearables are, the higher is the alert level
+        (reddish tones).
+        %
+        \meta{NICOLAS riduci lo spazio vuoto fra i tre casi, così da guadagnare spazio. La legenda potrebbe essere messa sotto o sopra per guadagnarne di ulteriore}
     }
     \label{fig:crowd-alert}
-\end{figure*}
+\end{figure}
 %
 The system is composed of two kind of devices: \emph{wearable} and \emph{laboratory}.
 %
