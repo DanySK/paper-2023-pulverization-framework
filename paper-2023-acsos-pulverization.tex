@@ -15,6 +15,8 @@
 \usetikzlibrary{arrows,shapes.geometric,positioning,automata,calc}
 \usepackage[hidelinks]{hyperref}
 \usepackage[inline]{enumitem}
+\usepackage{siunitx}
+\DeclareSIUnit{\decibelmeter}{dBm}
 
 \acrodef{dsl}[DSL]{domain-specific language}
 \acrodef{iot}[IoT]{Internet of Things}
@@ -835,14 +837,36 @@ In particular,
 we want to avoid situations in which too many people are too close to each other in the same room for safety reasons.
 %
 To do so,
-we equip each person with a wearable device that is able to detect the distance from other simialr devices via Bluetooth.
+we equip each person with a wearable device that is able to detect the distance from other similar devices via Bluetooth.
 %
 For the sake of simplicity,
 in the experiment we relied on smartphones to emulate wearables,
-and we used \meta{
-    NICOLAS please write here (within meta, so that it remains blue)
-    what you used to measure the signal strenght and estimate the distance.
-    Even formulas, calibration procedures, and stuff
+and we used
+% \meta{
+%     NICOLAS please write here (within meta, so that it remains blue)
+%     what you used to measure the signal strenght and estimate the distance.
+%     Even formulas, calibration procedures, and stuff
+% }
+%
+\meta{
+    the RSSI signal of the bluetooth during the scanning of the environment
+    to estimate the distance between the devices.
+    %
+    In particular, we used the following formula to estimate the distance:
+    \begin{equation*}
+        d = 10^{\cfrac{(A - A')}{(10 \cdot n)}}
+    \end{equation*}
+    where $A$ is the RSSI value at 1 meter,
+    $A'$ is the RSSI value measured by the device
+    and $n$ is the path loss exponent.
+    %
+    Since the definition of $A'$ and $n$ is not trivial,
+    and depends on the environment in which the system is deployed,
+    we have calibrated the system in a test environment by measuring the RSSI signal
+    at 1 meter using two smartphones.
+    %
+    The following values emerged from the calibration phase:
+    $A=\qty{-60}{\decibelmeter}$ and $n = \qty{2.0}{\decibel}$.
 }
 %
 In our case the warning was issued through a monitor,
