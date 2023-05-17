@@ -10,6 +10,9 @@
 \usepackage{listings}
 \usepackage{acronym}
 \usepackage{listing-style}
+\usepackage{subcaption}
+\usepackage{tikz}
+\usetikzlibrary{arrows,shapes.geometric,positioning,automata,calc}
 \usepackage[hidelinks]{hyperref}
 \usepackage[inline]{enumitem}
 
@@ -240,10 +243,281 @@ In the following, we introduce the deployment approach
   that we extend and upon which we develop \ourframework{}.
 
 
+
+\begin{figure}
+\tikzset{-,
+  host/.style={rectangle,draw,line width={2pt},inner sep=10pt,
+  	outer sep=0, minimum height=1.5cm, minimum width=1.8cm, %text height=0.2cm, 
+  	text depth=0.5cm,
+  	fill=black!10!white
+  },
+  node/.style={rectangle,draw,dotted,line width={1pt}, inner sep=2pt, 
+  	fill=blue!20!white,
+  	font=\large
+  },
+  nodeA/.style={node,fill=red!20!white},
+  nodeB/.style={node,fill=green!20!white},
+  nodeC/.style={node,fill=black!30!white},
+  nodeD/.style={node,fill=white!20!white},
+  plink/.style={line width=2pt},
+  llink/.style={dotted,line width=2pt,red},
+  hostThin/.style={rectangle,draw,line width={0.5pt},inner sep=10pt,
+  	outer sep=0, minimum height=1.1cm, minimum width=1.8cm, %text height=0.2cm, 
+  	text depth=0.5cm,
+  	fill=black!10!white
+  },
+  lnode/.style={node,minimum width=0.55cm,minimum height=0.55cm},
+  loglink/.style={->,line width=1.5pt}
+}
+\def\nm{0.35cm} %nm = node margin offset
+\def\tpscale{0.7}
+\newcommand{\agent}{node}
+\newcommand{\LSens}{\boldsymbol{\sigma}}
+\newcommand{\LComp}{\boldsymbol{\beta}}
+\newcommand{\LComm}{\boldsymbol{\chi}}
+\newcommand{\LAct}{\boldsymbol{\alpha}}
+\newcommand{\LState}{\boldsymbol{\kappa}}
+
+\begin{minipage}{\columnwidth}
+\centering
+\begin{tikzpicture}[every node/.style={scale=1}]
+\node[hostThin,minimum width=3.4cm,minimum height=3cm,dashed]
+ (h1) [label={[yshift=0.35cm]above:{\textbf{logical \agent{}}}}] {};
+
+\node[lnode] (d1) at (h1.north west) [xshift=\nm,yshift=-\nm,label=above:{behaviour}] {$\LComp$};
+\node[lnode] (d2) at (h1.north east) [xshift=-\nm,yshift=-\nm,label=above:{communication}] {$\LComm$};
+\node[lnode] (d3) at (h1.center) [xshift=0,yshift=0,label=right:{state/knowledge}] {$\LState$};
+\node[lnode] (d4) at (h1.south west) [xshift=\nm,yshift=\nm,label=below:{sensors}] {$\LSens$};
+\node[lnode] (d5) at (h1.south east) [xshift=-\nm,yshift=\nm,label=below:{actuators}] {$\LAct$};
+
+\node[hostThin,minimum width=2.3cm,minimum height=2.3cm,dashed]
+ (h2) [right=2cm of h1, label={above:{\textbf{neighbour \agent{}}}}] {};
+
+\node[lnode] (d21) at (h2.north west) [xshift=\nm,yshift=-\nm] {$\LComm$};
+\node[lnode] (d22) at (h2.north east) [xshift=-\nm,yshift=-\nm] {$\LComp$};
+\node[lnode] (d23) at (h2.center) [xshift=0,yshift=0] {$\LState$};
+\node[lnode] (d24) at (h2.south west) [xshift=\nm,yshift=\nm] {$\LSens$};
+\node[lnode] (d25) at (h2.south east) [xshift=-\nm,yshift=\nm] {$\LAct$};
+
+\draw[loglink] (d1) -- (d3);
+\draw[loglink] (d2) -- (d3);
+\draw[loglink] (d3) -- (d1);
+\draw[loglink] (d3) -- (d2);
+\draw[loglink] (d4) -- (d3);
+\draw[loglink] (d3) -- (d5);
+
+\draw[loglink] (d21) -- (d23);
+\draw[loglink] (d22) -- (d23);
+\draw[loglink] (d23) -- (d21);
+\draw[loglink] (d23) -- (d22);
+\draw[loglink] (d24) -- (d23);
+\draw[loglink] (d23) -- (d25);
+
+\draw[loglink] (d2.east) -- (d21.west);
+\draw[loglink] (d21.west) -- (d2.east);
+
+
+\end{tikzpicture}
+\subcaption{A logical device, split into sub-components, and one of its neighbours.\label{fig:pulv:dev}}
+\end{minipage}
+\\[0.2cm]
+\begin{minipage}{\columnwidth}
+\def\nm{0.3cm} %nm = node margin offset
+
+\begin{minipage}{0.48\columnwidth}\centering
+\begin{tikzpicture}[node distance=1.0cm and 0.5cm,every node/.style={scale=\tpscale}]
+% physical nodes
+\node[host] (h1) [anchor=north,label=above:{}] {};
+\node[host] (h2) [right=of h1,label=above:{}] {};
+\node[host] (h3) [below=of h1, label=above:{}] {};
+\node[host] (h4) [right=of h3, label=above:{}] {};
+
+\node[node] (n11) at (h1.south west) [xshift=\nm,yshift=\nm] {$\LSens$};
+\node[node] (n12) at (h1.south east) [xshift=-\nm,yshift=\nm] {$\LComm$};
+\node[node] (n13) at (h1.north east) [xshift=-\nm,yshift=-\nm] {$\LAct$};
+\node[node] (n14) at (h1.north west) [xshift=\nm,yshift=-\nm] {$\LComp$};
+\node[node] (n15) at (h1) [] {$\LState$};
+% logical node 2
+\node[nodeA] (n21) at (h2.south west) [xshift=\nm,yshift=\nm] {$\LComm$};
+\node[nodeA] (n22) at (h2.south east) [xshift=-\nm,yshift=\nm] {$\LAct$};
+\node[nodeA] (n23) at (h2.north east) [xshift=-\nm,yshift=-\nm] {$\LSens$};
+\node[nodeA] (n24) at (h2.north west) [xshift=\nm,yshift=-\nm] {$\LComp$};
+\node[nodeA] (n25) at (h2) [] {$\LState$};
+% logical node 3
+\node[nodeB] (n31) at (h3.south west) [xshift=\nm,yshift=\nm] {$\LSens$};
+\node[nodeB] (n32) at (h3.south east) [xshift=-\nm,yshift=\nm] {$\LAct$};
+\node[nodeB] (n33) at (h3.north east) [xshift=-\nm,yshift=-\nm] {$\LComm$};
+\node[nodeB] (n34) at (h3.north west) [xshift=\nm,yshift=-\nm] {$\LComp$};
+\node[nodeB] (n35) at (h3) [] {$\LState$};
+% logical node 4
+\node[nodeC] (n41) at (h4.south west) [xshift=\nm,yshift=\nm] {$\LSens$};
+\node[nodeC] (n42) at (h4.south east) [xshift=-\nm,yshift=\nm] {$\LAct$};
+\node[nodeC] (n43) at (h4.north east) [xshift=-\nm,yshift=-\nm] {$\LComp$};
+\node[nodeC] (n44) at (h4.north west) [xshift=\nm,yshift=-\nm] {$\LComm$};
+\node[nodeC] (n45) at (h4) [] {$\LState$};
+
+% physical links
+\draw[plink] 
+	(h1) -- (h2)
+	(h2) -- (h3)
+	(h2) -- (h4)
+	(h3) -- (h4)
+;
+% logical links
+\draw[llink]
+    (n12) to [] (n21)
+    (n21) to [] (n44)
+    (n21) to [bend right=30] (n33)
+    (n33) to [] (n44);
+\end{tikzpicture}
+\subcaption{Peer-to-peer architecture: one-to-one mapping between logical and physical devices, with no offloading.\label{fig:pulv:p2p}}
+\end{minipage}
+%\hfill
+%\begin{minipage}{0.48\columnwidth}\centering
+%\begin{tikzpicture}[node distance=1.0cm and 0.5cm,
+%every node/.style={scale=\tpscale}]
+%
+%% physical nodes
+%\node[host,minimum width=1.5cm] (h1) [anchor=north,label=above:{}] {};
+%\node[host,minimum width=1.5cm] (h2) [right=of h1,label=above:{}] {};
+%\node[host,minimum width=1.5cm] (h3) [right=of h2, label=above:{}] {};
+%\node[host,minimum width=2.5cm] (he) [above right=0.6cm and -1cm of h1,label=above:{}] {};
+%\node[host,minimum width=3.5cm] (h5) [above=2.6cm of h2,label=right:{}] {};
+%
+%\node[node] (n11) at (h1.south west) [xshift=\nm,yshift=\nm] {$\LSens$};
+%\node[node] (n12) at (h1.south east) [xshift=-\nm,yshift=\nm] {$\LAct$};
+%\node[node] (n13) at (h1.north east) [xshift=-\nm,yshift=-\nm] {$\LState$};
+%\node[node] (n14) at (h1.north west) [xshift=\nm,yshift=-\nm] {$\LComp$};
+%\node[node] (n15) at (he) [xshift=-2*\nm] {$\LComm$};
+%% logical node 2
+%\node[nodeA] (n21) at (h2.south west) [xshift=\nm,yshift=\nm] {$\LSens$};
+%\node[nodeA] (n22) at (h2.south east) [xshift=-\nm,yshift=\nm] {$\LAct$};
+%\node[nodeA] (n23) at (h2.north east) [xshift=-\nm,yshift=-\nm] {$\LState$};
+%\node[nodeA] (n24) at (h2.north west) [xshift=\nm,yshift=-\nm] {$\LComp$};
+%\node[nodeA] (n25) at (he) [xshift=0] {$\LComm$};
+%% logical node 3
+%\node[nodeB] (n31) at (h3.south west) [xshift=\nm,yshift=\nm] {$\LSens$};
+%\node[nodeB] (n32) at (h3.south east) [xshift=-\nm,yshift=\nm] {$\LAct$};
+%\node[nodeB] (n33) at (h3.north east) [xshift=-\nm,yshift=-\nm] {$\LState$};
+%\node[nodeB] (n34) at (h3.north west) [xshift=\nm,yshift=-\nm] {$\LComp$};
+%\node[nodeB] (n35) at (h5) [xshift=2*\nm] {$\LComm$};
+%
+%% physical links
+%\draw[plink] 
+%	(h1) -- (he)
+%	(h2) -- (he)
+%	(h3) -- (h5)
+%	(he) -- (h5);
+%
+%\draw[llink]
+%    %(n15) to [bend left=20] (n35)
+%    (n25) to [bend left=30] (n35);
+%\end{tikzpicture}
+%\subcaption{Communication component offloaded.\label{fig:pulv:comm}}
+%\end{minipage}
+%\\[0.2cm]
+%\begin{minipage}{0.48\columnwidth}\centering
+%\begin{tikzpicture}[node distance=1.0cm and 0.5cm,
+%every node/.style={scale=\tpscale}]
+%
+%% physical nodes
+%\node[host,minimum width=1.5cm] (h1) [anchor=north,label=above:{}] {};
+%\node[host,minimum width=1.5cm] (h2) [right=of h1,label=above:{}] {};
+%\node[host,minimum width=1.5cm] (h3) [right=of h2, label=above:{}] {};
+%\node[host,minimum width=2.5cm] (he) [above right=0.6cm and -1cm of h1,label=above:{}] {};
+%\node[host,minimum width=3.5cm] (h5) [above=2.6cm of h2,label=right:{}] {};
+%
+%\node[node] (n11) at (h1.south west) [xshift=\nm,yshift=\nm] {$\LSens$};
+%\node[node] (n12) at (h1.south east) [xshift=-\nm,yshift=\nm] {$\LAct$};
+%\node[node] (n13) at (he.north) [xshift=-2*\nm,yshift=-\nm] {$\LComm$};
+%\node[node] (n14) at (h1.north) [yshift=-\nm] {$\LComp$};
+%\node[node] (n15) at (he.south) [xshift=-2*\nm,yshift=\nm] {$\LState$};
+%% logical node 2
+%\node[nodeA] (n21) at (h2.south west) [xshift=\nm,yshift=\nm] {$\LSens$};
+%\node[nodeA] (n22) at (h2.south east) [xshift=-\nm,yshift=\nm] {$\LAct$};
+%\node[nodeA] (n23) at (he.north) [xshift=0*\nm,yshift=-\nm] {$\LComm$};
+%\node[nodeA] (n24) at (h2.north) [yshift=-\nm] {$\LComp$};
+%\node[nodeA] (n25) at (he.south) [xshift=0,yshift=\nm] {$\LState$};
+%% logical node 3
+%\node[nodeB] (n31) at (h3.south west) [xshift=\nm,yshift=\nm] {$\LSens$};
+%\node[nodeB] (n32) at (h3.south east) [xshift=-\nm,yshift=\nm] {$\LAct$};
+%\node[nodeB] (n33) at (h5.south) [xshift=2*\nm,yshift=\nm] {$\LComm$};
+%\node[nodeB] (n34) at (h3.north) [yshift=-\nm] {$\LComp$};
+%\node[nodeB] (n35) at (h5.south) [xshift=4*\nm,yshift=\nm] {$\LState$};
+%
+%% physical links
+%\draw[plink] 
+%	(h1) -- (he)
+%	(h2) -- (he)
+%	(h3) -- (h5)
+%	(he) -- (h5);
+%
+%\draw[llink]
+%    %(n15) to [bend left=20] (n35)
+%    (n23) to [bend left=20] (n33);
+%\end{tikzpicture}
+%\subcaption{Communication and state components offloaded.\label{fig:pulv:state}}
+%\end{minipage}
+\hfill
+\begin{minipage}{0.48\columnwidth}
+\begin{tikzpicture}[node distance=1.0cm and 0.5cm,
+every node/.style={scale=\tpscale}]
+
+% physical nodes
+\node[hostThin,minimum width=1.5cm] (h1) [anchor=north,label=above:{}] {};
+\node[hostThin,minimum width=1.5cm] (h2) [right=of h1,label=above:{}] {};
+\node[hostThin,minimum width=1.5cm] (h3) [right=of h2, label=above:{}] {};
+\node[host,minimum width=2.5cm] (he) [above right=0.6cm and -1cm of h1,label=above:{}] {};
+\node[host,minimum width=3.5cm] (h5) [above=2.6cm of h2,label=right:{}] {};
+
+\node[node] (n11) at (h1.south west) [xshift=\nm,yshift=\nm] {$\LSens$};
+\node[node] (n12) at (h1.south east) [xshift=-\nm,yshift=\nm] {$\LAct$};
+\node[node] (n13) at (he.south east) [xshift=-4*\nm,yshift=\nm] {$\LComm$};
+\node[node] (n14) at (he.south west) [xshift=1*\nm,yshift=\nm] {$\LComp$};
+\node[node] (n15) at (he.north) [xshift=-2*\nm,yshift=-\nm] {$\LState$};
+% logical node 2
+\node[nodeA] (n21) at (h2.south west) [xshift=\nm,yshift=\nm] {$\LSens$};
+\node[nodeA] (n22) at (h2.south east) [xshift=-\nm,yshift=\nm] {$\LAct$};
+\node[nodeA] (n23) at (he.south east) [xshift=-2.5*\nm,yshift=\nm] {$\LComm$};
+\node[nodeA] (n24) at (he.south west) [xshift=2.5*\nm,yshift=\nm] {$\LComp$};
+\node[nodeA] (n25) at (he.north) [xshift=0,yshift=-\nm] {$\LState$};
+% logical node 3
+\node[nodeB] (n31) at (h3.south west) [xshift=\nm,yshift=\nm] {$\LSens$};
+\node[nodeB] (n32) at (h3.south east) [xshift=-\nm,yshift=\nm] {$\LAct$};
+\node[nodeB] (n33) at (h5.south east) [xshift=-5*\nm,yshift=\nm] {$\LComm$};
+\node[nodeB] (n34) at (h5.south east) [xshift=-3*\nm,yshift=\nm] {$\LComp$};
+\node[nodeB] (n35) at (h5.south east) [xshift=-1*\nm,yshift=\nm] {$\LState$};
+
+% physical links
+\draw[plink] 
+	(h1) -- (he)
+	(h2) -- (he)
+	(h3) -- (h5)
+	(he) -- (h5);
+	
+\draw[llink]
+    (n23) to [bend left=25] (n33);
+\end{tikzpicture}
+\subcaption{IoT hosts can be thin, with some components offloaded at the edge and cloud.\label{fig:pulv:full}}
+\end{minipage}
+\end{minipage}
+
+\caption{Pulverisation model and examples of deployments (Figure adapted from~\cite{DBLP:journals/fi/CasadeiPPVW20}).
+Notation: solid-border boxes denote physical hosts (bold borders are for thick devices); solid lines denote connections between hosts; dashed-border boxes denote software components; %, with letters indicating their function (\textbf{B}ehaviour, \textbf{C}ommunication, \textbf{K}nowledge, \textbf{S}ensors, \textbf{A}ctuators); 
+differently colours denote (software components of) different logical devices;
+red dashed lines denote connections between the software components, i.e., neighbouring relationships (not shown for co-located software components).
+}
+\label{fig:pulv}
+\end{figure}
+
 \subsection{Pulverisation}
 
-The goal of pulverisation~\cite{FI2020-pulverization}
-is to provide application designers a way to specify the functional semantics of their software in a deployment-independent way.
+\emph{Pulverisation}~\cite{FI2020-pulverization,IEEE-IoTJ-pulverization-simulation}
+ is an approach to distributed application partitioning
+ and deployment, exemplified in \Cref{fig:pulv} and described in the following.
+%
+Its goal 
+ is to provide application designers a way to specify the functional semantics of their software in a deployment-independent way.
 %
 To do so,
 the application logic should be designed considering a \emph{logical system},
