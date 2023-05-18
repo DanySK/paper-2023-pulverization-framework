@@ -777,14 +777,13 @@ The framework has been open sourced and released with a permissive license\footn
 The configuration produced by the \ac{dsl} needs a platform that instructs the system on the way actual communication needs to be performed.
 %
 In our current implementation,
-we provide out of the box a JVM platform based on the MQTT protocol
+we provide out of the box a JVM platform based on the AMQP protocol leveraging RabbitMQ,
 supporting both intra- and inter-device communication.
 %
 The platform also feature an optimization for pulverized components of the same logical device ending up running on the same host:
 as it would be expected,
 they would communicate directly by sharing memory,
 without the need to go through (de)serialisation processes and networking.
-\meta{NICOLAS please check if the last sentence is true, if so remove this comment}
 %
 For the large scale experiment,
 we implemented a second platform,
@@ -957,10 +956,10 @@ one host to another.
 This example has been used as a real-world testbed driving our experimental implementation.
 %
 For the sake of brevity,
-we do not report the entire configuration in this manuscript, but it is available in the companion artifact~\cite{TBD}
-\meta{
-    NICOLAS please replace TBD with the artifact citation from zenodo. Use doi2bib to get the bibtex entry.
-}
+we do not report the entire configuration in this manuscript, but it is available in the companion artifact~\cite{https://doi.org/10.5281/zenodo.7933160}
+% \meta{
+%     NICOLAS please replace TBD with the artifact citation from zenodo. Use doi2bib to get the bibtex entry.
+% }
 for those willing to exercise the whole system.
 %
 To simplify testing we also provide,
@@ -1066,7 +1065,7 @@ From the variables above are derived the following metrics:
         \includegraphics[width=\linewidth]{figures/simulation-screenshot.png}
     \end{minipage}
     \caption{TODO}
-    \label{fig:simulation-screenshot}
+    \label{fig:simulation-screenshot}   
 \end{figure}
 
 \section{Related Work}
