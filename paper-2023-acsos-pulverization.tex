@@ -778,7 +778,13 @@ The configuration produced by the \ac{dsl} needs a platform that instructs the s
 %
 In our current implementation,
 we provide out of the box a JVM platform based on the MQTT protocol
-and supporting both intra- and inter-device communication.
+supporting both intra- and inter-device communication.
+%
+The platform also feature an optimization for pulverized components of the same logical device ending up running on the same host:
+as it would be expected,
+they would communicate directly by sharing memory,
+without the need to go through (de)serialisation processes and networking.
+\meta{NICOLAS please check if the last sentence is true, if so remove this comment}
 %
 For the large scale experiment,
 we implemented a second platform,
@@ -905,7 +911,7 @@ They do not need state nor actuators.
 %
 The alert consists of the following pulverized components:
 $\beta^a$, computing the mean distance among devices;
-$\kappa^a$, storing the distances measured by the device;
+$\kappa^a$, storing the distances measured by the device for comparison with the recent past;
 %\meta{
 %    NICOLAS what does this do? write within this meta block.
 %    %
@@ -918,9 +924,9 @@ It needs no sensors.
 
 We use the following hosts in the scenario:
 \begin{itemize}
-    \item multiple \emph{Smartphones} used by the people to detect the distance from the others;
-    \item a \emph{Monitor} used to show the alarm in the laboratory;
-    \item a \emph{Server} used run the crowd algorithm and the wearable logic.
+    \item multiple \emph{Smartphones}, one per user, emulating wearables and used as distance sensors;
+    \item a \emph{Monitor} used to show the alarm;
+    \item a \emph{Server} used run crowd estimation and wearable logic.
 \end{itemize}
 
 Initially, $\beta^{w}$ is allocated to the \emph{Server} while
@@ -936,45 +942,30 @@ $\beta^{w}$ is moved to the \emph{Smartphones}
 During the experiment,
 we launch several heavy-duty processes on the \emph{Server},
 and we observe how the system reacts to the overload.
-
-
-
-
-
-Given the infrastracture defined above, we simulate also a condition where the \emph{Server} is overloaded and, via pulverization,
-we want to lighteninig the load of the \emph{Server} by moving the $\beta_{werable}$ in the \emph{Smartphones}.
 %
-Formally, we can write the reconfiguration event as follow: $\beta^{werable}_{server} \xrightarrow{\mathcal{E}} \beta^{werable}_{smartphone}$
-where $\mathcal{E}$ represents the reconfiguration event due to the high load in the \emph{Server}.
+We rely on the MQTT platform module for all the communication,
+meaning that both intra- and inter-device communication is handled by the same protocol and broker.
 
-At the start of the system, each \emph{Wearable} device, with the $\sigma$ component,
-start to perceive the other devices in the laboratory using the RSSI signal from the Bluetooth.
+As soon as the reconfiguration event is triggered,
+the $\beta$ component of the \emph{Wearable} is moved from the \emph{Server} to the \emph{Smartphone} $s$ hosting $\sigma^{w}_{s}$,
+relieving the server and preserving while retaining the system in nominal conditions.
 %
-The $\beta$ component, initially executed in the \emph{Server}, starts to compute the distances from the other devices
-based on the received RSSI signal from the $\sigma$ component.
-%
-Once the distances are computed, the $\chi$ component sends the data to the
-\emph{Laboratory} containing the distances perceived by the device.
-%
-
-Similarity, the \emph{Laboratory} device has all the components executed in the \emph{Local PC},
-where the $\chi$ component receives the data from the \emph{Wearable},
-the $\beta$ component computes the mean distance between the devices.
-%
-The $\kappa$ component persist in memory the updated devices graph based on the distances retrieved by the $\chi$ component.
-and the $\alpha$ component show in the monitor the color based on the mean distance computed by the $\beta$ component.
-
-As soon as the reconfiguration event is triggered, the $\beta$ component of the \emph{Wearable} is moved from the \emph{Server} to the \emph{Smartphone}
-lightening the server and preserving from one side the functional semantic of the system and from the other side maintain the system operational.
-%
-The reconfiguration of the system in entirely managed by the framework, which handle all the machinery and communication to move the component from
+The reconfiguration of the system in entirely managed by the framework,
+which handles all the machinery and communication to move the component from
 one host to another.
+
+This example has been used as a real-world testbed driving our experimental implementation.
 %
-With this simple example we show how the pulverization framework can be used in practice to manage a system with different devices and an heterogeneous
-infrastructure.
+For the sake of brevity,
+we do not report the entire configuration in this manuscript, but it is available in the companion artifact~\cite{TBD}
+\meta{
+    NICOLAS please replace TBD with the artifact citation from zenodo. Use doi2bib to get the bibtex entry.
+}
+for those willing to exercise the whole system.
 %
-Moreover, we show how the pulverization framework can be used adapt the system to changing requirement without loosing the functional semantic of the system
-by describing the system in a declarative way.
+To simplify testing we also provide,
+in the same artifact,
+a simulation of the system where every device is containerized.
 
 \subsection{Large scale: urban event}
 
