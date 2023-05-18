@@ -971,6 +971,76 @@ a simulation of the system where every device is containerized.
 
 \cite{PianiniJOS2013}
 
+\meta{
+The simulation of this large-scale scenario should take into account several factors to be more realistic as possible:
+the power consumption of the werable devices (smartphones), the power consumption of the cloud server,
+and the weight of the application in terms of power dissipated by its execution.
+%
+The parameter described above represent the fundamental element of the power consumption model used in the simulation.
+%
+To be more adeherent as possible to a real consumption model of a device or cloud server,
+several research were conducted to figure out real value that can be used as parameter in the simulation.
+%
+Nevertheless,
+for our bes of knowledge,
+there are no precise and established studies regarding these specific parameters.
+%
+For this reason,
+we tried to identify likelihood parameters that could describe a plausible scenario in simulation.
+%
+In the following, we describe the parameters used in the simulation and the motivation behind their choice.
+%
+One popular metrics which relate the power consumption with the instruction is the \emph{Energy Per Instruction}
+(EPI)~\cite{Grochowski2006EnergyPI} measured in $J / instruction$,
+which associate the energy related to the execution of a CPU instruction.
+%
+From the metric introduced above, we should estimate the $EPI_{cloud}$ and $EPI_{device}$.
+%
+To do so, we rely our estimation based on the result obtained in~\cite{DBLP:conf/islped/ShaoB13},
+were the EPI of a server CPU is calculated.
+%
+From the value taken from~\cite{DBLP:conf/islped/ShaoB13} we defined a discrete variability range for
+$EPI_{cloud}$ equals to $300$, $30$, and $3$.
+%
+To estimate the $EPI_{device}$,
+an intermediate step could be determine the ratio between $EPI_{cloud}$ and $EPI_{device}$,
+which we define as $EPI_{ratio}$.
+%
+To do so we could rely on other characterizing elements:
+the \emph{TDP} of each CPU and the \emph{benchmark score} of each CPU,
+and for each one,
+define the ratio of this two metrics: $TDP_{ratio}$ and $Benachmark_{ratio}$.
+%
+In this way we are identifying the power ration and performance ratio between the CPU of the device
+and the CPU of the cloud.
+%
+The $EPI_{ratio}$ now can be define as:
+$$EPI_{ratio} = \frac{TDP_{ratio}}{Benchmark_{ratio}}$$
+%
+Supposing to have smartphones with the \emph{Snapdragon 888} (5W TDP) as a CPU and a cloud server
+with an \emph{Intel Xeon W-3375} (220W TDP), the respective benchmark results are $59,069$ and $9,362$.
+%
+Consequently, the $EPI_{ratio}$ is near to $7$.
+%
+To mitigate the uncertainty of this values we ranged the $EPI_{ratio}$ from 3 to 30.
+%
+The simulation consist of several scenarios in which we simulate different application load,
+and consequently different discharge time of the devices.
+%
+To do so, we estimate the number of instruction based on
+the $EPI_{device}$ and the required discharge time to simulate.
+%
+Given the total instruction of our application,
+we repartition that value for each component executed and the relative communication cost;
+in this way,
+we can estimate the consumption of each component either executed in cloud or in device.
+%
+The power consumption is trivially determined by:
+$$P = \frac{instructions * EPI}{time}$$
+where \emph{time} is the time interval between two measure,
+that in the simulation corresponds to the delta time between two simulation steps.
+}
+
 \subsubsection{Free variables}
 
 As follow are reported the free variables used in the evaluation:
