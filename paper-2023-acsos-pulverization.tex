@@ -22,6 +22,7 @@
 \acrodef{iot}[IoT]{Internet of Things}
 \acrodef{cas}[CAS]{collective adaptive system}
 \acrodef{qos}[QoS]{quality of service}
+\acrodef{rssi}[RSSI]{received signal strength indicator}
 
 \usepackage{cleveref}
 \usepackage{color}
@@ -849,30 +850,31 @@ and we used
 %     Even formulas, calibration procedures, and stuff
 % }
 %
-\meta{
-    the RSSI signal of the bluetooth during the scanning of the environment
-    to estimate the distance between the devices.
+%\meta{
+    the Bluetooth \ac{rssi} to estimate the distance $d$ between devices as:
+    $$d=10^{\frac{R_{ref} - R}{10 \cdot n}}$$
+    where $R_{ref}$ is the \ac{rssi} reference value at 1 meter
+%    (calibrated in a test environment by measuring it with two smartphones),
+    R is the currently measured \ac{rssi},
+    and $n$ is the path loss exponent,
+    a parameter indicating the rate at which the \ac{rssi} decreases with distance.
     %
-    In particular, we used the following formula to estimate the distance:
-    \begin{equation*}
-        d = 10^{\cfrac{(A - A')}{(10 \cdot n)}}
-    \end{equation*}
-    where $A$ is the RSSI value at 1 meter,
-    $A'$ is the RSSI value measured by the device
-    and $n$ is the path loss exponent.
-    %
-    Since the definition of $A'$ and $n$ is not trivial,
-    and depends on the environment in which the system is deployed,
-    we have calibrated the system in a test environment by measuring the RSSI signal
-    at 1 meter using two smartphones.
-    %
-    The following values emerged from the calibration phase:
-    $A=\qty{-60}{\decibelmeter}$ and $n = \qty{2.0}{\decibel}$.
-}
+    $R_{ref}$ and $n$ are environment-sensitive parameters that require calibration;
+    we set up a test with two smartphones and measured,
+    for our setup,
+    $R_{ref}\qty{-60}{\decibelmeter}$ and $n=\qty{2.0}{\decibel}$.
+%    Since the definition of $A'$ and $n$ is not trivial,
+%    and depends on the environment in which the system is deployed,
+%    we have calibrated the system in a test environment by measuring the RSSI signal
+%    at 1 meter using two smartphones.
+%    %
+%    The following values emerged from the calibration phase:
+%    $A=\qty{-60}{\decibelmeter}$ and $n = \qty{2.0}{\decibel}$.
+%}
 %
-In our case the warning was issued through a monitor,
-whose color was set to tones ranging from green to red depending on the average distance among people:
-the shorter the distance, the more red the tone.
+We used a monitor to issue the warning
+by setting its colour from green to red depending on the average distance among people:
+the shorter the distance, the redder the tone.
 %
 \Cref{fig:crowd-alert} shows a representation of the scenario.
 %
