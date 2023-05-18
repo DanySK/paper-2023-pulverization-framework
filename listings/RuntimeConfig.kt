@@ -15,7 +15,7 @@ object Smartphone : Host {
 }
 object Server : Host {
   override val hostname = "amazon-aws"
-  override val capabilities = setOf(HighCPU,LowLatencyComm)
+  override val capabilities=setOf(HighCPU,LowLatencyComm)
 }
 // Runtime initial setup and runtime reconfiguration rules
 val infrastructure = setOf(Smartphone, Server)
@@ -26,8 +26,8 @@ pulverizationRuntime(conf, "iot-sensor", infrastructure) {
   DeviceActuators() startsOn Smartphone
   reconfigurationRules {
     onDevice {
-      HighLoad reconfigures {Behaviour movesTo Smartphone}
-      LowBattery reconfigures { Behaviour movesTo Server }
+      HighLoad reconfigures{Behaviour movesTo Smartphone}
+      LowBattery reconfigures {Behaviour movesTo Server}
     }
   }
 }
