@@ -1034,7 +1034,7 @@ The $EPI_{ratio}$ now can be define as:
 $$EPI_{ratio} = \frac{TDP_{ratio}}{Benchmark_{ratio}}$$
 %
 Supposing to have smartphones with the \emph{Snapdragon 888} (5W TDP) as a CPU and a cloud server
-with an \emph{Intel Xeon W-3375} (220W TDP), the respective benchmark results are $59,069$ and $9,362$.
+with an \emph{Intel Xeon W-3375} (220W TDP), the respective benchmark results are $21,031$ and $9,362$.
 %
 Consequently, the $EPI_{ratio}$ is near to $7$.
 %
@@ -1055,6 +1055,15 @@ The power consumption is trivially determined by:
 $$P = \frac{instructions * EPI}{time}$$
 where \emph{time} is the time interval between two measure,
 that in the simulation corresponds to the delta time between two simulation steps.
+%
+For what concern the cloud cost, the simulation is based on the \emph{AWS}
+pricing model\footnote{\url{https://aws.amazon.com/ec2/pricing/on-demand/}}
+using the \emph{m5.16xlarge} instance with a cost of \emph{\$3.584} per hour.
+%
+The number of instance required for running the system is calculated by
+dividing the total power consumption of the cloud by the $TDP_{cloud}$.
+%
+The total cost of the cloud is calculated by multiplying the number of instance by the cost per hour.
 }
 
 \subsubsection{Free variables}
