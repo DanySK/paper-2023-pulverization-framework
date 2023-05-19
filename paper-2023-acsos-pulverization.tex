@@ -589,18 +589,23 @@ and the remaining components on the edge server.
 Although the idea behind pulverisation is simple,
 finding a way to implement it effectively requires tackling several challenges at different levels:
 \begin{itemize}
-    \item \textbf{communication}: spliting logical devices into small deployment units implies communication among them,
+    \item \textbf{communication}: splitting logical devices into small deployment units implies communication among them,
     thus requiring to consider networking at two levels:
     across pulverised components (intra-device) and among logical devices (inter-device);
     \item \textbf{portability}: hosts will have very diverse hardware specifications, operating systems, and software stacks;
     \item \textbf{runtime}: the system should be able to reconfigure its deployment at runtime without disrupting the application logic; and
-    \item \textbf{language}: for the idea to be exploitable by designers is quintessential that
+    \item \textbf{language}: for the idea to be exploitable by designers it is important that
     the pulverised configuration
     and the mapping of pulverised components to the underlying infrastructure
-    can be expressed nimbly and, possibly, declaratively.
+    can be expressed expressively and, possibly, declaratively.
 \end{itemize}
 
-\subsection{Domain-specific languages}
+\subsection{Middlewares and Languages for Deployed Systems Specification and Execution}
+
+As mentioned in \Cref{sec:background:dep},
+ the deployment and re-configuration of a software system
+ may be supported -- following the well-known layered architectural style -- by a \emph{middleware} or \emph{runtime}~\cite{DBLP:journals/cacm/GazisK22}
+ encapsulating, among others, deployment and reconfiguration services.
 
 In principle, there are several possibilities to implement a pulverisation configurator and runtime:
 as a library
