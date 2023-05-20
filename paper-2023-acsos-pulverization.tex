@@ -654,7 +654,7 @@ or
 %
 These approaches have different trade-offs.
 
-A framework/runtime configured via declarative files enforces declarativity at the configuration level,
+A framework/runtime with configuration files enforces declarativity at the configuration level,
 but its flexibility is limited,
 as options that have not been accounted for at design time can hardly be injected through configuration files.
 %
@@ -915,7 +915,7 @@ In this section,
 we exercise the proposed framework through two case studies.
 %
 In the former,
-we show a small-scale demonstrator of a safety system warning people when a room capacity is exceeded
+we show a small-scale demonstrator of a safety system warning people when a room capacity is exceeded,
 to showcase the integration of the framework with established technologies\footnote{
     \url{https://github.com/nicolasfara/ACSOS-2023-pulverization-crowd-room}
 };
@@ -1177,7 +1177,7 @@ require runtime reconfiguration to be realised.
 For each experiment, we run a total of 10 repetitions with a different random seed;
 all results are averaged over them.
 %
-The experiment has been open sourced\footnote{\url{https://github.com/nicolasfara/ACSOS-2023-pulverization-evaluation}}
+The experiment has been open sourced
 and the code has been archived on Zenodo~\cite{https://doi.org/10.5281/zenodo.7948801}.
 %
 \begin{figure}
@@ -1196,12 +1196,12 @@ and the code has been archived on Zenodo~\cite{https://doi.org/10.5281/zenodo.79
 
 \subsubsection{Results}
 %
-\begin{figure*}
-    \includegraphics[width=.32\linewidth]{figures/cloud_cost-device_consumption-cloud_consumption-distance-device=100.0.pdf}~
-    \includegraphics[width=.32\linewidth]{figures/cloud_cost-device_consumption-cloud_consumption-distance-device=300.0.pdf}~
-    \includegraphics[width=.32\linewidth]{figures/cloud_cost-device_consumption-cloud_consumption-distance-device=1000.0.pdf}
+\begin{figure}
+    \includegraphics[width=\columnwidth]{figures/cloud_cost-device_consumption-cloud_consumption-distance-device=100.0.pdf}\\
+    \includegraphics[width=\columnwidth]{figures/cloud_cost-device_consumption-cloud_consumption-distance-device=300.0.pdf}\\
+    \includegraphics[width=\columnwidth]{figures/cloud_cost-device_consumption-cloud_consumption-distance-device=1000.0.pdf}
     \caption{
-        Simulation results for 100 (left), 300 (center), and 1000 (right) devices;
+        Simulation results for 100 (top), 300 (center), and 1000 (bottom) devices;
         showing all four metrics:
         $P_{cloud}$ ($kW$) in green,
         $P_{devices}$ ($kW$) in blue,
@@ -1215,7 +1215,7 @@ and the code has been archived on Zenodo~\cite{https://doi.org/10.5281/zenodo.79
         energy use, and \ac{qos} that best fits the current context.
     }
     \label{fig:results}
-\end{figure*}
+\end{figure}
 %
 Results are summarised in \Cref{fig:results}.
 %
@@ -1281,14 +1281,14 @@ The specification or design of distributed systems
 %
 Specifically,
  this work builds on the \emph{pulverisation} component model~\cite{FI2020-pulverization,IEEE-IoTJ-pulverization-simulation}.
-% whereby a large-scale cyber-physical system
-% is partitioned into a graph of devices
-% where each device is split into five deployable components:
-% (i) sensors interface,
-% (ii) actuators interface,
-% (iii) behaviour,
-% (iv) state, and
-% (v) communication component.
+ whereby a large-scale cyber-physical system
+ is partitioned into a graph of devices
+ where each device is split into five deployable components:
+ (i) sensors interface,
+ (ii) actuators interface,
+ (iii) behaviour,
+ (iv) state, and
+ (v) communication component.
 %
 In~\cite{IEEE-IoTJ-pulverization-simulation},
  a methodology on top of the pulverisation model
@@ -1312,10 +1312,10 @@ A \emph{deployment plan} is a configured mapping of a software system onto a dep
 %
 Given a deployable software system
 developed using the techniques of the previous subsection,
- what is needed now is a language to describe a deployment domain 
+ what is needed now is a language to describe a deployment domain
  and the deployment mapping.
 %
-Languages have been proposed 
+Languages have been proposed
  targeting specific kinds of deployment domains
  such as the smart grid (cf. \emph{dspec} in the \emph{RIAPS} platform~\cite{DBLP:conf/coins/GhoshTKKL22})
  or the cloud (cf. the \emph{CAMEL} multi-\ac{dsl}~\cite{DBLP:journals/jcloudc/AchilleosKRKDOS19}).
@@ -1335,8 +1335,8 @@ In~\cite{DBLP:journals/sosym/SongDFSF22},
   distributed and heterogeneous devices at the edge characterised by different cyber-physical contexts
 (cf. resources, connectivity, etc.).
 %
-%It is based on the \emph{GeneSIS} modelling language,
-%where a \texttt{DeploymentModel} consists of sets of \texttt{Resources} (e.g., \texttt{Component}s, specialised by \texttt{InfrastructureComponent}s and \texttt{SoftwareComponent}s) with associated \texttt{Property}s and \texttt{Link}s.
+It is based on the \emph{GeneSIS} modelling language,
+where a \texttt{DeploymentModel} consists of sets of \texttt{Resources} (e.g., \texttt{Component}s, specialised by \texttt{InfrastructureComponent}s and \texttt{SoftwareComponent}s) with associated \texttt{Property}s and \texttt{Link}s.
 
 \subsection{Automatic/autonomic deployment and reconfiguration}
 \label{sec:rw:autodep}
@@ -1381,9 +1381,9 @@ In the \emph{osmotic computing} approach~\cite{DBLP:journals/computer/VillariFDR
 %
 The \emph{AWaRE DSL}~\cite{DBLP:conf/aswec/ChhetriLUVKNR18/adsl} supports constraint-based self-management,
 leveraging managing agents.
-%The language enables the specification of the domain model (in terms of components),
-%the problem structure model (in terms of constraints),
-%the agent architecture model (in terms of agents, roles, and their coordination), and the assignment model (in terms of management problem assignment strategies).
+The language enables the specification of the domain model (in terms of components),
+the problem structure model (in terms of constraints),
+the agent architecture model (in terms of agents, roles, and their coordination), and the assignment model (in terms of management problem assignment strategies).
 %
 Similar, earlier approaches based on the specification of \emph{constraint-sets} include \emph{DELADAS}~\cite{Dearle2004deladas}
 and \emph{ConfSolve}~\cite{DBLP:conf/saso/HewsonAG13}.
