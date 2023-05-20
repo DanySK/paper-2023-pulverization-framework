@@ -602,7 +602,7 @@ finding a way to implement it effectively requires tackling several challenges a
     can be expressed expressively and, possibly, declaratively.
 \end{itemize}
 
-\subsection{Middlewares and Languages for Deployed Systems Specification and Execution}
+\subsection{Middlewares and (Domain-Specific) Languages for Deployed Systems Specification and Execution}
 
 As mentioned in \Cref{sec:background:dep},
  the deployment and re-configuration of a software system
@@ -626,7 +626,7 @@ or
 (iii) through a \ac{dsl}~\cite{dsl-book-voelter}. % configured with its own custom syntax.
 %
 These approaches have different trade-offs.
-%
+
 A framework/runtime configured via declarative files enforces declarativity at the configuration level,
 but its flexibility is limited,
 as options that have not been accounted for at design time can hardly be injected through configuration files.
@@ -638,7 +638,7 @@ but its configuration may quickly become imperative and harder to maintain as co
 Finally, a \ac{dsl}~\cite{dsl-book-voelter} can be designed to be as expressive as needed,
 but it has high maintenance cost (as the language maintenance costs stack upon those of the library/\ac{api}) and, potentially,
 a steep learning curve due to the need of learning a new (custom) language.
-%
+
 Recent evolution in programming languages,
 however,
 open to an additional strategy:
