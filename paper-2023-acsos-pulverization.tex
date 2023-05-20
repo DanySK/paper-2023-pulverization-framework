@@ -31,6 +31,28 @@
 \usepackage{color}
 \usepackage{nicefrac}
 
+
+\lstdefinelanguage{pulv}[]{Kotlin}{
+%  basicstyle=\small\ttfamily\lst@ifdisplaystyle\footnotesize\fi,
+%	frame=single,
+%	escapechar=\%,
+%  keywordstyle=\color{blue},
+  keywordstyle=[3]\bfseries{},
+  keywords=[3]{pulverizedSystem,device,and,deployableOn},
+%  sensitive=true,
+%  morecomment=[l]{//},
+%  morecomment=[n]{/*}{*/},
+%  commentstyle=\color{green!40!black},
+%  morestring=[b]",
+%  morestring=[b]',
+%  morestring=[b]""",
+%  stringstyle=\ttfamily\color{orange},
+}
+\lstset{language=pulv,
+basewidth=0.555em % decreases spacing between chars
+}
+
+
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
     
@@ -730,7 +752,7 @@ it implies that the component can be dynamically moved to any host offering any 
 
 \begin{lstlisting}[
     float=ht,
-    language=Kotlin,
+    language=pulv,
     caption={
         Example infrastructure configuration,
         defining three capabilities and a system composed of two device types,
@@ -738,7 +760,7 @@ it implies that the component can be dynamically moved to any host offering any 
     },
     label=lst:system-configuration,
     escapechar=\%,
-    numbers=left,
+    numbers=left
 ]
 object HighCPU : Capability%\label{capab:start}%
 object LowLatencyComm : Capability
@@ -770,7 +792,7 @@ It works with the concepts of \texttt{Host}
 and \texttt{ReconfigurationRule}.
 %
 Using \Cref{lst:runtime-configuration} as a reference example,
-we show how reconfiguration events can be captured at the type system level
+we show how reconfiguration events can be captured at the type-system level
 by expressing them as a predicate over an asynchronous flow of \texttt{events} influencing the system's state.
 %
 Similarly, hosts can be configured by defining their name and capabilities.
