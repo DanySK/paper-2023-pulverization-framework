@@ -686,14 +686,11 @@ while retaining a reduced maintenance cost
 and a gentle learning curve compared to stand-alone \acp{dsl}
 (as the syntax will be largely familiar to the host language users).
 %
-The killer feature of internal \acp{dsl}, compared to external ones,
-is the counterpass of the limited syntax imposed by the host:
-if some peculiar entity or process cannot be express by the \ac{dsl},
-the designer can fall back to the host language directly,
-with no need to resort to interoperability features,
-and with the possibility to exploit all the libraries designed for the host language.
+Compared to external ones
+internal \acp{dsl} allow the designer to fall back to the host language directly
+to implement peculiar entities or processes that cannot be express by the \ac{dsl}.
 %
-The internal DSL approach has thus been successfully applied in several domains,
+The approach has thus been successfully applied in several domains,
 spanning from
 build systems\footnote{\url{https://archive.is/5xtaN}}
 and ontologies~\cite{DBLP:journals/jossw/Balhoff16} to
@@ -1464,7 +1461,7 @@ These approaches, however, typically suffer from scalability issues.
 \section{Conclusion and future work}\label{sec:conclusion}
 
 In this work we presented a practical \ac{dsl} and framework for the
-runtime re-configuration of pulverised \ac{cps} applications.
+runtime re-configuration of pulverised \ac{cas} applications.
 %
 The original idea of pulverisation was to define applications considering arbitrary networks of logical devices,
 decompose (pulverise) these logical devices into small deployment units,
