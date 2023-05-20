@@ -1425,11 +1425,30 @@ These approaches, however, typically suffer from scalability issues.
 
 \section{Conclusion and future work}\label{sec:conclusion}
 
-openness
+In this work we presented a practical \ac{dsl} and framework for the
+runtime re-configuration of pulverised \ac{cps} applications.
+%
+The original idea of pulverisation was to define applications considering arbitrary networks of logical devices,
+decompose (pulverise) these logical devices into small deployment units,
+and then define their desired deployment at a later time.
+%
+Through the specialised \ac{dsl} introduced in this work
+we have shown that this idea can be realised in practice.
+%
+Moreover, we extended the original idea of pulverisation with the possibility to specify runtime re-configuration policies,
+which can be leveraged to achieve better trade-offs in terms of performance, cost, and resource usage.
+%
+We provide a real-world demonstrator for the technology,
+and we show via simulation that the approach can be beneficial.
 
-more platforms
-
-global policies
+In the future,
+we plan to extend the \ac{dsl} to support openness and collective reconfiguration policies.
+%
+The former will allow devices to join and leave the system at runtime,
+while the latter will allow reconfigurations to be performed on the basis of a collective state of the system.
+%
+Concurrently,
+we intend to add support for additional network protocols to be able to support a larger number of practical scenarios.
 
 \bibliographystyle{IEEEtranDOI}
 \bibliography{bibliography}
