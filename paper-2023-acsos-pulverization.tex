@@ -703,21 +703,32 @@ The infrastructure \ac{dsl} captures the concepts of
 %
 A reference sample is presented in \Cref{lst:system-configuration}.
 %
-The DSL provides simple means to define capabilities as types in the host language,
-and then to associate them to pulverised components for each device type.
+The DSL provides simple means to define capabilities as types in the host language (Lines~\ref{capab:start}--\ref{capab:end}),
+and then to associate them to pulverised components for each device type (Lines~\ref{devcap:start}--\ref{devcap:end}).
 %
 This \ac{dsl} is meant to define constraints that the application imposes on the infrastructure,
 ruling out configurations that are not capable to support the system
 (for instance, deploying the sensor component of a device in a host that exposes no sensor).
 %
-All combinations of components and capabilities that are defined as supported become instead amenable to
-\emph{runtime reconfiguration}.
+All combinations of components and capabilities that are defined as supported become instead amenable as \emph{targets} of deployment or reconfiguration---forming what we may call the \emph{deployment range}.
+%\emph{runtime reconfiguration}.
 %
-Notice, for instance, that \texttt{Behavior} in \texttt{iot-sensor} is defined as executable on any of host exposing
-\texttt{HighCPU} and/or \texttt{EmbeddedDevice} as capabilities:
-it implies that the component can be moved from at runtime across any host implementing any such capability.
+In the example, e.g., component \texttt{Behavior} in \texttt{iot-sensor} is defined as executable on any of host exposing
+\texttt{HighCPU} and/or \texttt{EmbeddedDevice} as capabilities (\Cref{devcap:b}):
+it implies that the component can be dynamically moved to any host offering any such capability.
 
-\lstinputlisting[
+%\lstinputlisting[
+%    float=ht,
+%    language=Kotlin,
+%    caption={
+%        Example infrastructure configuration,
+%        defining three capabilities and a system composed of two device types,
+%        each component of which is then bound to the set of capabilities it needs to execute.
+%    },
+%    label=lst:system-configuration,
+%]{listings/SystemConfig.kt}
+
+\begin{lstlisting}[
     float=ht,
     language=Kotlin,
     caption={
@@ -726,7 +737,27 @@ it implies that the component can be moved from at runtime across any host imple
         each component of which is then bound to the set of capabilities it needs to execute.
     },
     label=lst:system-configuration,
-]{listings/SystemConfig.kt}
+    escapechar=\%,
+    numbers=left,
+]
+object HighCPU : Capability%\label{capab:start}%
+object LowLatencyComm : Capability
+object EmbeddedDevice : Capability%\label{capab:end}%
+
+pulverizedSystem {
+  device("control-center") {%\label{devcap:start}%
+    Behavior and State deployableOn HighCPU
+    Communication deployableOn LowLatencyComm
+    Sensors deployableOn EmbeddedDevice
+  }
+  device("iot-sensor") {
+    Behavior deployableOn setOf(HighCPU, EmbeddedDevice)%\label{devcap:b}%
+    Communication deployableOn LowLatencyComm
+    Sensors and Actuators deployableOn EmbeddedDevice
+  }%\label{devcap:end}%
+}
+\end{lstlisting}
+
 
 \subsection{Deployment and Reconfiguration}
 
