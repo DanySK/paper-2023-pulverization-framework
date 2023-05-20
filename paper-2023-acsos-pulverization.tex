@@ -674,19 +674,19 @@ hardware design~\cite{DBLP:journals/trets/SerreP20} to
 logic~\cite{2pkt-swx16} and aggregate programming~\cite{DBLP:journals/softx/CasadeiVAP22}.
 %
 
-\section{A DSL for reconfigurable pulverised systems}\label{sec:contribution}
+\section{A Runtime and \acsp{dsl} for Reconfigurable Pulverised Systems}\label{sec:contribution}
 
 From the previous section,
-we can identify two main phases in the pulverisation process:
+we can identify two main pieces of information for the definition of a deployment plan for a pulverised system:
 \begin{enumerate*}[label=\it{(\roman*)}]
-  \item the definition of the available devices and their capabilities (\emph{infrastructure}); and
-  \item the allocation of the pulverised components to them (\emph{runtime}).
+  \item the definition of the \emph{target} deployment domain (\emph{infrastructure}), i.e., the specification of the \emph{requirements} posed on hosts in terms of required (or preferred) capabilities; and
+  \item the definition of the \emph{deployment plan}, i.e., the allocation of the pulverised components to the infrastructural elements, together with constraints and reconfiguration policies.
 \end{enumerate*}
 %
-Coherently withush the single responsibility principle,
-we decided to capture these phases into two distinct \acp{dsl}.
+Coherently with the \emph{single responsibility principle},
+we capture these two descriptive needs into two distinct \acp{dsl}.
 
-\subsection{Infrastructure and requirements}
+\subsection{Infrastructure and Requirements}
 
 The infrastructure \ac{dsl} captures the concepts of
 \emph{device type}, \emph{component}, \emph{capability}, and \emph{requirement}.
@@ -718,7 +718,7 @@ it implies that the component can be moved from at runtime across any host imple
     label=lst:system-configuration,
 ]{listings/SystemConfig.kt}
 
-\subsection{Runtime and reconfiguration}
+\subsection{Deployment and Reconfiguration}
 
 The second \ac{dsl} supports the definition of the mapping between pulverised components and specific hosts,
 as well as the definition of reactive reconfiguration policies.
