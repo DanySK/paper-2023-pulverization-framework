@@ -18,6 +18,8 @@
 \usepackage{siunitx}
 \DeclareSIUnit{\decibelmeter}{dBm}
 
+
+\acrodef{api}[API]{application-program interface}
 \acrodef{dsl}[DSL]{domain-specific language}
 \acrodef{iot}[IoT]{Internet of Things}
 \acrodef{cas}[CAS]{collective adaptive system}
@@ -244,7 +246,7 @@ According to the analytical framework of~\cite{DBLP:journals/jss/ArcangeliBL15},
  (iv) how the deployment is performed (e.g., how deployment activities are carried out).
 %
 By an operational point of view, 
- deployment may be supported by a \emph{middleware}~\cite{DBLP:journals/cacm/GazisK22}.
+ deployment may be supported by a so-called \emph{runtime} or \emph{middleware}~\cite{DBLP:journals/cacm/GazisK22}.
 %
 Related work covering these issues is provided in \Cref{sec:rw}.
 %
@@ -604,34 +606,44 @@ finding a way to implement it effectively requires tackling several challenges a
 
 As mentioned in \Cref{sec:background:dep},
  the deployment and re-configuration of a software system
- may be supported -- following the well-known layered architectural style -- by a \emph{middleware} or \emph{runtime}~\cite{DBLP:journals/cacm/GazisK22}
+ may be supported -- following the well-known layered architectural style -- by a \emph{runtime} or \emph{middleware}~\cite{DBLP:journals/cacm/GazisK22}
  encapsulating, among others, deployment and reconfiguration services.
+%
+The runtime could be reified into a deployment unit \emph{per se},
+ or can be implemented as part of the deployment units of the software system to be deployed---e.g., taking the form of an \emph{\ac{api}} or a \emph{framework}.
+%
+In order to take decisions about deployment and reconfiguration, 
+ such a runtime has to be \emph{configured}
+ for the software application at hand,
+ i.e., it has to be given a \emph{deployment plan} capturing deployment mappings, constraints, and policies.
+%
 
-In principle, there are several possibilities to implement a pulverisation configurator and runtime:
-as a library
-configured by a program written in a general-purpose language,
-as a framework/runtime configured by means of configuration files,
-or as a \ac{dsl} configured with its own custom syntax.
+In principle, there are several possibilities to implement a deployment plan:
+%
+(i) declaratively, through a set of \emph{configuration files};
+(ii) through a \emph{\ac{api}/library}, implemented in a general-purpose language;
+or 
+(iii) through a \ac{dsl}~\cite{dsl-book-voelter}. % configured with its own custom syntax.
 %
 These approaches have different trade-offs.
-%
-A (well designed) library can be flexible as the host language can be used to express peculiar configurations
-and easier to adopt to users acquainted with the host language;
-but its configuration may quickly become imperative and harder to maintain as complexity grows.
 %
 A framework/runtime configured via declarative files enforces declarativity at the configuration level,
 but its flexibility is limited,
 as options that have not been accounted for at design time can hardly be injected through configuration files.
 %
-Finally, a \ac{dsl} can be designed to be as expressive as needed,
-but it has high maintenance cost (as the language maintenance costs stack upon those of the library/API) and, potentially,
+A (well designed) library can be flexible as the host language can be used to express peculiar configurations
+and easier to adopt to users acquainted with the host language;
+but its configuration may quickly become imperative and harder to maintain as complexity grows.
+%
+Finally, a \ac{dsl}~\cite{dsl-book-voelter} can be designed to be as expressive as needed,
+but it has high maintenance cost (as the language maintenance costs stack upon those of the library/\ac{api}) and, potentially,
 a steep learning curve due to the need of learning a new (custom) language.
 %
 Recent evolution in programming languages,
 however,
 open to an additional strategy:
 the construction of \emph{internal} \acp{dsl},
-hybrids between libraries and stand-alone (external) \acp{dsl}.
+hybrids between libraries and stand-alone (external) \acp{dsl}~\cite{dsl-book-voelter}.
 %
 In fact, modern languages such as Kotlin, Groovy, Ruby, and Scala~\cite{Riti2018}
 provide specific syntactic features to enable the construction of APIs whose ergonomy is akin to the one of a dedicated language,
