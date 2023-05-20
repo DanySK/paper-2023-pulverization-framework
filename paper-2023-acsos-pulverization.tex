@@ -29,6 +29,7 @@
 
 \usepackage{cleveref}
 \usepackage{color}
+\usepackage{nicefrac}
 
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
@@ -1008,117 +1009,113 @@ and its behaviour to be able to run either on the smartphones or in cloud.
 We assume the event to start with users located in random positions in the city,
 and to have a recharging station available at that place.
 %
-The game requires to phisically move in the city,
+The game requires to physically move in the city,
 reach a \ac{poi} and perform some operations once there.
-
-\cite{PianiniJOS2013}
-
-\meta{
-The simulation of this large-scale scenario should take into account several factors to be more realistic as possible:
-the power consumption of the werable devices (smartphones), the power consumption of the cloud server,
-and the weight of the application in terms of power dissipated by its execution.
 %
-The parameter described above represent the fundamental element of the power consumption model used in the simulation.
+We assume users with low battery to turn off the application and move to their start station to recharge the device
+before rejoining the game.
 %
-To be more adeherent as possible to a real consumption model of a device or cloud server,
-several research were conducted to figure out real value that can be used as parameter in the simulation.
+The application is pulverised and its behaviour can execute either on the device or in the cloud.
 %
-Nevertheless,
-for our bes of knowledge,
-there are no precise and established studies regarding these specific parameters.
+We configure the framework to move the behaviour to the cloud when the battery level
+(measured as a percentage of the maximum charge)
+is below a threshold $\lambda$,
+and to move it back to the device when the battery is charged enough to cross a threshold $\upsilon$
+(stable configuration have $\upsilon{}>\lambda$,
+otherwise the system continuously moves the behaviour between cloud and devices).
 %
-For this reason,
-we tried to identify likelihood parameters that could describe a plausible scenario in simulation.
+We thus indicate any configuration with $\Updownarrow^{\upsilon}_{\lambda}$,
+with the exception of two cases:
+$\upsilon, \lambda > 100$, forcing the behaviour to be always in the cloud, that we indicate with $\Uparrow$;
+and $\upsilon, \lambda < 0$, forcing the behaviour to be always on the device, that we indicate with $\Downarrow$.
 %
-In the following, we describe the parameters used in the simulation and the motivation behind their choice.
+We are interested in the following metrics:
 %
-One popular metrics which relate the power consumption with the instruction is the \emph{Energy Per Instruction}
-(EPI)~\cite{Grochowski2006EnergyPI} measured in $J / instruction$,
-which associate the energy related to the execution of a CPU instruction.
-%
-From the metric introduced above, we should estimate the $EPI_{cloud}$ and $EPI_{device}$.
-%
-To do so, we rely our estimation based on the result obtained in~\cite{DBLP:conf/islped/ShaoB13},
-were the EPI of a server CPU is calculated.
-%
-From the value taken from~\cite{DBLP:conf/islped/ShaoB13} we defined a discrete variability range for
-$EPI_{cloud}$ equals to $300$, $30$, and $3$.
-%
-To estimate the $EPI_{device}$,
-an intermediate step could be determine the ratio between $EPI_{cloud}$ and $EPI_{device}$,
-which we define as $EPI_{ratio}$.
-%
-To do so we could rely on other characterizing elements:
-the \emph{TDP} of each CPU and the \emph{benchmark score} of each CPU,
-and for each one,
-define the ratio of this two metrics: $TDP_{ratio}$ and $Benachmark_{ratio}$.
-%
-In this way we are identifying the power ration and performance ratio between the CPU of the device
-and the CPU of the cloud.
-%
-The $EPI_{ratio}$ now can be define as:
-$$EPI_{ratio} = \frac{TDP_{ratio}}{Benchmark_{ratio}}$$
-%
-Supposing to have smartphones with the \emph{Snapdragon 888} (5W TDP) as a CPU and a cloud server
-with an \emph{Intel Xeon Platinum P-8124} (220W TDP), the respective benchmark results are $22,674$ and $9,362$.
-%
-Consequently, the $EPI_{ratio}$ is near to $18$.
-%
-To mitigate the uncertainty of this values we ranged the $EPI_{ratio}$ from 3 to 30.
-%
-The simulation consist of several scenarios in which we simulate different application load,
-and consequently different discharge time of the devices.
-%
-To do so, we estimate the number of instruction based on
-the $EPI_{device}$ and the required discharge time to simulate.
-%
-Given the total instruction of our application,
-we repartition that value for each component executed and the relative communication cost;
-in this way,
-we can estimate the consumption of each component either executed in cloud or in device.
-%
-The power consumption is trivially determined by:
-$$P = \frac{instructions * EPI}{time}$$
-where \emph{time} is the time interval between two measure,
-that in the simulation corresponds to the delta time between two simulation steps.
-%
-For what concern the cloud cost, the simulation is based on the \emph{AWS}
-pricing model\footnote{\url{https://aws.amazon.com/ec2/pricing/on-demand/}}
-using the \emph{m5.16xlarge} instance (which use the CPU server described above)
-with a cost of \emph{\$3.584} per hour.
-%
-The number of instance required for running the system is calculated by
-dividing the total power consumption of the cloud by the $TDP_{cloud}$.
-%
-The total cost of the cloud is calculated by multiplying the number of instance by the cost per hour.
-}
-
-\subsubsection{Free variables}
-
-As follow are reported the free variables used in the evaluation:
 \begin{itemize}
-    \item let $n$ be the number of devices;
-    \item let $t_d$ be the discharge time of the battery of the devices;
-    \item let $B_l$ be the low battery threshold;
-    \item let $B_h$ be the high battery threshold;
-    \item let $EPI_{cloud}$ be the energy per instruction of the cloud;
-    \item let $EPI_{ratio}$ be the ratio of the consumption of the cloud and the device;
+    \item $P_{devices}$ ($kW$), the average device power consumption, a proxy for the battery life;
+    \item $P_{cloud}$ ($kW$), the average power consumption of the cloud, if added to $P_{devices}$
+    provides the total power consumption
+    (hence, assuming a non-carbon-neutral energy mix, it is also a proxy for the carbon footprint);
+    \item Distance ($km$), the total distance walked by the participants, a proxy for the \ac{qos},
+    as users that need to stop and recharge stop walking;
+    \item $\$_{cloud}$ (\$), the price paid to keep the required cloud instances up and running.
 \end{itemize}
 
-\subsubsection{Metrics}
+\subsubsection{Energy model}
 
-From the variables above are derived the following metrics:
+\acrodef{epi}[EPI]{Energy Per Instruction}
+\acrodef{tdp}[TDP]{Thermal Design Power}
 
-\begin{itemize}
-    \item let $\beta_{device}$ be the number of \emph{behaviour} executed in the device;
-    \item let $\beta_{cloud}$ be the number of \emph{behaviour} executed in the cloud;
-    \item let $C_{\%}$ be the average battery percentage of the devices;
-    \item let $P_{devices}$ be the consumed power of the devices;
-    \item let $P_{cloud}$ be the consumed power of the cloud;
-    \item let $P_{total}$ be the total consumed power of the system;
-    \item let $I_{cloud}$ be the number of server instances of the cloud;
-    \item let $\$_{cloud}$ be the cost of the cloud;
-\end{itemize}
+We assume that the power consumption of the device is linearly dependent on the CPU usage,
+and we thus decided to estimate the \ac{epi}~\cite{Grochowski2006EnergyPI}
+of common smartphone ($EPI_{device}$) and server ($EPI_{cloud}$) CPUs.
+%
+To do so, we take the \ac{tdp} of a
+Qualcomm Snapdragon 888 ($5W$)
+and an
+Intel Xeon Platinum P-8124 ($220W$)
+and we divide it by the score the CPU obtained in the popular Passmark benchmark\footnote{\url{https://www.cpubenchmark.net/}}
+($9362$ and $22674$, respectively)
+obtaining an indication of the power per benchmark point
+($\nicefrac{5W}{9362pts}$ and \nicefrac{220W}{22674pts} respectively).
+%
+We then used these ratios to estimate the relative \ac{epi} of the two CPUs,
+obtaining a $EPI_{ratio}$ close to 1:18.
+%
+Thus,
+we take the \ac{epi} estimation for the server CPU from~\cite{DBLP:conf/islped/ShaoB13},
+(approximately 10J per instruction, considering 36 logical cores of our reference processor)
+and we assume the \ac{epi} of the smartphone CPU to be 18 times lower.
+%
+Once the \acp{epi} of the two platforms are known,
+we estimate the number of instructions of the pulverised components as follows:
+we assume the application to be a heavy-duty game,
+capable to drain the battery of a smartphone
+(approximately 4500mAh in capacity, and thus, at 3.3V, 14.85Wh, 53460J)
+in 6 hours of continuous usage,
+which divided by the \ac{epi} of the smartphone CPU gives us the number of instructions.
+%
+Additionally,
+we account for a variable quota of instructions that captures other activities of the devices
+(screen, operating system, other applications, etc.).
+
+\subsubsection{Cost model}
+We assume the cloud to be composed by a set of Amazon \emph{AWS} instances,
+specifically, \emph{m5.16xlarge} instances
+(using our reference server CPU)
+the \emph{AWS}
+with a hourly cost of \$3.584\footnote{\url{https://aws.amazon.com/ec2/pricing/on-demand/}}
+%
+We estimate the number of instances required to run the pulverised components by
+dividing the total power consumption of the cloud by the \ac{tdp} of the server,
+assuming the CPU to be the dominant energy consumption component,
+and assuming that each vCPU on AWS maps to a logical core of the underlying hardware.
+
+\subsubsection{Implementation}
+We implemented our simulations by interfacing \ourframework{}
+with the Alchemist Simulator~\cite{PianiniJOS2013}
+through a dedicated platfrom module.
+%
+We ran experiments varying the number of participants (hence, smartphones): 100, 300, and 1000.
+%
+For each experiment, we run a total of 10 repetitions with a different random seed;
+all results are averaged over them.
+%
+The experiment has been open sourced\footnote{\url{https://github.com/nicolasfara/ACSOS-2023-pulverization-evaluation}}
+and the code has been archived on Zenodo~\cite{https://doi.org/10.5281/zenodo.7948801}.
+%
+\begin{figure}
+    \includegraphics[width=\linewidth]{figures/simulation-screenshot.png}
+    \caption{
+        A snapshot of the large-scale simulation.
+        Smartphones are represented as coloured circles,
+        with the color indicating their battery level
+        (green when charged, red when low).
+    }
+    \label{fig:simulation-screenshot}
+\end{figure}
+%
+\Cref{fig:simulation-screenshot} shows a snapshot of the simulation
 
 \subsubsection{Results}
 
@@ -1183,13 +1180,6 @@ From the variables above are derived the following metrics:
 \end{figure}
 
 
-\begin{figure}[ht]
-    \begin{minipage}{\columnwidth}
-        \includegraphics[width=\linewidth]{figures/simulation-screenshot.png}
-    \end{minipage}
-    \caption{TODO}
-    \label{fig:simulation-screenshot}   
-\end{figure}
 
 \section{Related Work}
 \label{sec:rw}
