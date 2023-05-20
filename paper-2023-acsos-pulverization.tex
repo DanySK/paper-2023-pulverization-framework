@@ -30,6 +30,7 @@
 \usepackage{cleveref}
 \usepackage{color}
 \usepackage{nicefrac}
+\usepackage{wasysym}
 
 
 \lstdefinelanguage{pulv}[]{Kotlin}{
@@ -61,7 +62,7 @@ basewidth=0.555em % decreases spacing between chars
 \lstset{xleftmargin=0.3cm,numbersep=5pt} 
 
 \makeatletter
-\newcommand{\linebreakand}{%
+\newcommand{\linebreakand}{
   \end{@IEEEauthorhalign}
   \hfill\mbox{}\par
   \mbox{}\hfill\begin{@IEEEauthorhalign}
@@ -1147,9 +1148,20 @@ and assuming that each vCPU on AWS maps to a logical core of the underlying hard
 \subsubsection{Implementation}
 We implemented our simulations by interfacing \ourframework{}
 with the Alchemist Simulator~\cite{PianiniJOS2013}
-through a dedicated platfrom module.
+through a dedicated platform module.
 %
-We ran experiments varying the number of participants (hence, smartphones): 100, 300, and 1000.
+We ran experiments varying the number of participants (hence, smartphones): 100, 300, and 1000
+and the \ourframework{} reconfiguration rules:
+$\Uparrow$ (behaviour always in the smartphones),
+$\Updownarrow^{60}_{20}$,
+$\Updownarrow^{80}_{20}$,
+$\Updownarrow^{60}_{40}$,
+$\Updownarrow^{80}_{40}$,
+$\Downarrow$ (behaviour always in the cloud).
+%
+All the hybrid configurations
+(all except $\Uparrow$ and $\Downarrow$)
+require runtime reconfiguration to be realised.
 %
 For each experiment, we run a total of 10 repetitions with a different random seed;
 all results are averaged over them.
@@ -1170,69 +1182,39 @@ and the code has been archived on Zenodo~\cite{https://doi.org/10.5281/zenodo.79
 %
 \Cref{fig:simulation-screenshot} shows a snapshot of the simulation
 
+
 \subsubsection{Results}
-
-\begin{figure}[ht]
-    \begin{minipage}{\columnwidth}
-        \includegraphics[width=\linewidth]{figures/cloud_cost-device_consumption-cloud_consumption-distance-device=100.0.pdf}
-    \end{minipage}
+%
+\begin{figure*}
+    \includegraphics[width=.32\linewidth]{figures/cloud_cost-device_consumption-cloud_consumption-distance-device=100.0.pdf}~
+    \includegraphics[width=.32\linewidth]{figures/cloud_cost-device_consumption-cloud_consumption-distance-device=300.0.pdf}~
+    \includegraphics[width=.32\linewidth]{figures/cloud_cost-device_consumption-cloud_consumption-distance-device=1000.0.pdf}
     \caption{
-        Results of the simulation with 100 devices.
+        Simulation results for 100 (left), 300 (center), and 1000 (right) devices;
+        showing all four metrics:
+        $P_{cloud}$ ($kW$) in green,
+        $P_{devices}$ ($kW$) in blue,
+        Distance in yellow, $\$_{cloud}$ in dark purple.
         %
-        The \emph{green} bar represents the mean power consumed by cloud;
-        the \emph{blue} bar represents the mean power consumed by all the devices in the system;
-        the \emph{yellow} bar represents the mean traveled distance by the people
-        and the \emph{purple} bar represents the average cost per hour of the cloud.
+        $P_{cloud}$ and $P_{devices}$ are stacked to also show the overall power consumption.
         %
-        The chart shows two ``static'' scenarios: \emph{device-only} (on the left) and \emph{cloud-only} (on the right).
+        Different reconfiguration rules are indicated on the horizontal axis.
         %
-        All the intermediate scenarios are obtained by exploiting the reconfiguration capabilities of the pulverization framework,
-        where different battery threshold are used to trigger the reconfiguration.
+        Runtime reconfiguration of the deployment opens to more opportunities to find the trade-off of cost,
+        energy use, and \ac{qos} that best fits the current context.
     }
-    \label{fig:result-100-devices}
-\end{figure}
-
-\begin{figure}[ht]
-    \begin{minipage}{\columnwidth}
-        \includegraphics[width=\linewidth]{figures/cloud_cost-device_consumption-cloud_consumption-distance-device=300.0.pdf}
-    \end{minipage}
-    \caption{
-        Results of the simulation with 300 devices.
-        %
-        The \emph{green} bar represents the mean power consumed by cloud;
-        the \emph{blue} bar represents the mean power consumed by all the devices in the system;
-        the \emph{yellow} bar represents the mean traveled distance by the people
-        and the \emph{purple} bar represents the average cost per hour of the cloud.
-        %
-        The chart shows two ``static'' scenarios: \emph{device-only} (on the left) and \emph{cloud-only} (on the right).
-        %
-        All the intermediate scenarios are obtained by exploiting the reconfiguration capabilities of the pulverization framework,
-        where different battery threshold are used to trigger the reconfiguration.
-    }
-    \label{fig:result-300-devices}
-\end{figure}
-
-\begin{figure}[ht]
-    \begin{minipage}{\columnwidth}
-        \includegraphics[width=\linewidth]{figures/cloud_cost-device_consumption-cloud_consumption-distance-device=1000.0.pdf}
-    \end{minipage}
-    \caption{
-        Results of the simulation with 1000 devices.
-        %
-        The \emph{green} bar represents the mean power consumed by cloud;
-        the \emph{blue} bar represents the mean power consumed by all the devices in the system;
-        the \emph{yellow} bar represents the mean traveled distance by the people
-        and the \emph{purple} bar represents the average cost per hour of the cloud.
-        %
-        The chart shows two ``static'' scenarios: \emph{device-only} (on the left) and \emph{cloud-only} (on the right).
-        %
-        All the intermediate scenarios are obtained by exploiting the reconfiguration capabilities of the pulverization framework,
-        where different battery threshold are used to trigger the reconfiguration.
-    }
-    \label{fig:result-1000-devices}
-\end{figure}
-
-
+    \label{fig:results}
+\end{figure*}
+%
+Results are summarised in \Cref{fig:results}.
+%
+$\Downarrow$ has the worst \ac{qos}, but also the lowest cloud cost and overall energy consumption.
+%
+Opposedly, $\Uparrow$ improves the \ac{qos}, but costs and energy use grow significantly.
+%
+The ability to reconfigure the deployment at runtime
+by moving the behaviour from the cloud to the smartphones and vice versa
+depending on the battery level allows to find different trade-offs between these two extremes.
 
 \section{Related Work}
 \label{sec:rw}
