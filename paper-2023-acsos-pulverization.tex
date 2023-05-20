@@ -1112,7 +1112,7 @@ We are interested in the following metrics:
 \acrodef{tdp}[TDP]{Thermal Design Power}
 
 We assume that the power consumption of the device is linearly dependent on the CPU usage,
-and we thus decided to estimate the \ac{epi}~\cite{Grochowski2006EnergyPI}
+and we thus decided to estimate the \ac{epi}~\cite{DBLP:conf/islped/ShaoB13}
 of common smartphone ($EPI_{device}$) and server ($EPI_{cloud}$) CPUs.
 %
 To do so, we take the \ac{tdp} of a
@@ -1279,17 +1279,16 @@ The specification or design of distributed systems
  service-based compositions~\cite{DBLP:journals/csur/LemosDB16}, 
  or frameworks.
 %
-
 Specifically,
- this work builds on the \emph{pulverisation} component model~\cite{FI2020-pulverization,IEEE-IoTJ-pulverization-simulation},
- whereby a large-scale cyber-physical system
- is partitioned into a graph of devices
- where each device is split into five deployable components:
- (i) sensors interface, 
- (ii) actuators interface, 
- (iii) behaviour, 
- (iv) state, and 
- (v) communication component.
+ this work builds on the \emph{pulverisation} component model~\cite{FI2020-pulverization,IEEE-IoTJ-pulverization-simulation}.
+% whereby a large-scale cyber-physical system
+% is partitioned into a graph of devices
+% where each device is split into five deployable components:
+% (i) sensors interface,
+% (ii) actuators interface,
+% (iii) behaviour,
+% (iv) state, and
+% (v) communication component.
 %
 In~\cite{IEEE-IoTJ-pulverization-simulation},
  a methodology on top of the pulverisation model
@@ -1302,61 +1301,67 @@ Additionally,
  for a whole distributed system
  is also related to \emph{macroprogramming}~\cite{Casadei2023macro}
  and, in particular, to \emph{multi-tier programming} paradigm~\cite{DBLP:journals/csur/WeisenburgerWS20},
- where the deployment units for different tiers (e.g., client and server tiers; or view, business logic, and data tiers) are obrained by compilation or interpretation of a single codebase.
-
-
+ where the deployment units for different tiers
+(e.g., client and server tiers; or view, business logic, and data tiers)
+are obtained by compilation or interpretation of a single codebase.
 
 \subsection{Infrastructure and deployment description languages}
 \label{sec:rw:depdesc}
 
 A \emph{deployment plan} is a configured mapping of a software system onto a deployment domain.
 %
-Given a deployable software system developed using the techniques of the previous subsection,
+Given a deployable software system
+developed using the techniques of the previous subsection,
  what is needed now is a language to describe a deployment domain 
  and the deployment mapping.
 %
 Languages have been proposed 
- targetting specific kinds of deployment domains
- such as the smart grid (cf. the deployment specification language \emph{dspec} in the \emph{Resilient Information Architecture Platform for Smart Grids [RIAPS]} platform~\cite{DBLP:conf/coins/GhoshTKKL22})
- or the cloud (cf. the \emph{Cloud Application Modelling and Execution Language [CAMEL]} multi-\ac{dsl}~\cite{DBLP:journals/jcloudc/AchilleosKRKDOS19}).
+ targeting specific kinds of deployment domains
+ such as the smart grid (cf. \emph{dspec} in the \emph{RIAPS} platform~\cite{DBLP:conf/coins/GhoshTKKL22})
+ or the cloud (cf. the \emph{CAMEL} multi-\ac{dsl}~\cite{DBLP:journals/jcloudc/AchilleosKRKDOS19}).
 
 In this work,
- we are especially interested deployments over large-scale cyber-physical systems and the edge-fog-cloud continuum.
+ we are especially interested in deployments over large-scale cyber-physical systems and the edge-cloud continuum.
 %
-The \emph{MultiScale Autonomic Deployment Language (MuScADeL)}~\cite{DBLP:conf/compsac/BoujbelRLTAL14/muscadel}
+\emph{MuScADeL}~\cite{DBLP:conf/compsac/BoujbelRLTAL14/muscadel}
  is a \ac{dsl} that allows to express deployment properties of 
- componentised applications on multi-scale deployment domains, i.e., large and heterogeneous infrastructures considered under several viewpoints (device, geography, network, administrative domains, etc.).
+applications on multi-scale deployment domains,
+i.e., large and heterogeneous infrastructures considered under several viewpoints
+(device, geography, network, administrative domains, etc.).
 %
 In~\cite{DBLP:journals/sosym/SongDFSF22},
   a model-based deployment approach is proposed
-  targetting so-called \emph{fleets}, i.e.,
-  distributed and heterogeneous devices at the edge chaaracterised by different cyber-physical contexts (cf. resources, connectivity, etc.).
+  targeting so-called \emph{fleets}, i.e.,
+  distributed and heterogeneous devices at the edge characterised by different cyber-physical contexts
+(cf. resources, connectivity, etc.).
 %
-It is based on the \emph{Generation and Deployment
-of Smart IoT Systems (GeneSIS)} modelling language, where a \texttt{DeploymentModel} consists of sets of \texttt{Resources} (e.g., \texttt{Component}s, specialised by \texttt{InfrastructureComponent}s and \texttt{SoftwareComponent}s) with associated \texttt{Property}s and \texttt{Link}s.
+%It is based on the \emph{GeneSIS} modelling language,
+%where a \texttt{DeploymentModel} consists of sets of \texttt{Resources} (e.g., \texttt{Component}s, specialised by \texttt{InfrastructureComponent}s and \texttt{SoftwareComponent}s) with associated \texttt{Property}s and \texttt{Link}s.
 
 \subsection{Automatic/autonomic deployment and reconfiguration}
 \label{sec:rw:autodep}
 %
 A comprehensive conceptual framework
  on automatic deployment of distributed systems
- is provided in a 2015 survey by Arcangeli et al. \cite{DBLP:journals/jss/ArcangeliBL15}.
+ is provided in~\cite{DBLP:journals/jss/ArcangeliBL15}.
 %
-A more recent survey by Coullon et al. focusses
+A more recent survey~\cite{coullon2023swreconfig} focuses
  on formal techniques for verifying the correctness of reconfigurations
- in component-based distributed software systems~\cite{coullon2023swreconfig}.
+ in component-based distributed software systems.
 %
-Two formal models for specifying reconfigurable architectures are \emph{DR-BIP (Dynamically Reconfigurable - Behaviour Interaction Priority model)}~\cite{Ballouli18dr-bip}
-and \emph{DReAM (Dynamically Reconfigurable Architectural Modelling)}~\cite{denicola2020dream-dynamic-reconfig-arch-modelling}.
+Two formal models for specifying reconfigurable architectures are
+\emph{DR-BIP}~\cite{Ballouli18dr-bip}
+and \emph{DReAM}~\cite{denicola2020dream-dynamic-reconfig-arch-modelling}.
 %
 Both are based on the same conceptual model: they 
- feature \emph{components} (capturing behaviour), \emph{connectors} (capturing interaction between components' \emph{ports}), 
+ feature \emph{components} (capturing behaviour),
+\emph{connectors} (capturing interaction between components' \emph{ports}),
 \emph{maps} (logical topologies),
 and \emph{deployments} (associating components to map locations),
 overall organised in \emph{motifs} (dynamic architectural configurations),
 to model and analyse dynamic architectures.
 %
-\meta{TODO: say something about our positioning wrt verification of reconfigurations}
+%\meta{TODO: say something about our positioning wrt verification of reconfigurations}
 
 In the \emph{osmotic computing} approach~\cite{DBLP:journals/computer/VillariFDRJR19},
  microservices (the solvent)
@@ -1365,7 +1370,7 @@ In the \emph{osmotic computing} approach~\cite{DBLP:journals/computer/VillariFDR
  passing through layer boundaries (the semi-permeable membranes),
  in order to keep a balance in the desired properties (the solute).
 %
-The \emph{ASSL (Autonomic System Specification Language)}~\cite{DBLP:conf/birthday/VassevH97}
+\emph{ASSL}~\cite{DBLP:conf/birthday/VassevH97}
  supports the specification
  of autonomic elements,
  interaction protocols,
@@ -1374,7 +1379,11 @@ The \emph{ASSL (Autonomic System Specification Language)}~\cite{DBLP:conf/birthd
 %In \emph{ConfSolve}~\cite{DBLP:conf/saso/HewsonAG13},
 % the language supports the specification of logical \emph{reconfiguration constraints}, which are then solved as a constraint satisfaction problem.
 %
-The \emph{AWaRE DSL (ADSL)}~\cite{DBLP:conf/aswec/ChhetriLUVKNR18/adsl} supports constraint-based self-management, leveraging managing agents. The language enables the specification of the domain model (in terms of components), the problem structure model (in terms of constraints), the agent architecture model (in terms of agents, roles, and their coordination), and the assignment model (in terms of management problem assignment strategies).
+The \emph{AWaRE DSL}~\cite{DBLP:conf/aswec/ChhetriLUVKNR18/adsl} supports constraint-based self-management,
+leveraging managing agents.
+%The language enables the specification of the domain model (in terms of components),
+%the problem structure model (in terms of constraints),
+%the agent architecture model (in terms of agents, roles, and their coordination), and the assignment model (in terms of management problem assignment strategies).
 %
 Similar, earlier approaches based on the specification of \emph{constraint-sets} include \emph{DELADAS}~\cite{Dearle2004deladas}
 and \emph{ConfSolve}~\cite{DBLP:conf/saso/HewsonAG13}.
