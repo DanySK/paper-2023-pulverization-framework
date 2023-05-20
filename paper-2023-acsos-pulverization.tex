@@ -909,30 +909,6 @@ this time to comply with the requirements of the simulation engine we used.
 The implementation required little effort,
 and it has been made available as part of the evaluation repositories.
 
-\subsection{Limitations of the current version of the DSL}
-
-In its current form, the proposed \ac{dsl} has two major limitations.
-%
-First and foremost, currently it does not consider openness:
-hosts get specified in the runtime and reconfiguration \ac{dsl} as a closed set,
-so the specification is not robust to the addition of new hosts or the loss of existing ones.
-%
-This is a major limitation that,
-although planned to be addressed shortly with minor additions to the \ac{dsl},
-must be highlighted in this manuscript.
-%
-The second limitation is related to the policies that can be expressed in the reconfiguration \ac{dsl}:
-currently, only policies that can be assessed at the local host level can be assessed.
-%
-A policy that requires to consider the state of multiple hosts would require to resort to the host language primitive mechanisms and make explicit communications outside the framework,
-thus breaking the abstraction.
-%
-This limitation can be addressed by extending the current reconfiguration
-block of the \ac{dsl} in such a way that queries can be performed on any reachable host of the system,
-thus making all communications
-(including reconfiguration-related ones)
-pass through the channels controlled by the framework.
-
 \section{Evaluation}\label{sec:evaluation}
 
 In this section,
@@ -1476,13 +1452,24 @@ which can be leveraged to achieve better trade-offs in terms of performance, cos
 We provide a real-world demonstrator for the technology,
 and we show via simulation that the approach can be beneficial.
 
-In the future,
-we plan to extend the \ac{dsl} to support openness and collective reconfiguration policies.
+In its current form, the proposed \ac{dsl} has two limitations that will be addressed in the future.
 %
-The former will allow devices to join and leave the system at runtime,
-while the latter will allow reconfigurations to be performed on the basis of a collective state of the system.
+First and foremost, it currently does not consider openness,
+as hosts get specified in the runtime and reconfiguration \acp{dsl} as a closed set.
 %
-Concurrently,
+The second limitation is related to the policies that can be expressed in the reconfiguration \ac{dsl}:
+currently, only policies that can be assessed at the local host level can be assessed.
+%
+A policy that requires to consider the state of multiple hosts would require to resort to the host language primitive mechanisms and make explicit communications outside the framework,
+thus breaking the abstraction.
+%
+This limitation can be addressed by extending the current reconfiguration
+block of the \ac{dsl} in such a way that queries can be performed on any reachable host of the system,
+thus making all communications
+(including reconfiguration-related ones)
+pass through the channels controlled by the framework.
+%
+Concurrently with these extensions,
 we intend to add support for additional network protocols to be able to support a larger number of practical scenarios.
 
 \bibliographystyle{IEEEtranDOI}
