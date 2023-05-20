@@ -39,7 +39,8 @@
 %	escapechar=\%,
 %  keywordstyle=\color{blue},
   keywordstyle=[3]\bfseries{},
-  keywords=[3]{pulverizedSystem,device,and,deployableOn,startsOn,reconfigures,pulverizationRuntime,onDevice,reconfigurationRules},
+  keywords=[3]{pulverizedSystem,device,and,deployableOn,pulverizationRuntime,startsOn,onDevice,reconfigurationRules,reconfigures,movesTo},
+%  emph={DeviceBehaviour,DeviceCommunication,DeviceSensors,DeviceActuators,HighLoad,LowBattery},
 %  sensitive=true,
 %  morecomment=[l]{//},
 %  morecomment=[n]{/*}{*/},
@@ -815,7 +816,7 @@ configuration blocks surrounded by curly brackets are,
 in fact,
 plain lambda expressions, supporting any kind of computation.
 
-\lstinputlisting[
+\begin{lstlisting}[
     float=ht,
     language=pulv,
     caption={
@@ -823,7 +824,42 @@ plain lambda expressions, supporting any kind of computation.
         The example defines the runtime configuration of the system, specifying the initial deployment and the reconfiguration rules.
     },
     label=lst:runtime-configuration,
-]{listings/RuntimeConfig.kt}
+    numbers=left,
+]
+// Reconfiguration events
+expect fun cpuLoad(): Double
+object HighLoad : ReconfigurationEvent<Double>() {
+  override val predicate = { it > 0.90 }
+  override val events: Flow<Double> = cpuLoad()
+}
+object LowBattery : ReconfigurationEvent<Double>() {
+  override val predicate = { it < 0.20 }
+  override val events: Flow<Double> = cpuLoad()
+}
+// Available hosts
+object Smartphone : Host {
+  override val hostname = "smartphone"
+  override val capabilities = setOf(EmbeddedDevice)
+}
+object Server : Host {
+  override val hostname = "amazon-aws"
+  override val capabilities=setOf(HighCPU,LowLatencyComm)
+}
+// Runtime initial setup and runtime reconfiguration rules
+val infrastructure = setOf(Smartphone, Server)
+pulverizationRuntime(conf, "iot-sensor", infrastructure) {
+  DeviceBehaviour() startsOn Server
+  DeviceCommunication() startsOn Server
+  DeviceSensors() startsOn Smartphone
+  DeviceActuators() startsOn Smartphone
+  reconfigurationRules {
+    onDevice {
+      HighLoad reconfigures {Behaviour movesTo Smartphone}
+      LowBattery reconfigures {Behaviour movesTo Server}
+    }
+  }
+}
+\end{lstlisting}
 
 % A \texttt{ReconfigurationEvent} is characterized by the \emph{events}
 % that it produces and the \emph{condition} that must be satisfied to trigger the reconfiguration.
