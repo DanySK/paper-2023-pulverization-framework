@@ -685,6 +685,14 @@ we can identify two main pieces of information for the definition of a deploymen
 %
 Coherently with the \emph{single responsibility principle},
 we capture these two descriptive needs into two distinct \acp{dsl}.
+%
+An overall view of the approach in terms of the provided tools and the main modelling concepts is provided in \Cref{fig:approach}.
+
+\begin{figure}
+\includegraphics[width=\columnwidth]{figures/pulverization-framework-overview.drawio.pdf}
+\caption{The approach provides two \acp{dsl} and a runtime for specifying and executing deployment plans. Each deployment unit will be delivered to the target site and properly configured to interact with other deployment units, as required by the application at hand (see  \Cref{sec:evaluation} for examples).}
+\label{fig:approach}
+\end{figure}
 
 \subsection{Infrastructure and Requirements}
 
