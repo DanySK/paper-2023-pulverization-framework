@@ -1052,16 +1052,16 @@ the shorter the distance, the redder the tone.
     \label{fig:crowd-alert}
 \end{figure}
 
-The system is composed of two kinds of device: \emph{wearable} and \emph{alert}.
+The system is composed of two kinds of device: \emph{wearable} and \emph{alarm}.
 %
 Wearables consist of the following pulverised components:
 sensors ($\sigma^w$), perceiving other devices by their signal strength;
-behaviour ($\beta^w$), converting raw data from the sensor into messages for the alert system; and
-communication ($\chi^w$) sending data to the alert system.
+behaviour ($\beta^w$), converting raw data from the sensor into messages for the alarm; and
+communication ($\chi^w$) sending data to the alarm.
 %
 They do not need state nor actuators.
 %
-The alert consists of the following pulverized components:
+The alarm consists of the following pulverized components:
 $\beta^a$, computing the mean distance among devices;
 $\kappa^a$, storing the distances measured by the device for comparison with the recent past;
 %\meta{
@@ -1083,7 +1083,7 @@ We use the following hosts in the scenario:
 
 Initially, $\beta^{w}$ is allocated to the \emph{Server} while
 $\sigma^{w}$ and $\chi^{w}$ are executed on the \emph{Smartphones},
-and all the \emph{alert} components are executed in the \emph{Monitor}.
+and all the \emph{alarm} components are executed in the \emph{Monitor}.
 %
 In the experiment,
 we define a rule by which,
