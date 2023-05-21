@@ -666,7 +666,7 @@ As mentioned in \Cref{sec:background:dep},
  may be supported -- following the well-known layered architectural style -- by a \emph{runtime} or \emph{middleware}~\cite{DBLP:journals/cacm/GazisK22}
  encapsulating, among others, deployment and reconfiguration services.
 %
-The runtime could be reified into a deployment unit \emph{per se},
+The runtime could be reified into a deployment unit \emph{per se}
  or can be implemented as part of the deployment units of the software system to be deployed---e.g., taking the form of an \emph{\ac{api}} or a \emph{framework}.
 %
 In order to take decisions about deployment and reconfiguration, 
@@ -677,12 +677,12 @@ In order to take decisions about deployment and reconfiguration,
 
 In principle, there are several possibilities to implement a deployment plan:
 %
-(i) declaratively, through a set of \emph{configuration files};
-(ii) through a \emph{\ac{api}/library}, implemented in a general-purpose language;
+(i) declaratively through a set of \emph{configuration files};
+(ii) through an \emph{\ac{api}/library} implemented in a general-purpose language;
 or 
 (iii) through a \ac{dsl}~\cite{dsl-book-voelter}. % configured with its own custom syntax.
 %
-These approaches have different trade-offs.
+Naturally, these approaches have different trade-offs.
 
 A framework/runtime with configuration files enforces declarativity at the configuration level,
 but its flexibility is limited,
