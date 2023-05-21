@@ -1350,7 +1350,7 @@ This partitioning may be
 In our approach, the application partitioning into components is manually specified through a \ac{dsl}.
 %
 Therefore, it can be framed in the context of \emph{component-based software engineering},
- with ~\cite{vale2016component-based-se} providing a comprehensive review.
+with~\cite{vale2016component-based-se} providing a comprehensive review.
 %
 The specification or design of distributed systems
  may leverage
@@ -1360,7 +1360,7 @@ The specification or design of distributed systems
  or frameworks.
 
 Specifically,
- this work builds on the \emph{pulverisation} component model~\cite{FI2020-pulverization,IEEE-IoTJ-pulverization-simulation}.
+ this work builds on the \emph{pulverisation} component model~\cite{FI2020-pulverization,IEEE-IoTJ-pulverization-simulation},
  whereby a large-scale cyber-physical system
  is partitioned into a graph of devices
  where each device is split into five deployable components:
@@ -1404,7 +1404,7 @@ developed using the techniques of the previous subsection,
  and the deployment mapping.
 %
 Languages have been proposed
- targeting specific kinds of deployment domains
+ targeting specific deployment domains
  such as the smart grid (cf. \emph{dspec} in the \emph{RIAPS} platform~\cite{DBLP:conf/coins/GhoshTKKL22})
  or the cloud (cf. the \emph{CAMEL} multi-\ac{dsl}~\cite{DBLP:journals/jcloudc/AchilleosKRKDOS19}).
 %
@@ -1412,14 +1412,16 @@ In this work,
  we are especially interested in deployments over large-scale cyber-physical systems and the edge-cloud continuum.
 
 A related \ac{dsl} is 
-\emph{MuScADeL}~\cite{DBLP:conf/compsac/BoujbelRLTAL14/muscadel}: allows to express deployment properties of 
+\emph{MuScADeL}~\cite{DBLP:conf/compsac/BoujbelRLTAL14/muscadel}:
+it allows to express deployment properties of
 applications on multi-scale deployment domains,
 i.e., large and heterogeneous infrastructures considered under several viewpoints
 (device, geography, network, administrative domains, etc.).
 %
-Component descriptions can include \emph{constraints} (both basic software/hardware constraint and multi-scale criteria).
+Component descriptions can include \emph{constraints}
+(both basic software/hardware constraints and multi-scale criteria).
 %
-The specifications are used to generate \emph{probe} artifacts supporting data collection at the level of the deployment middleware.
+The specifications are used to generate \emph{probe} artefacts supporting data collection at the level of the deployment middleware.
 %
 However, the work in~\cite{DBLP:conf/compsac/BoujbelRLTAL14/muscadel} is preliminary and does not cover runtime adaptation.
  
@@ -1435,13 +1437,13 @@ A more recent survey~\cite{coullon2023swreconfig} focuses
  on formal techniques for verifying the correctness of reconfigurations
  in component-based distributed software systems.
 %
-Indeed, formal models can help in specifying reconfigurable architectures: examples include 
+Indeed, formal models can help specify reconfigurable architectures: examples include
 \emph{DR-BIP}~\cite{Ballouli18dr-bip}
 and \emph{DReAM}~\cite{denicola2020dream-dynamic-reconfig-arch-modelling}.
 %
 Both are based on the same conceptual model: they 
  feature \emph{components} (capturing behaviour),
-\emph{connectors} (capturing interaction between components' \emph{ports}),
+\emph{connectors} (capturing the interaction between components' \emph{ports}),
 \emph{maps} (logical topologies),
 and \emph{deployments} (associating components to map locations),
 overall organised in \emph{motifs} (dynamic architectural configurations),
@@ -1449,7 +1451,7 @@ to model and analyse dynamic architectures.
 %
 %\meta{TODO: say something about our positioning wrt verification of reconfigurations}
 
-A number of approaches use languages together with middlewares to specify and execute reconfiguration policies.
+Several approaches use languages together with middlewares to specify and execute reconfiguration policies.
 %
 %\emph{ASSL}~\cite{DBLP:conf/birthday/VassevH97}
 % supports the specification
@@ -1466,13 +1468,14 @@ The language enables the specification of the domain model (in terms of componen
 the problem structure model (in terms of constraints),
 the agent architecture model (in terms of agents, roles, and their coordination), and the assignment model (in terms of management problem assignment strategies).
 %
-Similar, earlier approaches based on the specification of \emph{constraint-sets} include \emph{DELADAS}~\cite{Dearle2004deladas}
+Similarly,
+earlier approaches based on the specification of \emph{constraint-sets} include \emph{DELADAS}~\cite{Dearle2004deladas}
 and \emph{ConfSolve}~\cite{DBLP:conf/saso/HewsonAG13}.
 %
 \emph{Ctrl-F}~\cite{DBLP:journals/jss/AlvaresRS17}
  is an architectural description language
  with constructs for specifying adaptive behaviour 
- and policies (constraints) for the reconfiguration of system components.
+ and policies (constraints) for reconfiguring system components.
 %
 %
 In~\cite{DBLP:journals/sosym/SongDFSF22},
@@ -1483,16 +1486,17 @@ In~\cite{DBLP:journals/sosym/SongDFSF22},
 %
 The main goal is to support the distribution of \emph{multiple variants} of the same application based on the different contexts of the different target devices.
 %
-The approach based on the \emph{GeneSIS} modelling language,
+The approach is based on the \emph{GeneSIS} modelling language,
 where a \texttt{DeploymentModel} consists of sets of \texttt{Resources} (e.g., \texttt{Component}s, specialised by \texttt{InfrastructureComponent}s and \texttt{SoftwareComponent}s) with associated \texttt{Property}s and \texttt{Link}s.
 %
-These approaches, however, being based on constraint solving, typically suffer from scalability issues.
+However,
+these approaches, being based on constraint solving, typically suffer from scalability issues.
 
 Another approach is \emph{osmotic computing}~\cite{DBLP:journals/computer/VillariFDRJR19},
  whereby microservices (the solvent)
  can migrate across 
  the edge-cloud infrastructure (the solution),
- passing through layer boundaries (the semi-permeable membranes),
+ passing through layer boundaries (the semi-permeable membranes)
  in order to keep a balance in the desired properties (the solute).
 %
 
@@ -1546,21 +1550,22 @@ Another approach is \emph{osmotic computing}~\cite{DBLP:journals/computer/Villar
 
 \section{Conclusion and future work}\label{sec:conclusion}
 
-In this work we presented a practical \ac{dsl} and framework for the
+In this work,
+we presented a practical \ac{dsl} and framework for the
 runtime re-configuration of pulverised \ac{cas} applications.
 %
 The original idea of pulverisation was to define applications considering arbitrary networks of logical devices,
 decompose (pulverise) these logical devices into small deployment units,
 and then define their desired deployment at a later time.
 %
-Through the specialised \ac{dsl} introduced in this work
-we have shown that this idea can be realised in practice.
+The specialised \ac{dsl} introduced in this work
+shows that this idea can be realised in practice.
 %
-Moreover, we extended the original idea of pulverisation with the possibility to specify runtime re-configuration policies,
-which can be leveraged to achieve better trade-offs in terms of performance, cost, and resource usage.
+Moreover, we extended the original idea of pulverisation with the possibility of specifying runtime re-configuration policies,
+which can be leveraged to achieve better performance, cost, and resource usage trade-offs.
 %
-We provide a real-world demonstrator for the technology,
-and we show via simulation that the approach can be beneficial.
+Finally, we provide a real-world demonstrator for the technology
+and show via simulation that the approach can be beneficial.
 
 In its current form, the proposed \ac{dsl} has two limitations that will be addressed in the future.
 %
@@ -1570,17 +1575,17 @@ as hosts get specified in the runtime and reconfiguration \acp{dsl} as a closed 
 The second limitation is related to the policies that can be expressed in the reconfiguration \ac{dsl}:
 currently, only policies that can be assessed at the local host level can be assessed.
 %
-A policy that requires to consider the state of multiple hosts would require to resort to the host language primitive mechanisms and make explicit communications outside the framework,
+A policy that requires to consider the state of multiple hosts would require to resort to the host language's primitive mechanisms and make explicit communications outside the framework,
 thus breaking the abstraction.
 %
 This limitation can be addressed by extending the current reconfiguration
-block of the \ac{dsl} in such a way that queries can be performed on any reachable host of the system,
+block of the \ac{dsl} so that queries can be performed on any reachable host of the system,
 thus making all communications
 (including reconfiguration-related ones)
 pass through the channels controlled by the framework.
 %
 Concurrently with these extensions,
-we intend to add support for additional network protocols to be able to support a larger number of practical scenarios.
+we intend to add support for additional network protocols to support a larger number of practical scenarios.
 
 \bibliographystyle{IEEEtranDOI}
 \bibliography{bibliography}
