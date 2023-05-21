@@ -156,8 +156,8 @@ Examples include
 %
 Regarding infrastructure,
  it is mounting the idea of the \emph{cloud-edge continuum}~\cite{DBLP:journals/iot/BittencourtISFM18}: 
-a multi-layer heterogeneous network of devices (ranging from large and powerful cloud servers to small connected \emph{things})
-on which software can compute, store, and exchange data in a distributed fashion, while 
+a multi-layer heterogeneous network of devices (ranging from large and powerful cloud servers to small connected \emph{things}).
+There, software can compute, store, and exchange data in a distributed fashion, while also 
 optimising for performance and resource utilisation.
 %
 
@@ -169,26 +169,26 @@ could benefit from being deployed on different devices or from \emph{offloading}
 However, exploiting this infrastructure
  poses new challenges to \ac{cas} application designers.
 %
-Commonly, in fact, applications are designed with a specific infrastructure in mind,
-whose assumptions unavoidably leak into the application logic~\cite{Spolsky2004},
+In fact, typically applications are designed with a specific infrastructure in mind,
+whose assumptions unavoidably leak into the application logic~\cite{Spolsky2004}
 unless captured and encapsulated away from it:
 the higher the coupling between the application and the infrastructure,
 the harder it is for the former to exploit the latter's full potential and adapt to changes.
-
+    
 The general solution is to devise 
  a reasonable \emph{partitioning}~\cite{DBLP:journals/jnca/LiuASGBQ15} of the software system
  and a corresponding (dynamic) deployment plan 
  defining the mapping between the software components and the target deployment domain~\cite{DBLP:journals/jss/ArcangeliBL15}.
 %
 In the context of \acp{cas},
- previous work proposes an application partitioning schema,
+ previous works propose an application partitioning schema,
  called \emph{pulverisation}~\cite{FI2020-pulverization},
  that fosters the decoupling of business logic and deployment concerns.
 %
-In short, the core idea is to consider devices as \emph{logical} entities,
+The core idea is to consider devices as \emph{logical} entities,
 whose software can be designed as (or broken down to, if already existing) an ensemble of \emph{five components
 (behaviour, state, communication, sensors, and actuators)}
- that can be deployed with flexibility on available infrastructure without (ideally) affecting application functionality. %whose actual host can be decided at deployment time.
+ that can be deployed with flexibility on the available infrastructure without affecting application functionality. %whose actual host can be decided at deployment time.
 %
 This way, the designer can focus on the business logic at hand,
 delaying an optimised deployment to later stages of the sofware design,
@@ -196,19 +196,18 @@ thus gaining resilience to changes in the infrastructure or in non-functional re
 %
 One limitation of previous work on pulverisation regards dynamicity:
 although the application can be deployed on arbitrary systems,
-there is no support for the reconfiguration of components at runtime, as a reaction to changing conditions or requirements.
+there is no support for the reconfiguration of components at runtime, as a reaction to changing requirements or workload conditions.
 
 In this work,
-we further develop the research on pulverised systems by providing two key contributions:
+we further develop the research on pulverised systems by providing three key contributions:
 %
-\begin{enumerate}
+\begin{enumerate}[label=\it{(\roman*)}]
  \item we extend the theoretical framework of pulverisation by adding support for
 \emph{runtime configuration rules}, allowing pulverised components to move at runtime across different hosts;
- \item we accordigly provide a practical implementation of pulverisation (with reconfiguration rules) called \emph{\ourframework{}}, developed in the Kotlin programming language.
+ \item we provide a practical implementation of pulverisation (with reconfiguration rules) called \emph{\ourframework{}}, developed in the Kotlin programming language.
+ \item we provide an evaluatuation of \ourframework{}, exercising it through two case studies:
+a small-scale real-wold demonstration, and a city-scale simulated scenario where we seek for achieving balance between energy consumption and \ac{qos}.
 \end{enumerate}
-%
-To evaluate \ourframework{}, we exercise it through two case studies:
-a small-scale real-wold demonstration, and a city-scale simulated scenario.
 
 %\meta{
 %\begin{itemize}
