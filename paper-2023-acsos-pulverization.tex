@@ -912,7 +912,7 @@ pulverizationRuntime(conf, "control-center", infrastructure) {
 %     label=lst:reconfiguration-events,
 % ]{listings/ReconfigurationEvents.kt}
 
-\subsection{Implementation details and underlying runtime}
+\subsection{Implementation Details and the Runtime System}
 \label{sec:contrib:runtime}
 
 We implemented the proposed \ac{dsl} in Kotlin.
@@ -987,7 +987,7 @@ and show how the dynamic reconfiguration may help achieving balance between ener
 Both experiments have been released with a permissive open-source license and have been archived for future reference on
 Zenodo~\cite{https://doi.org/10.5281/zenodo.7933160, https://doi.org/10.5281/zenodo.7948801}.
 
-\subsection{Small scale: crowd alert}
+\subsection{Small-Scale Scenario: Crowd Alert in a Lab}
 \label{sec:small-scale-crowd-alert}
 
 In this example, we exercise the framework on a real-world testbed
@@ -1119,7 +1119,7 @@ To simplify testing we also provide,
 in the same artifact,
 a simulation of the system where every device is containerized.
 
-\subsection{Large scale: urban event}
+\subsection{Large-Scale Scenario: Collective Computation at a Urban Event}
 
 To show the potential benefit of automatic reconfiguration in \acp{cas},
 we consider a large-scale scenario where a crowd of people is attending an event in a city
@@ -1309,7 +1309,7 @@ Following the conceptual framework introduced in \Cref{sec:background:dep},
  
  
  
-\subsection{Application description languages: component-based software engineering and the pulverisation model}
+\subsection{Application Description Languages: Component-based Software Engineering and the Pulverisation Model}
 \label{sec:rw:whatsw}
 %
 %% A first distinction revolves around whether 
@@ -1372,7 +1372,7 @@ are obtained by compilation or interpretation of a single codebase.
  of the distributed architecture
  enables runtime checks and deployment activities.
 
-\subsection{Infrastructure and deployment description languages}
+\subsection{Infrastructure and Deployment Description Languages}
 \label{sec:rw:depdesc}
 
 A \emph{deployment plan} is a configured mapping of a software system onto a deployment domain.
@@ -1405,7 +1405,7 @@ In~\cite{DBLP:journals/sosym/SongDFSF22},
 It is based on the \emph{GeneSIS} modelling language,
 where a \texttt{DeploymentModel} consists of sets of \texttt{Resources} (e.g., \texttt{Component}s, specialised by \texttt{InfrastructureComponent}s and \texttt{SoftwareComponent}s) with associated \texttt{Property}s and \texttt{Link}s.
 
-\subsection{Automatic/autonomic deployment and reconfiguration}
+\subsection{Automatic/Autonomic Deployment and Reconfiguration}
 \label{sec:rw:autodep}
 %
 A comprehensive conceptual framework
