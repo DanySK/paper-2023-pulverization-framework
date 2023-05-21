@@ -177,7 +177,7 @@ which generally feature components that,
 depending on the conditions at hand,
 could benefit from being deployed on different devices or from \emph{offloading} some of their  tasks.
 %
-However, exploiting this infrastructure,
+However, exploiting this infrastructure
  poses new challenges to \ac{cas} application designers.
 %
 Commonly, in fact, applications are designed with a specific infrastructure in mind,
@@ -194,7 +194,7 @@ The general solution is to devise
 In the context of \acp{cas},
  previous work proposes an application partitioning schema,
  called \emph{pulverisation}~\cite{FI2020-pulverization},
- the fosters the decoupling of business logic and deployment concerns.
+ that fosters the decoupling of business logic and deployment concerns.
 %
 In short, the core idea is to consider devices as \emph{logical} entities,
 whose software can be designed as (or broken down to, if already existing) an ensemble of \emph{five components
@@ -210,12 +210,13 @@ although the application can be deployed on arbitrary systems,
 there is no support for the reconfiguration of components at runtime, as a reaction to changing conditions or requirements.
 
 In this work,
-we continue the research on pulverised systems by providing two key contributions:
-\textbf{first}, we extend the theoretical framework of pulverisation by adding support for
+we further develop the research on pulverised systems by providing two key contributions:
+%
+\begin{enumerate}
+ \item we extend the theoretical framework of pulverisation by adding support for
 \emph{runtime configuration rules}, allowing pulverised components to move at runtime across different hosts;
-\textbf{second}, we provide a practical implementation in Kotlin called \emph{\ourframework{}} which,
-to the best of our knowledge,
-is the first \emph{practical framework supporting pulverisation}. % for a general-purpose language.
+ \item we accordigly provide a practical implementation of pulverisation (with reconfiguration rules) called \emph{\ourframework{}}, developed in the Kotlin programming language.
+\end{enumerate}
 %
 To evaluate \ourframework{}, we exercise it through two case studies:
 a small-scale real-wold demonstration, and a city-scale simulated scenario.
