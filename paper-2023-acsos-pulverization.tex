@@ -948,11 +948,15 @@ spawns all the components that must start on the \emph{deployment unit}.
 Similarly, the \texttt{UnitReconfigurator} starts observing all the configured \texttt{ReconfigurationEvent}s
 and registers the listeners for incoming reconfigurations.
 %
-Each spawned component starts to execute its logic and shares data with other component via the \texttt{Communicator},
+Then,
+each spawned component starts
+executing its logic and sharing data with other components via the \texttt{Communicator},
 which is responsible for the components' intra-communication by leveraging the communication protocol.
 %
-When a reconfiguration occurs, the \texttt{UnitReconfigurator} takes into account the new deployment configuration,
-by interacting with the \texttt{Spawner}, to start or stop the required components.
+Finally,
+when a reconfiguration occurs, the \texttt{UnitReconfigurator} considers the new deployment configuration and,
+by interacting with the \texttt{Spawner},
+starts or stops components in order to achieve the new setup.
 
 The configuration produced by the \ac{dsl} needs a platform that instructs the system on the way actual communication needs to be performed.
 %
