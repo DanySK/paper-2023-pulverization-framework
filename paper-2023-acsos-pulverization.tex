@@ -17,6 +17,9 @@
 \usepackage[inline]{enumitem}
 \usepackage{siunitx}
 \DeclareSIUnit{\decibelmeter}{dBm}
+\providecommand{\decibel}{dB}
+\providecommand{\decibelmeter}{dBm}
+\providecommand{\qty}[2]{#1#2}
 
 
 \acrodef{api}[API]{application-program interface}
@@ -629,7 +632,42 @@ finding a way to implement it effectively requires tackling several challenges a
     can be expressed easily and, possibly, declaratively.
 \end{itemize}
 
-\subsection{Middlewares and (Domain-Specific) Languages for Deployed Systems Specification and Execution}
+
+\newcommand{\dslSys}[0]{\emph{System \ac{dsl}}}
+\newcommand{\dslDep}[0]{\emph{Deployment \ac{dsl}}}
+
+\section{A Runtime and \acsp{dsl} for Reconfigurable Pulverised Systems}\label{sec:contribution}
+
+From the previous section,
+we can identify three main pieces of information for the definition of a pulverised system and its deployment:
+\begin{enumerate}[label=\it{(\roman*)}]
+  \item the description of the logical system and its partitioning into components and deployment units;
+  \item the definition of the \emph{target} deployment domain (\emph{infrastructure}), i.e., the specification of the \emph{requirements} posed on hosts in terms of required (or preferred) capabilities; and
+  \item the definition of the \emph{deployment plan}, i.e., the allocation of the pulverised components to the infrastructural elements, together with constraints and reconfiguration policies.
+\end{enumerate}
+%
+%Coherently with the \emph{single responsibility principle},
+We capture these %two 
+ descriptive needs into two distinct \acp{dsl}: the \dslSys{} and the \dslDep{}.
+%
+An overall view of the approach in terms of the provided tools and the main modelling concepts is provided in \Cref{fig:approach}.
+
+In the following,
+ we first clarify the approach (\Cref{sec:contrib:general}),
+ then cover the two \acp{dsl}
+ (\Cref{sec:contrib:dslsys,sec:contrib:dsldep}),
+ and finally provide details on the runtime system (\Cref{sec:contrib:runtime}).
+
+\begin{figure}
+\includegraphics[width=\columnwidth]{figures/pulverization-framework-overview.drawio.pdf}
+\caption{The approach provides two \acp{dsl} and a runtime for specifying and executing deployment plans. Each deployment unit will be delivered to the target site and properly configured to interact with other deployment units, as required by the application at hand (see  \Cref{sec:evaluation} for examples).}
+\label{fig:approach}
+\end{figure}
+
+
+
+\subsection{On Middlewares and (Domain-Specific) Languages for Deployed Systems Specification and Execution}
+\label{sec:contrib:general}
 
 As mentioned in \Cref{sec:background:dep},
  the deployment and re-configuration of a software system
@@ -698,31 +736,8 @@ hardware design~\cite{DBLP:journals/trets/SerreP20} to
 logic~\cite{2pkt-swx16} and aggregate programming~\cite{DBLP:journals/softx/CasadeiVAP22}.
 %
 
-\newcommand{\dslSys}[0]{\emph{System \ac{dsl}}}
-\newcommand{\dslDep}[0]{\emph{Deployment \ac{dsl}}}
-
-\section{A Runtime and \acsp{dsl} for Reconfigurable Pulverised Systems}\label{sec:contribution}
-
-From the previous section,
-we can identify two main pieces of information for the definition of a deployment plan for a pulverised system:
-\begin{enumerate*}[label=\it{(\roman*)}]
-  \item the definition of the \emph{target} deployment domain (\emph{infrastructure}), i.e., the specification of the \emph{requirements} posed on hosts in terms of required (or preferred) capabilities; and
-  \item the definition of the \emph{deployment plan}, i.e., the allocation of the pulverised components to the infrastructural elements, together with constraints and reconfiguration policies.
-\end{enumerate*}
-%
-Coherently with the \emph{single responsibility principle},
-we capture these two descriptive needs into two distinct \acp{dsl}: the \dslSys{} and the \dslDep{}.
-%
-An overall view of the approach in terms of the provided tools and the main modelling concepts is provided in \Cref{fig:approach}.
-
-\begin{figure}
-\includegraphics[width=\columnwidth]{figures/pulverization-framework-overview.drawio.pdf}
-\caption{The approach provides two \acp{dsl} and a runtime for specifying and executing deployment plans. Each deployment unit will be delivered to the target site and properly configured to interact with other deployment units, as required by the application at hand (see  \Cref{sec:evaluation} for examples).}
-\label{fig:approach}
-\end{figure}
-
-
 \subsection{The \dslSys{}: Components and Required Capabilities}
+\label{sec:contrib:dslsys}
 
 The \dslSys{} captures the concepts of
 \emph{device type}, \emph{component}, \emph{capability}, and \emph{requirement}.
@@ -786,6 +801,7 @@ pulverizedSystem {
 
 
 \subsection{The \dslDep{}: Deployment Domain, Mapping, and Reconfiguration}
+\label{sec:contrib:dsldep}
 
 The \dslDep{} supports the definition of the mapping between pulverised components and specific hosts,
 as well as the definition of reactive reconfiguration policies.
@@ -882,6 +898,7 @@ pulverizationRuntime(conf, "iot-sensor", infrastructure) {
 % ]{listings/ReconfigurationEvents.kt}
 
 \subsection{Implementation details and underlying runtime}
+\label{sec:contrib:runtime}
 
 We implemented the proposed \ac{dsl} in Kotlin.
 %
