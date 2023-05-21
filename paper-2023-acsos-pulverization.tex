@@ -833,6 +833,16 @@ configuration blocks surrounded by curly brackets are,
 in fact,
 plain lambda expressions, supporting any kind of computation.
 
+\makeatletter
+\newcommand\currentStyle@lstparam{}
+\lst@AddToHook{Output}{\global\let\currentStyle@lstparam\lst@thestyle}
+\lst@AddToHook{OutputOther}{\global\let\currentStyle@lstparam\lst@thestyle}
+\makeatother
+
+\makeatletter
+\newcommand{\crefe}[1]{\currentStyle@lstparam\Cref{#1}} %<-- try to change that to `xs'
+\makeatother
+
 \begin{lstlisting}[
     float=ht,
     numbers=left,
@@ -867,6 +877,7 @@ object Server : Host {
 }%\label{code:hosts:end}%
 // Runtime initial setup and runtime reconfiguration rules %\label{code:infra:start}%
 val infrastructure = setOf(Smartphone, Server)
+val conf = // see %\crefe{lst:system-configuration}%
 pulverizationRuntime(conf, "iot-sensor", infrastructure) {
   DeviceBehaviour() startsOn Server%\label{code:mapping:start}%
   DeviceCommunication() startsOn Server
