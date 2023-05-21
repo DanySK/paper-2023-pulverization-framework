@@ -846,15 +846,15 @@ plain lambda expressions, supporting any kind of computation.
     escapechar=\%
 ]
 // Reconfiguration events %\label{code:reconfigev:start}%
-expect fun cpuLoad(): Double
-expect fun batteryLevel(): Double
+expect fun cpuLoad(): Flow<Double>
+expect fun batteryLevel(): Flow<Double>
 object HighLoad : ReconfigurationEvent<Double>() {
   override val predicate = { it > 0.90 }
-  override val events: Flow<Double> = cpuLoad()
+  override val events = cpuLoad()
 }
 object LowBattery : ReconfigurationEvent<Double>() {
   override val predicate = { it < 0.20 }
-  override val events: Flow<Double> = batteryLevel()
+  override val events = batteryLevel()
 }%\label{code:reconfigev:end}%
 // Available hosts %\label{code:hosts:start}%
 object Smartphone : Host {
