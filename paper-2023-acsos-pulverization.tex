@@ -1176,7 +1176,7 @@ We are interested in the following metrics:
 %
 \begin{itemize}
     \item $P_{devices}$ ($kW$), the average device power consumption, a proxy for the battery life;
-    \item $P_{cloud}$ ($kW$), the average power consumption of the cloud, if added to $P_{devices}$
+    \item $P_{cloud}$ ($kW$), the average power consumption of the cloud, if added to $P_{devices}$,
     provides the total power consumption
     (hence, assuming a non-carbon-neutral energy mix, it is also a proxy for the carbon footprint);
     \item Distance ($km$), the total distance walked by the participants, a proxy for the \ac{qos},
@@ -1191,19 +1191,19 @@ We are interested in the following metrics:
 
 We assume that the power consumption of the device is linearly dependent on the CPU usage,
 and we thus decided to estimate the \ac{epi}~\cite{DBLP:conf/islped/ShaoB13}
-of common smartphone ($EPI_{device}$) and server ($EPI_{cloud}$) CPUs.
+of a typical smartphone ($EPI_{device}$) and server ($EPI_{cloud}$) CPUs.
 %
 To do so, we take the \ac{tdp} of a
 Qualcomm Snapdragon 888 ($5W$)
 and an
-Intel Xeon Platinum P-8124 ($220W$)
+Intel Xeon Platinum P-8124 ($220W$),
 and we divide it by the score the CPU obtained in the popular Passmark benchmark\footnote{\url{https://www.cpubenchmark.net/}}
 ($9362$ and $22674$, respectively)
 obtaining an indication of the power per benchmark point
 ($\nicefrac{5W}{9362pts}$ and \nicefrac{220W}{22674pts} respectively).
 %
 We then used these ratios to estimate the relative \ac{epi} of the two CPUs,
-obtaining a $EPI_{ratio}$ close to 1:18.
+obtaining an $EPI_{ratio}$ close to 1:18.
 %
 Thus,
 we take the \ac{epi} estimation for the server CPU from~\cite{DBLP:conf/islped/ShaoB13},
@@ -1213,7 +1213,7 @@ and we assume the \ac{epi} of the smartphone CPU to be 18 times lower.
 Once the \acp{epi} of the two platforms are known,
 we estimate the number of instructions of the pulverised components as follows:
 we assume the application to be a heavy-duty game,
-capable to drain the battery of a smartphone
+capable of draining the battery of a smartphone
 (approximately 4500mAh in capacity, and thus, at 3.3V, 14.85Wh, 53460J)
 in 6 hours of continuous usage,
 which divided by the \ac{epi} of the smartphone CPU gives us the number of instructions.
