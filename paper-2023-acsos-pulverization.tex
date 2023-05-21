@@ -1061,14 +1061,14 @@ the shorter the distance, the redder the tone.
     \label{fig:crowd-alert}
 \end{figure}
 
-The system is composed of two kinds of device: \emph{wearable} and \emph{alarm}.
+The system is composed of two kinds of devices: \emph{wearable} and \emph{alarm}.
 %
 Wearables consist of the following pulverised components:
 sensors ($\sigma^w$), perceiving other devices by their signal strength;
 behaviour ($\beta^w$), converting raw data from the sensor into messages for the alarm; and
 communication ($\chi^w$) sending data to the alarm.
 %
-They do not need state nor actuators.
+They do not need a state or actuators.
 %
 The alarm consists of the following pulverised components:
 $\beta^a$, computing the mean distance among devices;
@@ -1079,7 +1079,7 @@ $\kappa^a$, storing the distances measured by the device for comparison with the
 %    Hold in memory the updated distances between the devices.
 %};
 $\chi^a$, responsible for receiving the data from the wearable devices;
-$\alpha^a$, enacting the alarm by showing a color on the screen.
+$\alpha^a$, enacting the alarm by showing a colour on the screen.
 %
 It needs no sensors.
 
@@ -1087,7 +1087,7 @@ We use the following hosts in the scenario:
 \begin{itemize}
     \item multiple \emph{Smartphones}, one per user, emulating wearables and used as distance sensors;
     \item a \emph{Monitor} used to show the alarm;
-    \item a \emph{Server} used run crowd estimation and wearable logic.
+    \item a \emph{Server} used to run crowd estimation and wearable logic.
 \end{itemize}
 
 Initially, $\beta^{w}$ is allocated to the \emph{Server} while
