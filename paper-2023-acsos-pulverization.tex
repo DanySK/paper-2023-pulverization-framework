@@ -913,7 +913,6 @@ but we deemed the multiplatform support of Kotlin a better fit for our needs.
 %
 The framework has been open sourced and released with a permissive license\footnote{\url{https://github.com/pulvreakt/pulvreakt}}.
 
-\meta{
 The runtime bases its operation on three main components:
 the \texttt{Spawner}, which is responsible for executing the components;
 the \texttt{UnitReconfigurator}, which is responsible for reconfigure the \emph{deployment unit}
@@ -925,17 +924,16 @@ the \emph{host} on which is running, and the configurations produced by the two 
 %
 At the start of the system the runtime,
 based on the provided configuration,
-spawn all the components that must start on the \emph{deployment unit}.
+spawns all the components that must start on the \emph{deployment unit}.
 %
-Similarly, the \texttt{UnitReconfigurator} start observing all the configured \texttt{ReconfigurationEvent}s,
-and register the listeners for incoming reconfigurations.
+Similarly, the \texttt{UnitReconfigurator} starts observing all the configured \texttt{ReconfigurationEvent}s,
+and registers the listeners for incoming reconfigurations.
 %
-Each spawned component start to execute its logic and share data with other component via the \texttt{Communicator},
+Each spawned component starts to execute its logic and shares data with other component via the \texttt{Communicator},
 which is responsible for the components' intra-communication by leveraging the communication protocol.
 %
-When a reconfiguration occurs, the \texttt{UnitReconfigurator} takes into account the new deployment configuration
-by interacting with the \texttt{Spawner} to start or stop the required components.
-}
+When a reconfiguration occurs, the \texttt{UnitReconfigurator} takes into account the new deployment configuration,
+by interacting with the \texttt{Spawner}, to start or stop the required components.
 
 The configuration produced by the \ac{dsl} needs a platform that instructs the system on the way actual communication needs to be performed.
 %
