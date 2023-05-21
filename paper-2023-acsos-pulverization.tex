@@ -1310,10 +1310,11 @@ depending on the battery level allows to find different trade-offs between these
 Following the conceptual framework introduced in \Cref{sec:background:dep},
  in this section we cover related work about
  languages for 
- specifying distributed systems (\Cref{sec:rw:whatsw}),
- languages for specifying infrastructures and deployments (\Cref{sec:rw:depdesc}),
+ specifying distributed systems (\Cref{sec:rw:whatsw})
  and
- techniques for automatic deployment and reconfiguration (\Cref{sec:rw:autodep}).
+ languages for specifying infrastructures, deployments, and reconfigurations (\Cref{sec:rw:depdesc}). 
+% and
+% techniques for automatic deployment and reconfiguration (\Cref{sec:rw:autodep}).
  
  
  
@@ -1394,29 +1395,25 @@ Languages have been proposed
  targeting specific kinds of deployment domains
  such as the smart grid (cf. \emph{dspec} in the \emph{RIAPS} platform~\cite{DBLP:conf/coins/GhoshTKKL22})
  or the cloud (cf. the \emph{CAMEL} multi-\ac{dsl}~\cite{DBLP:journals/jcloudc/AchilleosKRKDOS19}).
-
+%
 In this work,
  we are especially interested in deployments over large-scale cyber-physical systems and the edge-cloud continuum.
-%
-\emph{MuScADeL}~\cite{DBLP:conf/compsac/BoujbelRLTAL14/muscadel}
- is a \ac{dsl} that allows to express deployment properties of 
+
+A related \ac{dsl} is 
+\emph{MuScADeL}~\cite{DBLP:conf/compsac/BoujbelRLTAL14/muscadel}: allows to express deployment properties of 
 applications on multi-scale deployment domains,
 i.e., large and heterogeneous infrastructures considered under several viewpoints
 (device, geography, network, administrative domains, etc.).
 %
-In~\cite{DBLP:journals/sosym/SongDFSF22},
-  a model-based deployment approach is proposed
-  targeting so-called \emph{fleets}, i.e.,
-  distributed and heterogeneous devices at the edge characterised by different cyber-physical contexts
-(cf. resources, connectivity, etc.).
+Component descriptions can include \emph{constraints} (both basic software/hardware constraint and multi-scale criteria).
 %
-The main goal is to support the distribution of \emph{multiple variants} of the same application based on the different contexts of the different target devices.
+The specifications are used to generate \emph{probe} artifacts supporting data collection at the level of the deployment middleware.
 %
-The approach based on the \emph{GeneSIS} modelling language,
-where a \texttt{DeploymentModel} consists of sets of \texttt{Resources} (e.g., \texttt{Component}s, specialised by \texttt{InfrastructureComponent}s and \texttt{SoftwareComponent}s) with associated \texttt{Property}s and \texttt{Link}s.
+However, the work in~\cite{DBLP:conf/compsac/BoujbelRLTAL14/muscadel} is preliminary and does not cover runtime adaptation.
+ 
 
-\subsection{Automatic/Autonomic Deployment and Reconfiguration}
-\label{sec:rw:autodep}
+%\subsection{Automatic/Autonomic Deployment and Reconfiguration}
+%\label{sec:rw:autodep}
 %
 A comprehensive conceptual framework
  on automatic deployment of distributed systems
@@ -1426,7 +1423,7 @@ A more recent survey~\cite{coullon2023swreconfig} focuses
  on formal techniques for verifying the correctness of reconfigurations
  in component-based distributed software systems.
 %
-Two formal models for specifying reconfigurable architectures are
+Indeed, formal models can help in specifying reconfigurable architectures: examples include 
 \emph{DR-BIP}~\cite{Ballouli18dr-bip}
 and \emph{DReAM}~\cite{denicola2020dream-dynamic-reconfig-arch-modelling}.
 %
@@ -1440,18 +1437,13 @@ to model and analyse dynamic architectures.
 %
 %\meta{TODO: say something about our positioning wrt verification of reconfigurations}
 
-In the \emph{osmotic computing} approach~\cite{DBLP:journals/computer/VillariFDRJR19},
- microservices (the solvent)
- can migrate across 
- the edge-cloud infrastructure (the solution),
- passing through layer boundaries (the semi-permeable membranes),
- in order to keep a balance in the desired properties (the solute).
+A number of approaches use languages together with middlewares to specify and execute reconfiguration policies.
 %
-\emph{ASSL}~\cite{DBLP:conf/birthday/VassevH97}
- supports the specification
- of autonomic elements,
- interaction protocols,
- and \emph{self-management policies} based on fluents (states), events, and actions.
+%\emph{ASSL}~\cite{DBLP:conf/birthday/VassevH97}
+% supports the specification
+% of autonomic elements,
+% interaction protocols,
+% and \emph{self-management policies} based on fluents (states), events, and actions.
 %
 %In \emph{ConfSolve}~\cite{DBLP:conf/saso/HewsonAG13},
 % the language supports the specification of logical \emph{reconfiguration constraints}, which are then solved as a constraint satisfaction problem.
@@ -1470,7 +1462,27 @@ and \emph{ConfSolve}~\cite{DBLP:conf/saso/HewsonAG13}.
  with constructs for specifying adaptive behaviour 
  and policies (constraints) for the reconfiguration of system components.
 %
-These approaches, however, typically suffer from scalability issues.
+%
+In~\cite{DBLP:journals/sosym/SongDFSF22},
+  a model-based deployment approach is proposed
+  targeting so-called \emph{fleets}, i.e.,
+  distributed and heterogeneous devices at the edge characterised by different cyber-physical contexts
+(cf. resources, connectivity, etc.).
+%
+The main goal is to support the distribution of \emph{multiple variants} of the same application based on the different contexts of the different target devices.
+%
+The approach based on the \emph{GeneSIS} modelling language,
+where a \texttt{DeploymentModel} consists of sets of \texttt{Resources} (e.g., \texttt{Component}s, specialised by \texttt{InfrastructureComponent}s and \texttt{SoftwareComponent}s) with associated \texttt{Property}s and \texttt{Link}s.
+%
+These approaches, however, being based on constraint solving, typically suffer from scalability issues.
+
+Another approach is \emph{osmotic computing}~\cite{DBLP:journals/computer/VillariFDRJR19},
+ whereby microservices (the solvent)
+ can migrate across 
+ the edge-cloud infrastructure (the solution),
+ passing through layer boundaries (the semi-permeable membranes),
+ in order to keep a balance in the desired properties (the solute).
+%
 
 %%high-level constructs to describe adaptation in software components by means of behavioural programs, i.e., in terms of order and/or conditions under which reconfigurations take place; and policies, i.e., constraints that have to be enforced all along the execution. In other words, Ctrl-Fis a first-class language that is applicable to any Component-based application requiring self-adaptation with formal guarantees.
  
