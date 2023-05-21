@@ -811,6 +811,15 @@ It works with the concepts of \texttt{Host}
 \texttt{ReconfigurationEvent},
 and \texttt{ReconfigurationRule}.
 %
+\meta{
+The main goal of the \dslDep is to configure the \emph{deployment unit},
+which represents the smallest deployable unit of the pulverised system.
+%
+It is characterized by a set of \emph{pulverised components},
+the \emph{host} on which they are deployed,
+and the \emph{logical device} they represent. 
+}
+%
 Using \Cref{lst:runtime-configuration} as a reference example,
 we show how reconfiguration events (Lines~\ref{code:reconfigev:start}--\ref{code:reconfigev:end}) can be captured at the type-system level
 by expressing them as a predicate over an asynchronous flow of \texttt{events} influencing the system's state.
