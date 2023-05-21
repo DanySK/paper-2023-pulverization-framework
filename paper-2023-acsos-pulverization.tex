@@ -888,7 +888,7 @@ object Server : Host {
 }%\label{code:hosts:end}%
 // Runtime initial setup and runtime reconfiguration rules %\label{code:infra:start}%
 val infrastructure = setOf(Smartphone, Server)
-val conf = // see %\crefe{lst:system-configuration}%
+val conf = ... // see %\crefe{lst:system-configuration}%
 pulverizationRuntime(conf, "iot-sensor", infrastructure) {
   DeviceBehaviour() startsOn Server%\label{code:mapping:start}%
   DeviceCommunication() startsOn Server
@@ -942,16 +942,15 @@ The framework has been open-sourced and released with a permissive licence\footn
 The runtime bases its operation on three main components:
 the \texttt{Spawner}, which is responsible for executing the components;
 the \texttt{UnitReconfigurator}, which is responsible for reconfiguring the \emph{deployment unit}
-according to the \texttt{ReconfigurationEvent}
+according to the \texttt{ReconfigurationEvent}; 
 and the \texttt{Communicator}s,
 which are used to establish the components' intra-communication.
 %
 To start, the \texttt{PulverisationRuntime} needs to know the name of the \emph{logical device},
 the \emph{host} on which it is running, and the configurations produced by the two \ac{dsl}s.
 %
-At the start of the system, the runtime,
-based on the provided configuration,
-spawns all the components that must start on the \emph{deployment unit}.
+At the start of the system, using the provided configuration, the runtime
+spawns all the components that must execute on the \emph{deployment unit}.
 %
 Similarly, the \texttt{UnitReconfigurator} starts observing all the configured \texttt{ReconfigurationEvent}s
 and registers the listeners for incoming reconfigurations.
