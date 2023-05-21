@@ -1353,6 +1353,9 @@ In~\cite{IEEE-IoTJ-pulverization-simulation},
  a methodology on top of the pulverisation model
  is proposed
  for generating and testing deployments through simulation.
+%
+There, file descriptors and scripts are used to generate deployment plans; in \ourframework{}, instead, we provide \acp{dsl} supporting a specification-oriented, declarative approach.
+%
 
 Additionally,
  the approach of specifying in a single codebase 
@@ -1363,6 +1366,11 @@ Additionally,
  where the deployment units for different tiers
 (e.g., client and server tiers; or view, business logic, and data tiers)
 are obtained by compilation or interpretation of a single codebase.
+%
+\ourframework{} adopts the same idea,
+ where a logically centralised specification
+ of the distributed architecture
+ enables runtime checks and deployment activities.
 
 \subsection{Infrastructure and deployment description languages}
 \label{sec:rw:depdesc}
