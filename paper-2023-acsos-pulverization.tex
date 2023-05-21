@@ -693,7 +693,7 @@ Naturally, these approaches have different trade-offs.
 
 A framework/runtime with configuration files enforces declarativity at the configuration level,
 but its flexibility is limited,
-as options that have not been accounted for at design time can hardly be injected through configuration files.
+as options not accounted for at design time can hardly be injected through configuration files.
 %
 On the other hand,
 a (well-designed) library can be flexible as the host language can be used to express peculiar configurations
@@ -725,7 +725,7 @@ while retaining a reduced maintenance cost
 and a gentle learning curve compared to stand-alone \acp{dsl}
 (as the syntax will be largely familiar to the host language users).
 %
-Compared to external ones,
+Unlike external ones,
 internal \acp{dsl} allow the designer to directly fall back to the host language
 to implement peculiar entities or processes that the \ac{dsl} cannot express.
 %
