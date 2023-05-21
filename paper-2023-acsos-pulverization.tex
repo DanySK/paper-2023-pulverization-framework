@@ -785,7 +785,7 @@ object HighCPU : Capability%\label{capab:start}%
 object LowLatencyComm : Capability
 object EmbeddedDevice : Capability%\label{capab:end}%
 
-pulverizedSystem {
+val conf = pulverizedSystem {
   device("control-center") {%\label{devcap:start}%
     Behavior and State deployableOn HighCPU
     Communication deployableOn LowLatencyComm
@@ -878,6 +878,9 @@ pulverizationRuntime(conf, "iot-sensor", infrastructure) {
     }
   }%\label{code:reconfig:end}%
 }%\label{code:infra:end}%
+pulverizationRuntime(conf, "control-center", infrastructure) {
+  /* ... */
+}
 \end{lstlisting}
 
 % A \texttt{ReconfigurationEvent} is characterized by the \emph{events}
