@@ -84,16 +84,15 @@ basewidth=0.555em % decreases spacing between chars
 
 \author{
 \IEEEauthorblockN{
-    Nicolas Farabegoli\IEEEauthorrefmark{1},
-    Danilo Pianini\IEEEauthorrefmark{1},
-    Roberto Casadei\IEEEauthorrefmark{2},
-    Mirko Viroli\IEEEauthorrefmark{1}
+    Nicolas Farabegoli,
+    Danilo Pianini,
+    Roberto Casadei,
+    Mirko Viroli
 }
 \IEEEauthorblockA{\textit{Department of Computer Science and Engineering} \\
 \textit{Alma Mater Studiorum---Università di Bologna}\\
 Cesena, Italy \\
-\IEEEauthorrefmark{1}\{nicolas.farabegoli,danilo.pianini,mirko.viroli\}@unibo.it}
-\IEEEauthorrefmark{2}roby.casadei@unibo.it
+\{nicolas.farabegoli, danilo.pianini, roby.casadei, mirko.viroli\}@unibo.it}
 }
 
 \maketitle
@@ -139,8 +138,8 @@ runtime reconfiguration, distributed systems, self-adaptation, self-organisation
 
 Recent technological and scientific advances
  are extending 
- both the \emph{kinds of applications and systems} that are being addressed  
- as well as their \emph{supporting infrastructure}~\cite{DBLP:journals/iot/GillXOPBSGSWASM22}.
+ the \emph{kinds of applications and systems} being addressed and
+their \emph{supporting infrastructure}~\cite{DBLP:journals/iot/GillXOPBSGSWASM22}.
 %
 Emerging applications
  are, for instance, those based on \emph{\acp{cas}}~\cite{DBLP:journals/computer/Abowd16,DBLP:journals/sttt/NicolaJW20},
@@ -156,8 +155,14 @@ Examples include
 %
 Regarding infrastructure,
  it is mounting the idea of the \emph{cloud-edge continuum}~\cite{DBLP:journals/iot/BittencourtISFM18}: 
+<<<<<<< HEAD
 a multi-layer heterogeneous network of devices (ranging from large and powerful cloud servers to small connected \emph{things}).
 There, software can compute, store, and exchange data in a distributed fashion, while also 
+=======
+a multi-layer heterogeneous network of devices (ranging from large and powerful cloud servers to small connected \emph{things})
+on which software can compute, store, and exchange data in a distributed fashion
+while
+>>>>>>> c27efc5c09be3f0c14d1e11e3a24c3735b080953
 optimising for performance and resource utilisation.
 %
 
@@ -169,7 +174,11 @@ could benefit from being deployed on different devices or from \emph{offloading}
 However, exploiting this infrastructure
  poses new challenges to \ac{cas} application designers.
 %
+<<<<<<< HEAD
 In fact, typically applications are designed with a specific infrastructure in mind,
+=======
+Commonly, applications are designed with a specific infrastructure in mind,
+>>>>>>> c27efc5c09be3f0c14d1e11e3a24c3735b080953
 whose assumptions unavoidably leak into the application logic~\cite{Spolsky2004}
 unless captured and encapsulated away from it:
 the higher the coupling between the application and the infrastructure,
@@ -191,7 +200,7 @@ whose software can be designed as (or broken down to, if already existing) an en
  that can be deployed with flexibility on the available infrastructure without affecting application functionality. %whose actual host can be decided at deployment time.
 %
 This way, the designer can focus on the business logic at hand,
-delaying an optimised deployment to later stages of the sofware design,
+delaying an optimised deployment to later stages of the software design,
 thus gaining resilience to changes in the infrastructure or in non-functional requirements.
 %
 One limitation of previous work on pulverisation regards dynamicity:
@@ -803,7 +812,7 @@ and \texttt{ReconfigurationRule}.
 The main goal of the \dslDep{} is to configure the \emph{deployment unit},
 which represents the smallest deployable unit of the pulverised system.
 %
-It is characterized by a set of \emph{pulverised components},
+It is characterised by a set of \emph{pulverised components},
 the \emph{host} on which they are deployed,
 and the \emph{logical device} they represent. 
 }
@@ -1058,7 +1067,7 @@ communication ($\chi^w$) sending data to the alarm.
 %
 They do not need state nor actuators.
 %
-The alarm consists of the following pulverized components:
+The alarm consists of the following pulverised components:
 $\beta^a$, computing the mean distance among devices;
 $\kappa^a$, storing the distances measured by the device for comparison with the recent past;
 %\meta{
@@ -1114,7 +1123,7 @@ for those willing to exercise the whole system.
 %
 To simplify testing we also provide,
 in the same artifact,
-a simulation of the system where every device is containerized.
+a simulation of the system where every device is containerised.
 
 \subsection{Large-Scale Scenario: Collective Computation at a Urban Event}
 
