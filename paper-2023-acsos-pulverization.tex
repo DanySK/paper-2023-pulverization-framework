@@ -935,16 +935,17 @@ The runtime bases its operation on three main components:
 the \texttt{Spawner}, which is responsible for executing the components;
 the \texttt{UnitReconfigurator}, which is responsible for reconfiguring the \emph{deployment unit}
 according to the \texttt{ReconfigurationEvent}
-and the \texttt{Communicator}s which are used to establish the components' intra-communication.
+and the \texttt{Communicator}s,
+which are used to establish the components' intra-communication.
 %
 To start, the \texttt{PulverisationRuntime} needs to know the name of the \emph{logical device},
-the \emph{host} on which is running, and the configurations produced by the two \ac{dsl}s.
+the \emph{host} on which it is running, and the configurations produced by the two \ac{dsl}s.
 %
-At the start of the system the runtime,
+At the start of the system, the runtime,
 based on the provided configuration,
 spawns all the components that must start on the \emph{deployment unit}.
 %
-Similarly, the \texttt{UnitReconfigurator} starts observing all the configured \texttt{ReconfigurationEvent}s,
+Similarly, the \texttt{UnitReconfigurator} starts observing all the configured \texttt{ReconfigurationEvent}s
 and registers the listeners for incoming reconfigurations.
 %
 Each spawned component starts to execute its logic and shares data with other component via the \texttt{Communicator},
