@@ -1101,17 +1101,17 @@ $\beta^{w}$ is moved to the \emph{Smartphones}
 (with each smartphone running the $\beta^{w}$ corresponding to its $\sigma^{w}$).
 %
 During the experiment,
-we launch several heavy-duty processes on the \emph{Server},
-and we observe how the system reacts to the overload.
+we launch several heavy-duty processes on the \emph{Server}
+and observe how the system reacts to the overload.
 %
 We rely on the MQTT platform module for all the communication,
-meaning that both intra- and inter-device communication is handled by the same protocol and broker.
+meaning that the same protocol and broker handle both intra- and inter-device communication.
 
 As soon as the reconfiguration event is triggered,
 the $\beta$ component of the \emph{Wearable} is moved from the \emph{Server} to the \emph{Smartphone} $s$ hosting $\sigma^{w}_{s}$,
 relieving the server and preserving while retaining the system in nominal conditions.
 %
-The reconfiguration of the system in entirely managed by the framework,
+The reconfiguration of the system is entirely managed by the framework,
 which handles all the machinery and communication to move the component from
 one host to another.
 
