@@ -792,18 +792,18 @@ It works with the concepts of \texttt{Host}
 and \texttt{ReconfigurationRule}.
 %
 Using \Cref{lst:runtime-configuration} as a reference example,
-we show how reconfiguration events can be captured at the type-system level
+we show how reconfiguration events (Lines~\ref{code:reconfigev:start}--\ref{code:reconfigev:end}) can be captured at the type-system level
 by expressing them as a predicate over an asynchronous flow of \texttt{events} influencing the system's state.
 %
-Similarly, hosts can be configured by defining their name and capabilities.
+Similarly, hosts can be configured by defining their name and capabilities (Lines~\ref{code:hosts:start}--\ref{code:hosts:end}).
 %
 Once the hosts composing the system have been configured,
-the entire infrastructure can be set up by defining,
+the entire infrastructure can be set up (Lines~\ref{code:infra:start}--\ref{code:infra:end}) by defining,
 for each logical device,
-which host should host each pulverised component.
+which host should host each pulverised component (Lines~\ref{code:mapping:start}--\ref{code:mapping:end}).
 %
 Additionally,
-reconfiguration rules can be defined to specify how the system should react to reconfiguration events.
+reconfiguration rules (Lines~\ref{code:reconfig:start}--\ref{code:reconfig:end}) can be defined to specify how the system should react to reconfiguration events.
 %
 In this context, the \ac{dsl} exposes a special syntax to express the migration of a pulverised component on a different host.
 %
@@ -823,8 +823,9 @@ plain lambda expressions, supporting any kind of computation.
     },
     label=lst:runtime-configuration,
     numbers=left,
+    escapechar=\%
 ]
-// Reconfiguration events
+// Reconfiguration events %\label{code:reconfigev:start}%
 expect fun cpuLoad(): Double
 object HighLoad : ReconfigurationEvent<Double>() {
   override val predicate = { it > 0.90 }
@@ -833,8 +834,8 @@ object HighLoad : ReconfigurationEvent<Double>() {
 object LowBattery : ReconfigurationEvent<Double>() {
   override val predicate = { it < 0.20 }
   override val events: Flow<Double> = cpuLoad()
-}
-// Available hosts
+}%\label{code:reconfigev:end}%
+// Available hosts %\label{code:hosts:start}%
 object Smartphone : Host {
   override val hostname = "smartphone"
   override val capabilities = setOf(EmbeddedDevice)
@@ -842,21 +843,21 @@ object Smartphone : Host {
 object Server : Host {
   override val hostname = "amazon-aws"
   override val capabilities=setOf(HighCPU,LowLatencyComm)
-}
-// Runtime initial setup and runtime reconfiguration rules
+}%\label{code:hosts:end}%
+// Runtime initial setup and runtime reconfiguration rules %\label{code:infra:start}%
 val infrastructure = setOf(Smartphone, Server)
 pulverizationRuntime(conf, "iot-sensor", infrastructure) {
-  DeviceBehaviour() startsOn Server
+  DeviceBehaviour() startsOn Server%\label{code:mapping:start}%
   DeviceCommunication() startsOn Server
   DeviceSensors() startsOn Smartphone
-  DeviceActuators() startsOn Smartphone
-  reconfigurationRules {
+  DeviceActuators() startsOn Smartphone%\label{code:mapping:end}%
+  reconfigurationRules {%\label{code:reconfig:start}%
     onDevice {
       HighLoad reconfigures {Behaviour movesTo Smartphone}
       LowBattery reconfigures {Behaviour movesTo Server}
     }
-  }
-}
+  }%\label{code:reconfig:end}%
+}%\label{code:infra:end}%
 \end{lstlisting}
 
 % A \texttt{ReconfigurationEvent} is characterized by the \emph{events}
