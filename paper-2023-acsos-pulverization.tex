@@ -1140,23 +1140,25 @@ a simulation of the system where every device is containerised.
 
 To show the potential benefit of automatic reconfiguration in \acp{cas},
 we consider a large-scale scenario where a crowd of people is attending an event in a city
-to participate in a collective activity whose computational weight is relevant, for instance
+to participate in a collective activity whose computational weight is relevant,
+for instance,
 a tournament of a geo-located game similar to Ingress\footnote{\url{https://www.ingress.com/}}
 or Pokémon Go\footnote{\url{https://pokemongolive.com/}}).
 %
-We suppose the application to be pulverised,
-and its behaviour to be able to run either on the smartphones or in cloud.
+We suppose the application to be pulverised
+and its behaviour to be able to run either on smartphones or in the cloud.
 %
-We assume the event to start with users located in random positions in the city,
-and to have a recharging station available at that place.
+We assume the event starts with users in random positions in the city,
+where their respective recharging station is located.
 %
-The game requires to physically move in the city,
-reach a \ac{poi} and perform some operations once there.
+The game requires physically moving into the city,
+reaching a \ac{poi} and performing some operations there.
 %
 We assume users with low battery to turn off the application and move to their start station to recharge the device
 before rejoining the game.
 %
-The application is pulverised and its behaviour can execute either on the device or in the cloud.
+The application is pulverised,
+and its behaviour can execute either on the device or in the cloud.
 %
 We configure the framework to move the behaviour to the cloud when the battery level
 (measured as a percentage of the maximum charge)
