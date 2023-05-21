@@ -21,6 +21,7 @@
 \providecommand{\decibelmeter}{dBm}
 \providecommand{\qty}[2]{#1#2}
 
+%\usepackage[none]{hyphenat}
 
 \acrodef{api}[API]{application-program interface}
 \acrodef{dsl}[DSL]{domain-specific language}
@@ -204,7 +205,7 @@ we further develop the research on pulverised systems by providing two key contr
 \begin{enumerate}
  \item we extend the theoretical framework of pulverisation by adding support for
 \emph{runtime configuration rules}, allowing pulverised components to move at runtime across different hosts;
- \item we accordigly provide a practical implementation of pulverisation (with reconfiguration rules) called \emph{\ourframework{}}, developed in the Kotlin programming language.
+ \item we accordingly provide a practical implementation of pulverisation (with reconfiguration rules) called \emph{\ourframework{}}, developed in the Kotlin programming language.
 \end{enumerate}
 %
 To evaluate \ourframework{}, we exercise it through two case studies:
@@ -236,7 +237,7 @@ Finally, \Cref{sec:conclusion} concludes the paper and highlights directions for
 
 The \emph{deployment view} is a well-known architectural viewpoint for software systems,
 concerned with the mapping of \emph{software components} to \emph{physical machines}~\cite{DBLP:journals/software/Kruchten95}
- and supported by modeling notations like \emph{UML Deployment diagrams}.
+ and supported by modelling notations like \emph{UML Deployment diagrams}.
 %
 Here, we briefly introduce deployment and reconfiguration based on the conceptual characterisation of~\cite{DBLP:journals/jss/ArcangeliBL15,carzaniga1998characterization}.
 %
@@ -936,7 +937,7 @@ and be as interoperable as possible with other languages.
 Scala could have been a good alternative,
 but we deemed the multiplatform support of Kotlin a better fit for our needs.
 %
-The framework has been open-sourced and released with a permissive license\footnote{\url{https://github.com/pulvreakt/pulvreakt}}.
+The framework has been open-sourced and released with a permissive licence\footnote{\url{https://github.com/pulvreakt/pulvreakt}}.
 
 The runtime bases its operation on three main components:
 the \texttt{Spawner}, which is responsible for executing the components;
@@ -994,13 +995,13 @@ to showcase the integration of the framework with established technologies\footn
     \url{https://github.com/nicolasfara/ACSOS-2023-pulverization-crowd-room}
 };
 in the latter,
-we simulate a city-scale distributed application deployed for an urban event
+we simulate a city-scale distributed application deployed for a urban event
 and show how the dynamic reconfiguration may help to balance
 cost, energy consumption and \ac{qos}\footnote{
     \url{https://github.com/nicolasfara/ACSOS-2023-pulverization-evaluation}
 }.
 %
-Both experiments were released with a permissive open-source license and archived for future reference on
+Both experiments were released with a permissive open-source licence and archived for future reference on
 Zenodo~\cite{https://doi.org/10.5281/zenodo.7933160, https://doi.org/10.5281/zenodo.7948801}.
 
 \subsection{Small-Scale Scenario: Crowd Alert in a Lab}
@@ -1136,7 +1137,7 @@ we also provide,
 in the same artefact,
 a simulation of the system where every device is containerised.
 
-\subsection{Large-Scale Scenario: Collective Computation at an Urban Event}
+\subsection{Large-Scale Scenario: Collective Computation at a Urban Event}
 
 To show the potential benefit of automatic reconfiguration in \acp{cas},
 we consider a large-scale scenario where a crowd of people is attending an event in a city
@@ -1300,7 +1301,7 @@ Results are summarised in \Cref{fig:results}.
 $\Downarrow$ has the worst \ac{qos}
 but also the lowest cloud cost and overall energy consumption.
 %
-Opposedly, $\Uparrow$ improves the \ac{qos}, but costs and energy use grow significantly.
+Conversely, $\Uparrow$ improves the \ac{qos}, but costs and energy use grow significantly.
 %
 The ability to reconfigure the deployment at runtime
 by moving the behaviour from the cloud to the smartphones and vice versa
@@ -1413,7 +1414,7 @@ In this work,
 
 A related \ac{dsl} is 
 \emph{MuScADeL}~\cite{DBLP:conf/compsac/BoujbelRLTAL14/muscadel}:
-it allows to express deployment properties of
+it allows expressing deployment properties of
 applications on multi-scale deployment domains,
 i.e., large and heterogeneous infrastructures considered under several viewpoints
 (device, geography, network, administrative domains, etc.).
@@ -1575,7 +1576,7 @@ as hosts get specified in the runtime and reconfiguration \acp{dsl} as a closed 
 The second limitation is related to the policies that can be expressed in the reconfiguration \ac{dsl}:
 currently, only policies that can be assessed at the local host level can be assessed.
 %
-A policy that requires to consider the state of multiple hosts would require to resort to the host language's primitive mechanisms and make explicit communications outside the framework,
+A policy that requires to consider the state of multiple hosts would require resorting to the host language's primitive mechanisms and make explicit communications outside the framework,
 thus breaking the abstraction.
 %
 This limitation can be addressed by extending the current reconfiguration
