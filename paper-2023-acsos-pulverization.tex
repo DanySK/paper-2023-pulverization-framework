@@ -1279,31 +1279,32 @@ and the code has been archived on Zenodo~\cite{https://doi.org/10.5281/zenodo.79
     \includegraphics[width=\columnwidth]{figures/cloud_cost-device_consumption-cloud_consumption-distance-device=300.0.pdf}\\
     \includegraphics[width=\columnwidth]{figures/cloud_cost-device_consumption-cloud_consumption-distance-device=1000.0.pdf}
     \caption{
-        Simulation results for 100 (top), 300 (center), and 1000 (bottom) devices;
+        Simulation results for 100 (top), 300 (centre), and 1000 (bottom) devices;
         showing all four metrics:
         $P_{cloud}$ ($kW$) in green,
         $P_{devices}$ ($kW$) in blue,
         Distance in yellow, $\$_{cloud}$ in dark purple.
         %
-        $P_{cloud}$ and $P_{devices}$ are stacked to also show the overall power consumption.
+        $P_{cloud}$ and $P_{devices}$ are stacked to show the overall power consumption.
         %
         Different reconfiguration rules are indicated on the horizontal axis.
         %
-        Runtime reconfiguration of the deployment opens to more opportunities to find the trade-off of cost,
-        energy use, and \ac{qos} that best fits the current context.
+        Runtime reconfiguration of the deployment opens more opportunities to find the
+        cost, energy use, and \ac{qos} trade-off that best fits the current context.
     }
     \label{fig:results}
 \end{figure}
 %
 Results are summarised in \Cref{fig:results}.
 %
-$\Downarrow$ has the worst \ac{qos}, but also the lowest cloud cost and overall energy consumption.
+$\Downarrow$ has the worst \ac{qos}
+but also the lowest cloud cost and overall energy consumption.
 %
 Opposedly, $\Uparrow$ improves the \ac{qos}, but costs and energy use grow significantly.
 %
 The ability to reconfigure the deployment at runtime
 by moving the behaviour from the cloud to the smartphones and vice versa
-depending on the battery level allows to find different trade-offs between these two extremes.
+depending on the battery level allows us to find different trade-offs between these two extremes.
 
 \section{Related Work}
 \label{sec:rw}
