@@ -164,7 +164,7 @@ optimising for performance and resource utilisation.
 This kind of infrastructure is also valuable for  \acp{cas}~\cite{DBLP:journals/tpds/HongCHGZ19,DBLP:journals/comsur/WangZZMLW20,DBLP:journals/comsur/AfrinJRRWH21,IEEE-IoTJ-pulverization-simulation},
 which generally feature components that,
 depending on the conditions at hand,
-could benefit from being deployed on different devices or from \emph{offloading} some of their  tasks.
+could benefit from being deployed on different devices or from \emph{offloading} some of their tasks.
 %
 However, exploiting this infrastructure
  poses new challenges to \ac{cas} application designers.
@@ -208,7 +208,7 @@ we further develop the research on pulverised systems by providing two key contr
 \end{enumerate}
 %
 To evaluate \ourframework{}, we exercise it through two case studies:
-a small-scale real-wold demonstration, and a city-scale simulated scenario.
+a small-scale real-world demonstration, and a city-scale simulated scenario.
 
 %\meta{
 %\begin{itemize}
@@ -236,7 +236,7 @@ Finally, \Cref{sec:conclusion} concludes the paper and highlights directions for
 
 The \emph{deployment view} is a well-known architectural viewpoint for software systems,
 concerned with the mapping of \emph{software components} to \emph{physical machines}~\cite{DBLP:journals/software/Kruchten95}
- and supported by modelling notations like \emph{UML Deployment diagrams}.
+ and supported by modeling notations like \emph{UML Deployment diagrams}.
 %
 Here, we briefly introduce deployment and reconfiguration based on the conceptual characterisation of~\cite{DBLP:journals/jss/ArcangeliBL15,carzaniga1998characterization}.
 %
@@ -703,7 +703,7 @@ However,
 its configuration may quickly become imperative and more challenging to maintain as complexity grows.
 %
 Finally, a \ac{dsl}~\cite{dsl-book-voelter} can be designed to be as expressive as needed,
-but it has high maintenance cost
+but it has a high maintenance cost
 (as the language maintenance stacks upon the library/\ac{api}) and, potentially,
 a steep learning curve due to the need to learn a new (custom) language.
 
@@ -776,7 +776,7 @@ it implies that the component can be dynamically moved to any host offering any 
     caption={
         Example of \dslSys{} usage.
         This code snippet defines three capabilities and a logical system composed of two device types,
-        whose components are bound to the set of capabilities they needs to execute.
+        whose components are bound to the set of capabilities they need to execute.
     },
     label=lst:system-configuration,
     escapechar=\%,
@@ -1211,7 +1211,7 @@ we take the \ac{epi} estimation for the server CPU from~\cite{DBLP:conf/islped/S
 and we assume the \ac{epi} of the smartphone CPU to be 18 times lower.
 %
 Once the \acp{epi} of the two platforms are known,
-we estimate the number of instructions of the pulverised components as follows:
+we estimate the number of instructions for the pulverised components as follows:
 we assume the application to be a heavy-duty game,
 capable of draining the battery of a smartphone
 (approximately 4500mAh in capacity, and thus, at 3.3V, 14.85Wh, 53460J)
@@ -1252,7 +1252,7 @@ All the hybrid configurations
 (every configuration except $\Uparrow$ and $\Downarrow$)
 require runtime reconfiguration.
 %
-We run 10 repetitions or each experiment with a different random seed;
+We run 10 repetitions of each experiment with a different random seed;
 all results are averaged over them.
 %
 The experiment has been open-sourced,
@@ -1279,7 +1279,7 @@ and the code has been archived on Zenodo~\cite{https://doi.org/10.5281/zenodo.79
     \includegraphics[width=\columnwidth]{figures/cloud_cost-device_consumption-cloud_consumption-distance-device=300.0.pdf}\\
     \includegraphics[width=\columnwidth]{figures/cloud_cost-device_consumption-cloud_consumption-distance-device=1000.0.pdf}
     \caption{
-        Simulation results for 100 (top), 300 (centre), and 1000 (bottom) devices;
+        Simulation results for 100 (top), 300 (center), and 1000 (bottom) devices;
         showing all four metrics:
         $P_{cloud}$ ($kW$) in green,
         $P_{devices}$ ($kW$) in blue,
