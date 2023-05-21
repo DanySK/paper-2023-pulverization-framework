@@ -698,6 +698,9 @@ hardware design~\cite{DBLP:journals/trets/SerreP20} to
 logic~\cite{2pkt-swx16} and aggregate programming~\cite{DBLP:journals/softx/CasadeiVAP22}.
 %
 
+\newcommand{\dslSys}[0]{\emph{System \ac{dsl}}}
+\newcommand{\dslDep}[0]{\emph{Deployment \ac{dsl}}}
+
 \section{A Runtime and \acsp{dsl} for Reconfigurable Pulverised Systems}\label{sec:contribution}
 
 From the previous section,
@@ -708,7 +711,7 @@ we can identify two main pieces of information for the definition of a deploymen
 \end{enumerate*}
 %
 Coherently with the \emph{single responsibility principle},
-we capture these two descriptive needs into two distinct \acp{dsl}.
+we capture these two descriptive needs into two distinct \acp{dsl}: the \dslSys{} and the \dslDep{}.
 %
 An overall view of the approach in terms of the provided tools and the main modelling concepts is provided in \Cref{fig:approach}.
 
@@ -718,9 +721,10 @@ An overall view of the approach in terms of the provided tools and the main mode
 \label{fig:approach}
 \end{figure}
 
-\subsection{Infrastructure and Requirements}
 
-The infrastructure \ac{dsl} captures the concepts of
+\subsection{The \dslSys{}: Components and Required Capabilities}
+
+The \dslSys{} captures the concepts of
 \emph{device type}, \emph{component}, \emph{capability}, and \emph{requirement}.
 %
 A reference sample is presented in \Cref{lst:system-configuration}.
@@ -754,9 +758,9 @@ it implies that the component can be dynamically moved to any host offering any 
     float=ht,
     language=pulv,
     caption={
-        Example infrastructure configuration,
-        defining three capabilities and a system composed of two device types,
-        each component of which is then bound to the set of capabilities it needs to execute.
+        Example of \dslSys{} usage.
+        This code snippet defines three capabilities and a logical system composed of two device types,
+        whose components are bound to the set of capabilities they needs to execute.
     },
     label=lst:system-configuration,
     escapechar=\%,
@@ -781,9 +785,9 @@ pulverizedSystem {
 \end{lstlisting}
 
 
-\subsection{Deployment and Reconfiguration}
+\subsection{The \dslDep{}: Deployment Domain, Mapping, and Reconfiguration}
 
-The second \ac{dsl} supports the definition of the mapping between pulverised components and specific hosts,
+The \dslDep{} supports the definition of the mapping between pulverised components and specific hosts,
 as well as the definition of reactive reconfiguration policies.
 %
 It works with the concepts of \texttt{Host}
