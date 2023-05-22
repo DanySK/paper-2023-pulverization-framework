@@ -1484,6 +1484,7 @@ and \emph{ConfSolve}~\cite{DBLP:conf/saso/HewsonAG13}.
  with constructs for specifying adaptive behaviour 
  and policies (constraints) for reconfiguring system components.
 %
+The idea of its \ac{dsl} to reconfiguration is to let designers specify behaviours that regulate the transitions between explicitly specified \emph{configurations}.
 %
 In~\cite{DBLP:journals/sosym/SongDFSF22},
   a model-based deployment approach is proposed
@@ -1499,7 +1500,7 @@ where a \texttt{DeploymentModel} consists of sets of \texttt{Resources} (e.g., \
 However,
 these approaches, being based on constraint solving, typically suffer from scalability issues.
 
-Another approach is \emph{osmotic computing}~\cite{DBLP:journals/computer/VillariFDRJR19},
+Finally, there is a plethora of approaches for automatic deployment or offloading across the edge-cloud continuum. One example is \emph{osmotic computing}~\cite{DBLP:journals/computer/VillariFDRJR19},
  whereby microservices (the solvent)
  can migrate across 
  the edge-cloud infrastructure (the solution),
