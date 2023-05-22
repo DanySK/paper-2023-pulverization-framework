@@ -55,7 +55,7 @@
 %  stringstyle=\ttfamily\color{orange},
 }
 \lstset{language=pulv,
-basewidth=0.52em % decreases spacing between chars
+basewidth=0.55em % decreases spacing between chars
 }
 
 
@@ -884,20 +884,23 @@ object Smartphone : Host {
 }
 object Server : Host {
   override val hostname = "amazon-aws"
-  override val capabilities=setOf(HighCPU,LowLatencyComm)
+  override val capabilities = 
+    setOf(HighCPU,LowLatencyComm)
 }%\label{code:hosts:end}%
-// Runtime initial setup and runtime reconfiguration rules %\label{code:infra:start}%
+// Runtime initial setup and runtime reconfig. rules %\label{code:infra:start}%
 val infrastructure = setOf(Smartphone, Server)
 val conf = ... // see %\crefe{lst:system-configuration}%
-pulverizationRuntime(conf, "iot-sensor", infrastructure) {
+pulverizationRuntime(conf,"iot-sensor",infrastructure){
   DeviceBehaviour() startsOn Server%\label{code:mapping:start}%
   DeviceCommunication() startsOn Server
   DeviceSensors() startsOn Smartphone
   DeviceActuators() startsOn Smartphone%\label{code:mapping:end}%
   reconfigurationRules {%\label{code:reconfig:start}%
     onDevice {
-      HighLoad reconfigures {Behaviour movesTo Smartphone}
-      LowBattery reconfigures {Behaviour movesTo Server}
+      HighLoad reconfigures 
+        { Behaviour movesTo Smartphone }
+      LowBattery reconfigures 
+        { Behaviour movesTo Server }
     }
   }%\label{code:reconfig:end}%
 }%\label{code:infra:end}%
