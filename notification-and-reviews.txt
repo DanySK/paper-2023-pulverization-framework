@@ -1,0 +1,150 @@
+
+
+Dear Roberto Casadei,
+
+On behalf of the ACSOS 2023 programme committee, we regret to inform
+you that your submission:
+
+Declarative Deployment Reconfiguration of Pulverised Collective Adaptive Systems at Runtime, authored by Nicolas Farabegoli, Danilo Pianini, Roberto Casadei, Mirko Viroli.
+
+could not be accepted for inclusion in the conference programme.
+
+The selection process for ACSOS was rigorous and thorough; each paper received at least 3 reviews, detailed discussion among reviewers, and a meta-review from a senior PC member. The reviews are enclosed below, and we hope you find them useful in further refining your work.
+
+While we know this outcome will be disappointing, we would encourage you to consider submitting a shortened version of your work to one of the workshops co-located with ACSOS 2023:
+
+10th Workshop on Self-Improving Systems Integration (SISSY)
+First International Workshop on Sustainable and Scalable Self-Organisation (SaSSO)
+16th International Workshop on Models@run.time: in the Era of Emerging Computing Paradigms
+First International Workshop on Artificial Intelligence for Autonomous computing Systems (AI4AS)
+1st Workshop on Autonomic and Self-* Management for the Edge-Cloud Continuum (ASMECC)
+
+More information about the workshops can be found here: https://2023.acsos.org/track/acsos-2023-workshops
+
+We still hope that you may be able to attend the conference and participate in its programme. Information about registration will be available at https://2023.acsos.org
+
+Best wishes,
+Barry Porter and Ivana Dusparic,
+ACSOS 2023 PC Chairs
+
+SUBMISSION: 7413
+TITLE: Declarative Deployment Reconfiguration of Pulverised Collective Adaptive Systems at Runtime
+
+-------------------------  METAREVIEW  ------------------------
+Reviewers have identified several major points for improvement while raising concerns about related work, validity, novelty, scope and fit of the work.
+
+
+
+----------------------- REVIEW 1 ---------------------
+SUBMISSION: 7413
+TITLE: Declarative Deployment Reconfiguration of Pulverised Collective Adaptive Systems at Runtime
+AUTHORS: Nicolas Farabegoli, Danilo Pianini, Roberto Casadei and Mirko Viroli
+
+----------- Overall evaluation -----------
+SCORE: 0 (borderline paper)
+----- TEXT:
+# Summary
+The authors present an approach to describe collective adaptive systems based on a previous approach (citation [13]), which is extended with runtime reconfiguration rules in this paper. The paper describes the approach from [13] and how reconfiguration rules can be specified. The approach is evaluated using two case studies. A small real-world case study conducted within a lab (alert if too many people are in the lab) and a larger simulated case study focusing on non-functional properties. 
+
+# Pros
+- The prototype as well as both case studies are available open source.
+- The paper is very well written and good to read
+- The case studies are nice exemplars for collective adaptive systems
+
+# Cons
+- There is no discussion on threats to validity
+- There is no elaborate explanation on how this paper goes beyond the previous work (many parts have already been published in [13])
+- The related work section mostly summarizes related work but does not clearly demarcate the presented approach
+
+# Review
+
+The paper is very well written, easy to read and has a clear structure guiding the reader. 
+Title and abstract adequately summarize the contents of the paper.
+
+The repeatable case studies, published as open source artifacts, are highly valuable to the research community as they represent nice exemplars for other researchers. 
+
+But, the evaluation section lacks a discussion of threats to validity. In fact, there is no research question posed in the introduction to be answered by the evaluation. Both case studies can be seen as a proof of concept, but should be clearly motivated. There is no discussion on the effort required to apply the approach to another case study. Only a hint is given: for the second case study there was some implementation effort. This question (generality) could be evaluated more thoroughly.
+
+The problem of the evaluation might be related to the unclear demarcation from the authors previous work. The paper mentions that the added parts are the runtime reconfiguration rules and the Kotlin implementation. But, to me it seams like large parts of the concept chapter have already been published in [13]. The paper should make a clear distinction between new and old concepts by summarizing existing work in the background section and the new work in the concept section.
+
+Finally, the related work section should contain explicit demarcation statements from related work. In its current version the own previous work is used for demarcation, which does not give a clear picture. For example, the authors write "the main aspects distinguishing PulvReAkt from other approaches are that it targets pulverized systems (and not general partitionings) ...". This distinguishing characteristic is clear by construction as pulverized systems are the concept introduced in previous work. The section should be rewritten to clarify how the overall approach which is only extended in this work demarcates from related work.
+----------- Best paper/best student paper award -----------
+SELECTION: no
+
+
+
+----------------------- REVIEW 2 ---------------------
+SUBMISSION: 7413
+TITLE: Declarative Deployment Reconfiguration of Pulverised Collective Adaptive Systems at Runtime
+AUTHORS: Nicolas Farabegoli, Danilo Pianini, Roberto Casadei and Mirko Viroli
+
+----------- Overall evaluation -----------
+SCORE: -2 (reject)
+----- TEXT:
+The submission "Declarative Deployment Reconfiguration ..." presents a new DSL for the description of deployments/mappings of a network of logical system components onto a heterogenous network of hosts. The DSL consists of the following two/three sublanguages: (1) a sublanguage for the description of a logical system architecture, (2) a separate sublanguage for an explititely defined mapping of logical components onto hardware components (hosts) that is tightly integrated with (3) a sublanguage for a rule-based description of a reconfiguration logic. 
+
+The paper is well-written and -organized, (almost) free of any typos, and addresses an interesting problem. Nevertheless I had a hard time to identify a significant delta compared to related work approaches, to understand how the adaption logic of the presented approaches looks like and works as well as to understand the semantics of the rule-based part of the DSL.
+Furthermore, the submission fails to provide me with a clear vision of the expressiveness (limitations) of the DSL and its related runtime system in the current state-of-affairs.
+
+In more detail I have the following problems with the paper:
+
+- I don't understand how a migration of a logical component from one host to another one is realized.
+  It looks like if each involved hosts has its own adaption logic (spawner and unit reconfigurator
+  components) that is only able to process locally generated reconfiguration events and has no means 
+  to communicate with adapter logic instances on other hosts to orchestrate/coordinate complex 
+  reconfiguration processes (the submission´s conclusion mentions the fact that "Currently, only policies 
+  that can be assessed at the local level can be assessed" and then goes ahead with "A policy that 
+  requires to consider the state of multiple hosts would require resorting to the host language´s 
+  primitive mechanisms ... thus breaking the abstraction"?)
+- A comprehensive description of the syntax and semantics of the presented DSL is missing. Therefore, I 
+  have no idea how, e.g., rule execution conflicts are resolved (situations where two different rules 
+  require two different/conflicting deployment reconfigurations of the same logical component)
+- The presented contribution is a borderline case for a "self-adaptive system engineering" approach due 
+  to the fact that the DSL offers no support for the definition of analysis or planning activities 
+  (reconfiguration rules are triggered by reconfiguration events that are probably generated/implemented 
+  in the host language Kotlin of the DSL and there seem to be no means for the selection of optimal/good
+  subsets of triggered rules or the coordination of the execution order of triggered rules or the 
+  description of optimization goals or ... )
+- It is unclear how triggered reconfiguration rules execute the required/specified reconfiguration on 
+  a given network of hosts (probably the needed reconfiguratiosa are implemented in the Kotlin host 
+  language?)
+- The related work section fails to highlight the advantages of the presented new declarative DSL-based 
+  approach commpared to other declarative DSLs that are used for similar purposes in the SAS context. 
+  All existing declarative constraint-based approaches are dismissed by the statement that they 
+  "... typically suffer from scalability issues. Reading this statement I would have expected that the 
+  presented evaluation shows that the new DSL offers indeed a better tradeoff between expressiveness 
+  (ease of use) and runtime efficiency. Unfortunately, the evaluation puts a focus on
+  the comparison of the efficiency of different deployment approaches implemented in the new DSL only.
+----------- Best paper/best student paper award -----------
+SELECTION: no
+
+
+
+----------------------- REVIEW 3 ---------------------
+SUBMISSION: 7413
+TITLE: Declarative Deployment Reconfiguration of Pulverised Collective Adaptive Systems at Runtime
+AUTHORS: Nicolas Farabegoli, Danilo Pianini, Roberto Casadei and Mirko Viroli
+
+----------- Overall evaluation -----------
+SCORE: 0 (borderline paper)
+----- TEXT:
+This paper presents a framework to dynamically manage the configuration of pulverized systems. Such a framework relies on two Domain Specific Languages (DSL).
+
+In general, the topic addressed by the paper is interesting and the proposed framework seems sound.
+However, there are two main limitations of the paper that, in my opinion, do not make it suitable for the publication in the ACSOS main conference.
+
+First, the paper proposes an implementation of the pulverization approach, which is presented in another paper ([13]). So, the paper does not present new main concepts or ideas. This could be acceptable, but if the proposed implementation should be compared with other approaches in order to show the concrete advantages (and costs, which usually are present in any approach).
+
+Second, the paper presents the evaluation of the proposed framework with two interesting examples, but it lacks a comparison with other approaches. In other words, I can understand that the framework has several advantages, but its adoption should be justified by showing the concrete advantages over other approaches. For instance, other approaches could be less flexible but faster. The Related Work section sketch some differences, but in my opinion they are still too vague. Indeed, the advantages seem due to the adoption of DSL more than the framework itself.
+The mentioned runtime configuration should be compared with a static reconfiguration in order to show the situations in which it can be useful.
+
+
+Minor comments
+In the Introduction, the claim “the higher the coupling between the application and the infrastructure, the harder it is for the former to exploit the latter’s full potential and adapt to changes” should be supported by a reference (perhaps it is [10])
+In the Introduction, the authors state “previous work proposes an application partitioning schema, called pulverization”; actually, this is “their” work. Also the “aggregate computing” cited in Section II.B is from the authors themselves.
+In Section II.B the sentence “the logical system would be split into ten deployable pulverised components” is not clear. Maybe “could be split”?
+Text in Figure 5 is small and difficult to read.
+----------- Best paper/best student paper award -----------
+SELECTION: no
+
+
